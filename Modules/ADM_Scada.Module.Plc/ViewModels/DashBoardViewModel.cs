@@ -2,11 +2,8 @@
 using ADM_Scada.Cores.PlcService;
 using Prism.Commands;
 using Prism.Mvvm;
-using Prism.Regions;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 using System.Windows.Forms;
 
@@ -17,7 +14,7 @@ namespace ADM_Scada.Modules.Plc.ViewModels
         private IPLCCommunicationService pLCCommunicationService;
         private ObservableCollection<VariableModel> variables;
         public ObservableCollection<VariableModel> Variables { get => variables; set => SetProperty(ref variables, value); }
-        public DelegateCommand IncCommand { get;  set; }
+        public DelegateCommand IncCommand { get; set; }
         public DelegateCommand ImageBrowseCommand { get; private set; }
         private void ImageBrowse()
         {
@@ -33,7 +30,7 @@ namespace ADM_Scada.Modules.Plc.ViewModels
                 {
                     openFileDialog1.FileName
                 };
-               // ImagePath = ImagePathList[0];
+                // ImagePath = ImagePathList[0];
             }
         }
         public DashBoardViewModel(IPLCCommunicationService _pLCCommunicationService)
@@ -49,4 +46,4 @@ namespace ADM_Scada.Modules.Plc.ViewModels
             Variables = Variables;
         }
     }
-} 
+}

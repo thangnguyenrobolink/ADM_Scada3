@@ -58,10 +58,10 @@ namespace ADM_Scada.Modules.User.ViewModels
             {
                 int index = Users.IndexOf(selectedModel);
                 Users[index] = selectedModel;
-                Task task1 = Task.Run(async () => 
+                Task task1 = Task.Run(async () =>
                     {
                         _ = await userRepository.Update(selectedModel);
-                        Users = new ObservableCollection<UserModel>((IEnumerable<UserModel>) await userRepository.GetAll());
+                        Users = new ObservableCollection<UserModel>((IEnumerable<UserModel>)await userRepository.GetAll());
                     });
                 task1.Wait();
             }

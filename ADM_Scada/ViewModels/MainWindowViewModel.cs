@@ -1,10 +1,10 @@
-﻿using Prism.Commands;
+﻿using ADM_Scada.Core;
+using ADM_Scada.Cores.PlcService;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
 using System.Windows.Threading;
-using ADM_Scada.Core;
-using ADM_Scada.Cores.PlcService;
 
 namespace ADM_Scada.ViewModels
 {

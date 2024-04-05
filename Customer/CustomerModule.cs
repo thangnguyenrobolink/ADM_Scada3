@@ -1,8 +1,8 @@
-﻿using Customer.Views;
+﻿using ADM_Scada.Core;
+using Customer.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
-using ADM_Scada.Core;
 
 namespace ADM_Scada.Modules.Customer
 {

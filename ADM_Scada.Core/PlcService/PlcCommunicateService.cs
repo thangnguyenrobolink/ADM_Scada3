@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ADM_Scada.Cores.Models;
+using ADM_Scada.Cores.Respo;
+using S7.Net;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,10 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using ADM_Scada.Cores.Models;
-using ADM_Scada.Cores.PlcService;
-using ADM_Scada.Cores.Respo;
-using S7.Net;
 
 namespace ADM_Scada.Cores.PlcService
 {
@@ -274,7 +273,7 @@ namespace ADM_Scada.Cores.PlcService
             if (index == -1) return false;
             try
             {
-               await plcs[index].OpenAsync();
+                await plcs[index].OpenAsync();
             }
             catch (PlcException a)
             {
@@ -318,7 +317,7 @@ namespace ADM_Scada.Cores.PlcService
             if (index == -1 || index >= plcs.Count) return DeviceStatus.NotPresent;
             try
             {
-                if ( plcs[index].IsConnected)
+                if (plcs[index].IsConnected)
                 {
                     return DeviceStatus.Connected;
                 }
@@ -353,7 +352,7 @@ namespace ADM_Scada.Cores.PlcService
             {
                 Random random = new Random();
                 _ = MessageBox.Show($"Read Variable {a.Name} from PLC {device.Name} fail! Error {b.ErrorCode}");
-                a.Value = random.NextDouble(); 
+                a.Value = random.NextDouble();
             }
             return a;
         }

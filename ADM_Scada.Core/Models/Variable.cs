@@ -16,7 +16,7 @@ namespace ADM_Scada.Cores.Models
         public string Module { get; set; }
         public string Unit { get; set; }
         public string Message { get => message; set { message = value; OnPropertyChanged(nameof(Message)); } }
-        public double Value { get => _value; set { _value = value; OnPropertyChanged(nameof(Value)); }}
+        public double Value { get => _value; set { _value = value; OnPropertyChanged(nameof(Value)); } }
         public string Purpose { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

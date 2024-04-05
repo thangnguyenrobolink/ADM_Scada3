@@ -2,10 +2,7 @@
 using ADM_Scada.Cores.PlcService;
 using Prism.Commands;
 using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ADM_Scada.Modules.Plc.ViewModels
@@ -21,12 +18,12 @@ namespace ADM_Scada.Modules.Plc.ViewModels
         private ObservableCollection<DeviceModel> devices;
         private VariableModel selectedvar;
         public VariableModel SelectedVariable { get => selectedvar; set => SetProperty(ref selectedvar, value); }
-        public ObservableCollection<VariableModel> Variables { get => variables; set => SetProperty(ref variables, value);}
-        public ObservableCollection<VariableModel> GeneralVariables { get => generalVariables; set => SetProperty(ref generalVariables, value);}
-        public ObservableCollection<VariableModel> InfeedVariables { get => infeedVariables; set => SetProperty(ref infeedVariables, value);}
-        public ObservableCollection<VariableModel> OutfeedVariables { get => outfeedVariables; set => SetProperty(ref outfeedVariables, value);}
-        public ObservableCollection<VariableModel> ScaleVariables { get => scaleVariables; set => SetProperty(ref scaleVariables, value);}
-        public ObservableCollection<DeviceModel> Devices { get => devices; set => SetProperty(ref devices, value);}
+        public ObservableCollection<VariableModel> Variables { get => variables; set => SetProperty(ref variables, value); }
+        public ObservableCollection<VariableModel> GeneralVariables { get => generalVariables; set => SetProperty(ref generalVariables, value); }
+        public ObservableCollection<VariableModel> InfeedVariables { get => infeedVariables; set => SetProperty(ref infeedVariables, value); }
+        public ObservableCollection<VariableModel> OutfeedVariables { get => outfeedVariables; set => SetProperty(ref outfeedVariables, value); }
+        public ObservableCollection<VariableModel> ScaleVariables { get => scaleVariables; set => SetProperty(ref scaleVariables, value); }
+        public ObservableCollection<DeviceModel> Devices { get => devices; set => SetProperty(ref devices, value); }
         public DelegateCommand<VariableModel> SetValueCommand { get; private set; }
         public DelegateCommand<VariableModel> CommentCommand { get; private set; }
         public DelegateCommand<DeviceModel> ConnectCommand { get; private set; }
@@ -50,7 +47,7 @@ namespace ADM_Scada.Modules.Plc.ViewModels
         private void ConnectDevice(DeviceModel deviceModel)
         {
             _ = pLCCommunicationService.ConnectDevice(deviceModel);
-        } 
+        }
         private void UpdateDevice(DeviceModel deviceModel)
         {
             _ = pLCCommunicationService.UpdatePlcDevice(deviceModel);

@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ADM_Scada.Cores.Respo
@@ -104,7 +102,7 @@ namespace ADM_Scada.Cores.Respo
                     Unit = Convert.ToString(row["Unit"]),
                     Message = Convert.ToString(row["Message"]),
                     Value = 0,
-                   // Value = (float)Convert.ToDouble(row["Value"]),
+                    // Value = (float)Convert.ToDouble(row["Value"]),
                     Purpose = Convert.ToString(row["Purpose"])
                 };
 

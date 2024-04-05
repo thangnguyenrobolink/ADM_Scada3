@@ -1,5 +1,4 @@
-﻿using ADM_Scada.Core;
-using ADM_Scada.Modules.Plc.Views;
+﻿using ADM_Scada.Modules.Plc.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;

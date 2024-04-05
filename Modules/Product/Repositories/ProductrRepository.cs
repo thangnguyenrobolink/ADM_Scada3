@@ -3,8 +3,6 @@ using ADM_Scada.Cores.Respo;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ADM_Scada.Modules.Product.Repositories

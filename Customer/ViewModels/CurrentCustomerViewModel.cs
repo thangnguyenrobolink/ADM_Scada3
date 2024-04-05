@@ -22,7 +22,7 @@ namespace Customer.ViewModels
 
         private void UpdateCustomer(CustomerModel curUser)
         {
-            
+
             CurrentCustomer = curUser;
             CurrentCustomer.TimeStamp = DateTime.Now;
             RaisePropertyChanged(nameof(CurrentCustomer));

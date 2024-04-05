@@ -5,7 +5,6 @@ using ADM_Scada.Modules.Customer.Repositories;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -30,9 +29,9 @@ namespace Customer.ViewModels
         }
         public CustomerModel CurrentCus { get => currentCus ?? new CustomerModel() { Name = "N/A", Company = "N/A", Code = "0", Avatar = "9723582.jpg", }; set => SetProperty(ref currentCus, value); }
         public CustomerModel ResCustomer { get => resCustomer; set => SetProperty(ref resCustomer, value); }
-        public string FilCompany { get => filCompany; set  { SetProperty(ref filCompany, value); FilterData(); } }
-        public string FilName { get => filName; set  { SetProperty(ref filName, value); FilterData(); } }
-        public string FilCode { get => filCode; set  { SetProperty(ref filCode, value); FilterData(); } }
+        public string FilCompany { get => filCompany; set { SetProperty(ref filCompany, value); FilterData(); } }
+        public string FilName { get => filName; set { SetProperty(ref filName, value); FilterData(); } }
+        public string FilCode { get => filCode; set { SetProperty(ref filCode, value); FilterData(); } }
 
         private readonly CustomerRepository customerRepository;
 
@@ -170,8 +169,8 @@ namespace Customer.ViewModels
             customerRepository = new CustomerRepository();
             Customers = new ObservableCollection<CustomerModel>();
             ResCustomer = new CustomerModel();
-            _ = Task.Run(async () => { FullCustomers = new ObservableCollection<CustomerModel>((IEnumerable<CustomerModel>)await customerRepository.GetAll()); Customers = FullCustomers; }) ;
-            
+            _ = Task.Run(async () => { FullCustomers = new ObservableCollection<CustomerModel>((IEnumerable<CustomerModel>)await customerRepository.GetAll()); Customers = FullCustomers; });
+
             EditCommand = new DelegateCommand<CustomerModel>(Edit);
             DeleteCommand = new DelegateCommand<CustomerModel>(Delete, CanDelete).ObservesProperty(() => FullCustomers.Count);
             AddCustomerCommand = new DelegateCommand(AddCustomer);

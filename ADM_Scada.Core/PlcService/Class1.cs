@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace ADM_Scada.Core.PlcService
 {
@@ -18,7 +15,7 @@ namespace ADM_Scada.Core.PlcService
             {
                 HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
-                if  (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     // Process successful response (see step 5)
                 }

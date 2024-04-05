@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ADM_Scada.Cores.Models
 {
@@ -17,7 +13,7 @@ namespace ADM_Scada.Cores.Models
         public float Weight { get; set; }
         public string WO { get; set; }
         public string LOT { get; set; }
-        
+
         public DateTime TimeStamp { get; set; }
     }
 

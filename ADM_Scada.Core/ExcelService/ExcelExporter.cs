@@ -1,7 +1,6 @@
 ﻿
 using ClosedXML.Excel;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Windows;
 
 namespace ADM_Scada.Core.ExcelService

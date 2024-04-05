@@ -1,9 +1,7 @@
 ﻿using ADM_Scada.Cores.Models;
 using ADM_Scada.Cores.PubEvent;
-using ADM_Scada.Modules.Report.ViewModels;
 using Prism.Events;
 using Prism.Mvvm;
-using System;
 
 namespace ADM_Scada.Modules.Report.ViewModels
 {

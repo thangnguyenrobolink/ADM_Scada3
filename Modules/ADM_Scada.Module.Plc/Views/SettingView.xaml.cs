@@ -36,7 +36,7 @@ namespace ADM_Scada.Modules.Plc.Views
             {
                 // Clear the selected item
                 dataGrid.SelectedItem = null;
-            }   
+            }
         }
 
         private void DataGrid_LostFocus_2(object sender, System.Windows.RoutedEventArgs e)

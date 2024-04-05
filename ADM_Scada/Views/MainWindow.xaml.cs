@@ -33,9 +33,9 @@ namespace ADM_Scada.Views
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            
+
             System.Windows.Application.Current.Shutdown();
-            
+
         }
 
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)

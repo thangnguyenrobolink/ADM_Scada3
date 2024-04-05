@@ -4,7 +4,6 @@ using ADM_Scada.Modules.User.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
-using System;
 
 namespace ADM_Scada.Modules.User
 {

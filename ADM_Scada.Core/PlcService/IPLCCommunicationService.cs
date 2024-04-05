@@ -1,5 +1,4 @@
 ﻿using ADM_Scada.Cores.Models;
-using S7.Net;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -8,10 +7,10 @@ namespace ADM_Scada.Cores.PlcService
 {
     public interface IPLCCommunicationService
     {
-        List<DeviceModel> Devices { get;}
+        List<DeviceModel> Devices { get; }
         Task<VariableModel> GetPLCValue(VariableModel a);
         Task<bool> SetPLCValue(VariableModel a);
-        Task <bool>ConnectDevice(DeviceModel a);
+        Task<bool> ConnectDevice(DeviceModel a);
         DeviceStatus GetPlcStatusById(int plcid);
         ObservableCollection<VariableModel> GetAllVariables();
         ObservableCollection<DeviceModel> GetAllDevices();

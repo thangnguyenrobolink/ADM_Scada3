@@ -4,8 +4,6 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace ADM_Scada.Modules.Report.ViewModels
@@ -13,7 +11,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
     public class ProductionInfoViewModel : BindableBase
     {
         private readonly IEventAggregator eventAggregator;
-        public static ProductionHistoryModel currentShift = new ProductionHistoryModel() {ProductId = 0, CustomerId =0, UserId =0, Shift=1, WO = "000", LOT = "L000", TimeStamp = DateTime.Now.Date };
+        public static ProductionHistoryModel currentShift = new ProductionHistoryModel() { ProductId = 0, CustomerId = 0, UserId = 0, Shift = 1, WO = "000", LOT = "L000", TimeStamp = DateTime.Now.Date };
         public ProductionHistoryModel CurrentShift
         {
             get => currentShift ?? new ProductionHistoryModel();
@@ -23,7 +21,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
         private void ChangeShiftInfo()
         {
             // Validation: Check if login credentials are valid
-            if (CurrentShift.LOT == null || CurrentShift.WO == null|| CurrentShift.TimeStamp == null)
+            if (CurrentShift.LOT == null || CurrentShift.WO == null || CurrentShift.TimeStamp == null)
             {
                 // Handle validation error (e.g., show a message)
                 MessageBox.Show("Please Fill infomatrion!");

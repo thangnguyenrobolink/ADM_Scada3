@@ -5,7 +5,6 @@ using ADM_Scada.Modules.Product.Repositories;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -78,7 +77,7 @@ namespace ADM_Scada.Modules.Product.ViewModels
             // CanExecute condition for DeleteCommand
             return FullProducts.Count > 1;
         }
-       
+
         private async void AddProduct()
         {
             // Validation: Check if required properties are not empty

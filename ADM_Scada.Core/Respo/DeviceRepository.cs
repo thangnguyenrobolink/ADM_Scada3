@@ -2,15 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ADM_Scada.Cores.Respo
 {
     public class DeviceRepository : RepositoryBase, IDataRepository<DeviceModel>
     {
-        public DeviceRepository(){ }
+        public DeviceRepository() { }
 
         public async Task<List<DeviceModel>> GetAll()
         {
