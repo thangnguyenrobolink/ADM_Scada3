@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace ADM_Scada.Cores.Respo
+namespace ADM_Scada.Core.Respo
 {
     public class VariableRepository : RepositoryBase, IDataRepository<VariableModel>
     {

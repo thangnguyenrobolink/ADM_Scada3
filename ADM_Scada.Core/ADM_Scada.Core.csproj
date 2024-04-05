@@ -85,6 +85,9 @@
     <Reference Include="S7.Net, Version=0.20.0.0, Culture=neutral, PublicKeyToken=d5812d469e84c693, processorArchitecture=MSIL">
       <HintPath>..\packages\S7netplus.0.20.0\lib\net462\S7.Net.dll</HintPath>
     </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.3.1.1\lib\net471\Serilog.dll</HintPath>
+    </Reference>
     <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
       <HintPath>..\packages\SixLabors.Fonts.1.0.0\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
     </Reference>
@@ -220,6 +223,7 @@
     <Compile Include="PubEvent\UserLoginEvent.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="Respo\DeviceRepository.cs" />
+    <Compile Include="Respo\RepositoryException.cs" />
     <Compile Include="Respo\UserRepository.cs" />
     <Compile Include="Respo\VariableRepository.cs" />
     <Compile Include="Respo\IDataRepository.cs" />

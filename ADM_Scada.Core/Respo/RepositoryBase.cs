@@ -4,9 +4,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-using System.Windows;
+using Serilog;
 
-namespace ADM_Scada.Cores.Respo
+namespace ADM_Scada.Core.Respo
 {
     public abstract class RepositoryBase
     {
@@ -26,17 +26,25 @@ namespace ADM_Scada.Cores.Respo
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
-                await connection.OpenAsync();
-
-                if (parameters != null)
+                try
                 {
-                    foreach (var parameter in parameters)
-                    {
-                        command.Parameters.AddWithValue(parameter.Key, parameter.Value ?? DBNull.Value);
-                    }
-                }
+                    await connection.OpenAsync();
 
-                return await command.ExecuteNonQueryAsync();
+                    if (parameters != null)
+                    {
+                        foreach (var parameter in parameters)
+                        {
+                            command.Parameters.AddWithValue(parameter.Key, parameter.Value ?? DBNull.Value);
+                        }
+                    }
+
+                    return await command.ExecuteNonQueryAsync();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "Error executing non-query command: {Query}", query);
+                    throw; // Rethrow the exception to propagate it to the caller
+                }
             }
         }
 
@@ -45,17 +53,25 @@ namespace ADM_Scada.Cores.Respo
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
-                await connection.OpenAsync();
-
-                if (parameters != null)
+                try
                 {
-                    foreach (var parameter in parameters)
-                    {
-                        command.Parameters.AddWithValue(parameter.Key, parameter.Value ?? DBNull.Value);
-                    }
-                }
+                    await connection.OpenAsync();
 
-                return await command.ExecuteScalarAsync();
+                    if (parameters != null)
+                    {
+                        foreach (var parameter in parameters)
+                        {
+                            command.Parameters.AddWithValue(parameter.Key, parameter.Value ?? DBNull.Value);
+                        }
+                    }
+
+                    return await command.ExecuteScalarAsync();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "Error executing scalar command: {Query}", query);
+                    throw; // Rethrow the exception to propagate it to the caller
+                }
             }
         }
 
@@ -69,33 +85,24 @@ namespace ADM_Scada.Cores.Respo
                     try
                     {
                         await connection.OpenAsync();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        return null;
-                    }
 
-                    if (parameters != null)
-                    {
-                        foreach (var parameter in parameters)
+                        if (parameters != null)
                         {
-                            command.Parameters.AddWithValue(parameter.Key, parameter.Value ?? DBNull.Value);
+                            foreach (var parameter in parameters)
+                            {
+                                command.Parameters.AddWithValue(parameter.Key, parameter.Value ?? DBNull.Value);
+                            }
                         }
-                    }
 
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                    {
-                        try
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                         {
                             await Task.Run(() => adapter.Fill(dataTable));
                         }
-                        catch (Exception ex)
-                        {
-                            // Log or handle the exception
-                            _ = MessageBox.Show(ex.Message);
-                            return null;
-                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex, "Error executing query: {Query}", query);
+                        throw; // Rethrow the exception to propagate it to the caller
                     }
                 }
             }
