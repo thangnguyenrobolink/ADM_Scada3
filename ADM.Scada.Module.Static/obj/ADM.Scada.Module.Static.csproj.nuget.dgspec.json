@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\work\\ADM_Scada\\ADM.Scada.Module.Static\\ADM.Scada.Module.Static.csproj": {}
+  },
+  "projects": {
+    "D:\\work\\ADM_Scada\\ADM.Scada.Module.Static\\ADM.Scada.Module.Static.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\work\\ADM_Scada\\ADM.Scada.Module.Static\\ADM.Scada.Module.Static.csproj",
+        "projectName": "ADM.Scada.Module.Static",
+        "projectPath": "D:\\work\\ADM_Scada\\ADM.Scada.Module.Static\\ADM.Scada.Module.Static.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "D:\\work\\ADM_Scada\\ADM.Scada.Module.Static\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\TwinCAT\\Functions\\TE2000-HMI-Engineering\\Infrastructure\\Packages": {},
+          "C:\\TwinCAT\\Functions\\TE2000-HMI-Engineering\\References": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "Prism.Wpf": {
+              "target": "Package",
+              "version": "[8.0.0.1909, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

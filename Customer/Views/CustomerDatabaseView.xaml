@@ -1,0 +1,190 @@
+﻿<UserControl x:Class="Customer.Views.CustomerDatabaseView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Normal"
+             TextElement.FontSize="14"
+             FontFamily="{materialDesign:MaterialDesignFont}"
+             IsTabStop="False" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Focusable="False" 
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="320"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--bangr data 0,0-->
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Customer Database" Margin="16,0,0,0"  FontSize="18" FontWeight="SemiBold" 
+                           Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding FileName}" Grid.Column="1" HorizontalAlignment="Right" materialDesign:HintAssist.Hint="Save File path" 
+                      MaxLength="12" VerticalAlignment="Center" />
+                <Button Grid.Column="2" Margin="14 4 4 4" HorizontalAlignment="Left" Command="{Binding ExportExcelCommand}"
+                  Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                  ToolTip="MaterialDesignFloatingActionLightButton">
+                    <materialDesign:PackIcon
+                                    Width="30"
+                                    Height="30"
+                    Kind="ContentSave" />
+                </Button>
+            </Grid>
+              <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Grid.Row="1">
+                <TextBox Text="{Binding FilCompany}" Margin="8" HorizontalAlignment="Left"
+                                materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                materialDesign:TextFieldAssist.LeadingIcon="Filter"  BorderBrush="gray"
+                                materialDesign:HintAssist.Hint="Find Company" 
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="200" />
+                <TextBox Text="{Binding FilName}" Margin="8" HorizontalAlignment="Center"
+                                materialDesign:TextFieldAssist.HasLeadingIcon="True" BorderBrush="gray"
+                                materialDesign:TextFieldAssist.LeadingIcon="Filter"
+                                materialDesign:HintAssist.Hint="Filter by Name" 
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="200" />
+                <TextBox Text="{Binding FilCode}" Margin="8" HorizontalAlignment="Right"  BorderBrush="gray"
+                                materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                materialDesign:TextFieldAssist.LeadingIcon="Filter"
+                                materialDesign:HintAssist.Hint="Filter by Code" 
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="200" />
+            </StackPanel>
+            <DataGrid Grid.Row="2" AutoGenerateColumns="False" RowStyle="{StaticResource DataGridRowStyle1}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  MaxHeight="300"
+                          SelectionMode="Extended"   GridLinesVisibility="None"    CellStyle="{StaticResource DataGridCellStyle1}"
+                          materialDesign:DataGridAssist.CornerRadius="10"
+                          materialDesign:ScrollViewerAssist.SupportHorizontalScroll="False"
+                        CanUserAddRows="False" ItemsSource="{Binding Customers}" Margin="16 0" Background="Transparent" LostFocus="DataGrid_LostFocus" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="#" IsReadOnly="false" CanUserResize="False" Width="auto" Binding="{Binding Path =Id}"/>
+                    <DataGridTextColumn Header="Company" Binding="{Binding Path =Company, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="Auto" />
+                    <DataGridTextColumn Header="Name" Binding="{Binding Path =Name, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="Auto" />
+                    <DataGridTextColumn Header="Code" Binding="{Binding Path =Code, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
+                    <DataGridTemplateColumn Header="Operations" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Command="{Binding DataContext.ChangeCustomerCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                Style="{StaticResource MaterialDesignIconForegroundButton}" Foreground="LightSeaGreen"
+                                CommandParameter="{Binding}">
+                                        <materialDesign:PackIcon Kind="CustomerService" />
+                                    </Button>
+                                    <Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                Style="{StaticResource MaterialDesignIconForegroundButton}" 
+                                CommandParameter="{Binding}">
+                                        <materialDesign:PackIcon Kind="PencilOutline"  Foreground="Orange"/>
+                                    </Button>
+                                    <Button Margin="5 0 0 0"
+                                Style="{StaticResource MaterialDesignIconButton}" 
+                                Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                CommandParameter="{Binding}">
+                                        <materialDesign:PackIcon Kind="DeleteOutline" Foreground="IndianRed" />
+                                    </Button>
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Path =Phone, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
+                    <DataGridTextColumn Header="Mail" Binding="{Binding Path =Email, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
+                    <DataGridTextColumn Header="Address" Binding="{Binding Path =Address, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <!--Current khach hang 1,1-->
+        <!--khach hang moi 1,0-->
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Margin="15,15,15,8" Height="48" VerticalAlignment="Top"  Command="{Binding AddCustomerCommand}">
+                    <StackPanel Orientation="Horizontal" Margin="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <materialDesign:PackIcon Kind="Plus" VerticalAlignment="Center" Margin="0 0 0 0" Width="30" Height="30"/>
+                        <TextBlock Text="New Customer" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <TextBox Text="{Binding ResCustomer.Company}" Margin="16 8 16 0"
+                                 materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                 materialDesign:TextFieldAssist.LeadingIcon="Login"
+                                 materialDesign:HintAssist.Hint="Enter Company" 
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                <Button Width="160" Height="160" Padding="3" Margin="8"  materialDesign:ElevationAssist.Elevation="Dp5"
+                          Style="{StaticResource MaterialDesignRaisedButton}"  Background="Transparent"
+                            Command="{Binding ImageBrowseCommand}" materialDesign:ButtonAssist.CornerRadius="20" BorderBrush="White">
+                    <Image  Source="{Binding ResCustomer.Avatar, NotifyOnSourceUpdated = True}"/>
+
+                </Button>
+            </StackPanel>
+
+
+            <Grid Grid.Column="1" Grid.Row="1" Margin="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="49"/>
+                    <RowDefinition Height="48"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <!--register full name-->
+                    <TextBlock Text="Full Name" Margin="16 16 16 0"/>
+                    <TextBox Text="{Binding ResCustomer.Name}" Margin="16 16 16 0"
+                                 materialDesign:TextFieldAssist.HasLeadingIcon="True"  BorderBrush="gray"
+                                 materialDesign:TextFieldAssist.LeadingIcon="User"
+                                 materialDesign:HintAssist.Hint="Enter Name" 
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                    <!--register Password name-->
+                    <TextBlock Text="Phone" Margin="16 16 16 0"/>
+                    <TextBox Text="{Binding ResCustomer.Phone}" Margin="16 16 16 0"
+                                 materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                 materialDesign:TextFieldAssist.LeadingIcon="key"
+                                 materialDesign:HintAssist.Hint="Enter Phone number"  BorderBrush="gray"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                </StackPanel>
+                <StackPanel Grid.Column="1"
+>
+                    <!--register full name-->
+                    <TextBlock Text="Customer Code" Margin="16 16 16 0"/>
+                    <TextBox Text="{Binding ResCustomer.Code}" Margin="16 16 16 0"
+                                 materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                 materialDesign:TextFieldAssist.LeadingIcon="Code"
+                                 materialDesign:HintAssist.Hint="Enter Customer Code" 
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                    <!--register Password name-->
+                    <TextBlock Text="Mail" Margin="16 16 16 0"/>
+                    <TextBox Text="{Binding ResCustomer.Email}" Margin="16 16 16 0"
+                                 materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                 materialDesign:TextFieldAssist.LeadingIcon="Code"
+                                 materialDesign:HintAssist.Hint="Enter Mail" 
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                    <TextBlock Text="Address" Margin="16 4 16 0"/>
+                    <TextBox Text="{Binding ResCustomer.Address}" Margin="16,16,16 8"
+                                materialDesign:TextFieldAssist.HasLeadingIcon="True"  BorderBrush="gray"
+                                materialDesign:TextFieldAssist.LeadingIcon="key"
+                                materialDesign:HintAssist.Hint="Enter Address" 
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+</UserControl>

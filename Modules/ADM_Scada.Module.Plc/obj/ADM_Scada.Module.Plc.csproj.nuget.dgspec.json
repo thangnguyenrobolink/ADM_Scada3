@@ -1,0 +1,114 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Plc\\ADM_Scada.Module.Plc.csproj": {}
+  },
+  "projects": {
+    "D:\\work\\ADM_Scada\\ADM_Scada.Core\\ADM_Scada.Core.csproj": {
+      "restore": {
+        "projectUniqueName": "D:\\work\\ADM_Scada\\ADM_Scada.Core\\ADM_Scada.Core.csproj",
+        "projectName": "ADM_Scada.Core",
+        "projectPath": "D:\\work\\ADM_Scada\\ADM_Scada.Core\\ADM_Scada.Core.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
+    "D:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Plc\\ADM_Scada.Module.Plc.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Plc\\ADM_Scada.Module.Plc.csproj",
+        "projectName": "ADM_Scada.Module.Plc",
+        "projectPath": "D:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Plc\\ADM_Scada.Module.Plc.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "D:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Plc\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\TwinCAT\\Functions\\TE2000-HMI-Engineering\\Infrastructure\\Packages": {},
+          "C:\\TwinCAT\\Functions\\TE2000-HMI-Engineering\\References": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {
+              "D:\\work\\ADM_Scada\\ADM_Scada.Core\\ADM_Scada.Core.csproj": {
+                "projectPath": "D:\\work\\ADM_Scada\\ADM_Scada.Core\\ADM_Scada.Core.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "LiveCharts.Wpf": {
+              "target": "Package",
+              "version": "[0.9.7, )"
+            },
+            "MaterialDesignColors": {
+              "target": "Package",
+              "version": "[2.1.4, )"
+            },
+            "MaterialDesignExtensions": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
+            "MaterialDesignThemes": {
+              "target": "Package",
+              "version": "[4.9.0, )"
+            },
+            "MaterialDesignThemes.MahApps": {
+              "target": "Package",
+              "version": "[0.3.0, )"
+            },
+            "Microsoft.Xaml.Behaviors.Wpf": {
+              "target": "Package",
+              "version": "[1.1.77, )"
+            },
+            "Prism.Core": {
+              "target": "Package",
+              "version": "[8.1.97, )"
+            },
+            "Prism.Wpf": {
+              "target": "Package",
+              "version": "[8.0.0.1909, )"
+            },
+            "System.Buffers": {
+              "target": "Package",
+              "version": "[4.5.1, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

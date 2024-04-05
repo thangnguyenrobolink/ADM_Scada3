@@ -1,0 +1,207 @@
+﻿<UserControl x:Class="ADM_Scada.Modules.Report.Views.ProductionInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:core="clr-namespace:ADM_Scada.Core;assembly=ADM_Scada.Core"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             prism:ViewModelLocator.AutoWireViewModel="True" >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="360"/>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                    HorizontalContentAlignment="Center"
+                        materialDesign:ColorZoneAssist.Mode="PrimaryLight"
+                materialDesign:NavigationRailAssist.SelectionCornerRadius="50"
+                materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+                Style="{StaticResource MaterialDesignNavigationRailTabControl}"
+                TabStripPlacement="Top" >
+            <TabItem HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TabItem.Header>
+                    <StackPanel >
+                        <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="WorkerOutline" />
+                        <TextBlock
+                                HorizontalAlignment="Center"
+                                Text="Shift Info" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <TextBlock Grid.Row="0" Text="Configure Production Shift Data" 
+                           Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
+                           Margin="10"/>
+
+                    <!-- Content -->
+                    <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"  />
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Manufacturing Date -->
+                        <TextBlock Text="Manufacturing Date:" 
+                       Style="{StaticResource MaterialDesignBody2TextBlock}" 
+                       Margin="10" VerticalAlignment="Center"/>
+                        <DatePicker Grid.Column="1" Grid.Row="0"
+                    SelectedDate="{Binding CurrentShift.TimeStamp, UpdateSourceTrigger=LostFocus}" 
+                    Style="{StaticResource MaterialDesignDatePicker}" 
+                    Margin="10"/>
+
+                        <!-- Shift -->
+                        <TextBlock Grid.Row="1" 
+                   Text="Shift:" 
+                   Style="{StaticResource MaterialDesignBody2TextBlock}" 
+                   Margin="10" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Column="1" Grid.Row="1"
+                  SelectedIndex="{Binding CurrentShift.Shift, UpdateSourceTrigger=LostFocus}" 
+                  Style="{StaticResource MaterialDesignComboBox}" 
+                  Margin="10">
+
+                            <ComboBoxItem Content="N/A" />
+                            <ComboBoxItem Content="Shift 1" />
+                            <ComboBoxItem Content="Shift 2" />
+                            <ComboBoxItem Content="Shift 3" />
+                        </ComboBox>
+
+                        <!-- Lot -->
+                        <TextBlock Grid.Row="2" 
+                   Text="LOT:" 
+                   Style="{StaticResource MaterialDesignBody2TextBlock}" 
+                   Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" 
+                 Text="{Binding CurrentShift.LOT, UpdateSourceTrigger=LostFocus}" 
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                 Margin="10"/>
+
+                        <!-- Word Order -->
+                        <TextBlock Grid.Row="3"  VerticalAlignment="Center"
+                   Text="Word Order:" 
+                   Style="{StaticResource MaterialDesignBody2TextBlock}" 
+                   Margin="10"/>
+                        <TextBox Grid.Column="1" Grid.Row="3" 
+                 Text="{Binding CurrentShift.WO, UpdateSourceTrigger=LostFocus}" 
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                 Margin="10"/>
+                    </Grid>
+                    <Button Content="Save"  Grid.Row="2" Width="150"
+                Command="{Binding ChangeShiftInfoCommand}" 
+                Style="{StaticResource MaterialDesignRaisedButton}"  Background="LightGreen" Foreground="Black"
+                Margin="10"
+                Grid.ColumnSpan="2"/>
+                </Grid>
+
+            </TabItem>
+            <TabItem HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TabItem.Header>
+                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="PackageOutline" />
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Text="Product Info" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl HorizontalAlignment="Center" Margin="8 8 8 8 " VerticalAlignment="Center" 
+                            prism:RegionManager.RegionName="{x:Static core:RegionNames.ProductDatabaseRegion}">
+                </ContentControl>
+            </TabItem>
+            <TabItem HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TabItem.Header>
+                    <StackPanel >
+                        <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="CustomerService" />
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Text="Customer Info" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl HorizontalAlignment="Center" Margin="8 8 8 8 " VerticalAlignment="Center" 
+                            prism:RegionManager.RegionName="{x:Static core:RegionNames.CustomerDatabaseRegion}">
+                </ContentControl>
+            </TabItem>
+            <TabItem HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TabItem.Header>
+                    <StackPanel
+                          Width="auto"
+                          Height="auto">
+                        <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="History" />
+                        <TextBlock
+                                HorizontalAlignment="Center"
+                                Text="History" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+                        <Run
+                          Text="tab 4 content. Default look and behaviors." />
+                        <LineBreak />
+                        <LineBreak />
+                </TextBlock>
+            </TabItem>
+            <TabItem HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TabItem.Header>
+                    <StackPanel
+                          Width="auto"
+                          Height="auto">
+                        <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="FileAccountOutline" />
+                        <TextBlock
+                                HorizontalAlignment="Center"
+                                Text="Report" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+                        <Run
+                          Text="tab 4 content. Default look and behaviors." />
+                        <LineBreak />
+                        <LineBreak />
+                </TextBlock>
+            </TabItem>
+        </TabControl>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ContentControl Grid.Row="0" HorizontalAlignment="Center" Margin="8 8 0 8 " VerticalAlignment="Center" 
+                            prism:RegionManager.RegionName="{x:Static core:RegionNames.CustomerRegion}">
+            </ContentControl>
+            <ContentControl Grid.Row="1" HorizontalAlignment="Center" Margin="8 8 0 8 " VerticalAlignment="Center" 
+                            prism:RegionManager.RegionName="{x:Static core:RegionNames.ProductRegion}">
+            </ContentControl>
+            <ContentControl Grid.Row="2" HorizontalAlignment="Center" Margin="8 8 0 8 " VerticalAlignment="Center" 
+                            prism:RegionManager.RegionName="{x:Static core:RegionNames.ShiftRegion}">
+            </ContentControl>
+        </Grid>
+    </Grid>
+</UserControl>

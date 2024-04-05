@@ -1,0 +1,17 @@
+﻿<prism:PrismApplication x:Class="ADM_Scada.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	        xmlns:prism="http://prismlibrary.com/"
+             xmlns:local="clr-namespace:ADM_Scada" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Application.Resources>
+        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <materialDesign:CustomColorTheme BaseTheme="Light" PrimaryColor="#152026" SecondaryColor="Orange" />
+                <ResourceDictionary Source="/CustomControl/ButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+       
+    </Application.Resources>
+</prism:PrismApplication>

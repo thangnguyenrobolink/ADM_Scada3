@@ -1,0 +1,219 @@
+﻿<Window x:Class="ADM_Scada.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:viewmodels="clr-namespace:ADM_Scada.ViewModels" 
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:core="clr-namespace:ADM_Scada.Core;assembly=ADM_Scada.Core"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        Focusable="False"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Normal"
+        TextElement.FontSize="14" Background="Transparent"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        WindowStyle="None" Height="727" Width="975" >
+    <Window.Resources>
+        <SolidColorBrush x:Key="titleColor3" Color="#D2D2D2"/>
+    </Window.Resources>
+    <Border CornerRadius="30" Background="#EFF2F7" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Margin="4">
+        <Grid materialDesign:ScrollViewerAssist.SupportHorizontalScroll="True" materialDesign:ScrollBarAssist.ButtonsVisibility="Visible" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!--Status bar and window control button-->
+            <Grid Grid.Row="0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="0" Grid.Row="0"    x:Name="pnlControlBar"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="0,0,2,0"
+                                MouseLeftButtonDown="PnlControlBar_MouseLeftButtonDown"
+                                MouseEnter="PnlControlBar_MouseEnter">
+                    <Button x:Name="btnClose" Style="{StaticResource MaterialDesignFlatButton}"
+                                Width="30" Height="30" Padding="0"
+                                Click="BtnClose_Click">
+                        <materialDesign:PackIcon Kind="Close" Foreground="#6E7783" 
+                                             Width="12"/>
+                    </Button>
+
+                    <Button x:Name="btnMaximize"  Style="{StaticResource MaterialDesignFlatButton}"
+                                 Width="30" Height="30" Padding="0"
+                                Click="BtnMaximize_Click" Foreground="#6E7783">
+                        <materialDesign:PackIcon Kind="Maximize" Width="12"/>
+                    </Button>
+
+                    <Button x:Name="btnMinimize"  Width="30" Height="30" Margin="0" Padding="0"
+                             Style="{StaticResource MaterialDesignFlatButton}"
+                            Click="BtnMinimize_Click" Foreground="#6E7783" >
+                        <materialDesign:PackIcon Kind="Minimize" Width="12"/>
+                    </Button>
+
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="4 0">
+                    <TextBlock Text="{Binding CurrentDate}" Foreground="#6E7783"
+                    Height="15" Width="72" TextAlignment="Center"
+                    FontSize="12" VerticalAlignment="Center" 
+                    HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding CurrentTime}"   Foreground="#6E7783"
+                    Width="72" TextAlignment="Center"
+                    FontSize="12"  Height="15"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center" />
+
+                </StackPanel>
+                <Grid Grid.RowSpan="2" Grid.Column="1" >
+                </Grid>
+                <Grid Grid.RowSpan="2" Grid.Column="2">
+                </Grid>
+                <Grid Grid.RowSpan="2" Grid.Column="3">
+                    <Image Source="/ADM_Scada;component/RoboLinks Logo.png" Margin="0,2,8,2"/>
+
+                </Grid>
+            </Grid>
+            <!--Navigator and main content-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!--Navigator and User info-->
+                <Grid Grid.Column="0" MinWidth="72" MaxWidth="164" x:Name="NavigationBar">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="74" />
+                        <!--<RowDefinition Height="150"/>-->
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <!--User info-->
+                    <Grid Grid.Row="0" Margin="0 12 0 45">
+                        <ToggleButton HorizontalAlignment="Left" VerticalAlignment="Center" Height="32" Margin="24,0" Foreground="#6E7783"
+                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked" />
+                    </Grid>
+                    <!--User  info-->
+                    <Border Grid.Row="1"  CornerRadius="0 40 0 25">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="535.2,535.2" StartPoint="1,1" MappingMode="Absolute" SpreadMethod="Reflect">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform X="0"/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF152026"/>
+                                <GradientStop Color="#5F91AA" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="150"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <ContentControl Grid.Row="0" HorizontalAlignment="Center" Margin="0 -35 0 0" VerticalAlignment="Top" x:Name="UserStatusRegion" 
+                                prism:RegionManager.RegionName="{x:Static core:RegionNames.UserRegion}">
+                            </ContentControl>
+                            <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment ="Left" Width="164">
+                                <RadioButton VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                Style="{StaticResource menuButton}"
+                                Tag="Orange"
+                                Command="{Binding NavigateCommand}"  CommandParameter="DashBoardView">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <materialDesign:PackIcon Margin="20,0"  Width="32"  Height="24" Kind="MonitorDashboard" />
+                                        <TextBlock VerticalAlignment="Center" Text="Dashboard" />
+                                    </StackPanel>
+                                </RadioButton>
+
+                                <RadioButton HorizontalAlignment ="Stretch"
+                                     Style="{StaticResource menuButton}"
+                                Tag="Orange"
+                                Command="{Binding NavigateCommand}"  CommandParameter="SettingView">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28">
+                                        <materialDesign:PackIcon Margin="20,0"  Width="32" Height="28" Kind="SettingsSyncOutline" />
+                                        <TextBlock VerticalAlignment="Center" Text="Setting" />
+                                    </StackPanel>
+                                </RadioButton>
+
+                                <RadioButton HorizontalAlignment ="Stretch"
+                                     Style="{StaticResource menuButton}"
+                                Tag="Orange"
+                                Command="{Binding NavigateCommand}"  CommandParameter="UserLoginView">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <materialDesign:PackIcon Margin="20,0"  Width="32"  Height="24" Kind="Alarm" />
+                                        <TextBlock VerticalAlignment="Center" Text="Alarm" />
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton HorizontalAlignment ="Stretch"
+                                     Style="{StaticResource menuButton}"
+                                Tag="Orange" IsTabStop="False"
+                                 Command="{Binding NavigateCommand}"  CommandParameter="ProductionInfoView">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <materialDesign:PackIcon Margin="20,0"  Width="32"  Height="24" Kind="GantryCrane" />
+                                        <TextBlock VerticalAlignment="Center" Text="Production" />
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton HorizontalAlignment ="Stretch"
+                                     Style="{StaticResource menuButton}"
+                                Tag="Orange" IsTabStop="False"
+                                 Command="{Binding NavigateCommand}"  CommandParameter="UserLoginView">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <materialDesign:PackIcon Margin="20,0"  Width="32"  Height="24" Kind="Database" />
+                                        <TextBlock VerticalAlignment="Center" Text="Data Static" />
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton HorizontalAlignment ="Stretch" 
+                                     Style="{StaticResource menuButton}"
+                                Tag="Orange" Command="{Binding NavigateCommand}"  CommandParameter="ProductDatabaseView" >
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <materialDesign:PackIcon Margin="20,0"  Width="32"  Height="24" Kind="FileChartOutline" />
+                                        <TextBlock VerticalAlignment="Center" Text="Report" />
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton HorizontalAlignment ="Stretch" 
+                                     Style="{StaticResource menuButton}"
+                                Tag="Orange" Command="{Binding NavigateCommand}"  CommandParameter="UserLoginView">
+
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <materialDesign:PackIcon Margin="20,0"  Width="32"  Height="24" Kind="UserMultiple" />
+                                        <TextBlock VerticalAlignment="Center" Text="User" />
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton HorizontalAlignment ="Stretch"
+                            Style="{StaticResource menuButton}"
+                            Tag="Orange"
+                            Command="{Binding NavigateCommand}"  CommandParameter="UserManageView">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <materialDesign:PackIcon Margin="20,0"  Width="32"  Height="24" Kind="Help" />
+                                        <TextBlock VerticalAlignment="Center" Text="Information" />
+                                    </StackPanel>
+                                </RadioButton>
+                            </StackPanel>
+                        </Grid>
+                        
+                    </Border>
+                   
+                    <!--Navigator-->
+                    
+                </Grid>
+                <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1">
+                    <ContentControl Margin="8,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}">
+                    </ContentControl>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
