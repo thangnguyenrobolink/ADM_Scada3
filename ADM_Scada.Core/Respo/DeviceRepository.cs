@@ -192,7 +192,7 @@ namespace ADM_Scada.Core.Respo
             }
         }
 
-        // Method to convert DataTable to a list of DeviceModel objects
+        // Method to convert DataTable to a list of DeviceModel objectsÁDASDASD
         private List<DeviceModel> ConvertDataTableToList(DataTable dataTable)
         {
             List<DeviceModel> deviceList = new List<DeviceModel>();
@@ -228,7 +228,6 @@ namespace ADM_Scada.Core.Respo
             {
                 return null;
             }
-
             DataRow row = dataTable.Rows[0];
             return ConvertDataRowToDeviceModel(row);
         }
