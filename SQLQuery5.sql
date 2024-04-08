@@ -1,4 +1,3 @@
-
 USE ADM_weighingconveyor_scada;
 GO
 DROP TABLE  [dbo].[customer]
