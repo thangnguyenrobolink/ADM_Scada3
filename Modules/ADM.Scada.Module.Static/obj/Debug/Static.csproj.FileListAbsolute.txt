@@ -152,3 +152,7 @@ E:\work\ADM_Scada\Modules\ADM.Scada.Module.Static\obj\Debug\Static.csproj.CoreCo
 E:\work\ADM_Scada\Modules\ADM.Scada.Module.Static\obj\Debug\Static.csproj.CopyComplete
 E:\work\ADM_Scada\Modules\ADM.Scada.Module.Static\obj\Debug\ADM.Scada.Module.Static.dll
 E:\work\ADM_Scada\Modules\ADM.Scada.Module.Static\obj\Debug\ADM.Scada.Module.Static.pdb
+E:\work\ADM_Scada\Modules\ADM.Scada.Module.Static\bin\Debug\Serilog.dll
+E:\work\ADM_Scada\Modules\ADM.Scada.Module.Static\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+E:\work\ADM_Scada\Modules\ADM.Scada.Module.Static\bin\Debug\Serilog.xml
+E:\work\ADM_Scada\Modules\ADM.Scada.Module.Static\bin\Debug\System.Diagnostics.DiagnosticSource.xml

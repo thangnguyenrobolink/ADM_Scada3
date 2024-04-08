@@ -1,4 +1,6 @@
 ﻿using ADM_Scada.Core.ExcelService;
+using ADM_Scada.Core.Models;
+using ADM_Scada.Core.Respo;
 using ADM_Scada.Cores.Model;
 using ADM_Scada.Cores.PubEvent;
 using ADM_Scada.Modules.Customer.Repositories;
@@ -27,7 +29,7 @@ namespace Customer.ViewModels
             get => customers;
             set => SetProperty(ref customers, value);
         }
-        public CustomerModel CurrentCus { get => currentCus ?? new CustomerModel() { Name = "N/A", Company = "N/A", Code = "0", Avatar = "9723582.jpg", }; set => SetProperty(ref currentCus, value); }
+        public CustomerModel CurrentCus { get => currentCus ?? new CustomerModel() ; set => SetProperty(ref currentCus, value); }
         public CustomerModel ResCustomer { get => resCustomer; set => SetProperty(ref resCustomer, value); }
         public string FilCompany { get => filCompany; set { SetProperty(ref filCompany, value); FilterData(); } }
         public string FilName { get => filName; set { SetProperty(ref filName, value); FilterData(); } }
@@ -86,7 +88,7 @@ namespace Customer.ViewModels
                 {
                     openFileDialog1.FileName
                 };
-                ResCustomer.Avatar = ImagePathList[0];
+                ResCustomer.CustAvatar = ImagePathList[0];
             }
             RaisePropertyChanged(nameof(ResCustomer));
         }

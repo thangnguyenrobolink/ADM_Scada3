@@ -199,7 +199,7 @@ namespace ADM_Scada.Cores.PlcService
                 try
                 {
                     if (statusVars[i].DeviceId >= plcs.Count) return;
-                    byte[] byteArray = await plcs[statusVars[i].DeviceId].ReadBytesAsync(DataType.DataBlock, statusVars[i].Area, statusVars[i].Address, count * 4);
+                    byte[] byteArray = await plcs[(int)statusVars[i].DeviceId].ReadBytesAsync(DataType.DataBlock, (int)statusVars[i].Area, (int)statusVars[i].Address, count * 4);
                     // Assuming each real is 4 bytes
                     // Convert the byte array to an array of floats
                     float[] floatArray = new float[count];
@@ -226,7 +226,7 @@ namespace ADM_Scada.Cores.PlcService
                 try
                 {
                     if (statusVars[i].DeviceId >= plcs.Count) return;
-                    byte[] byteArray = await plcs[errorVars[i].DeviceId].ReadBytesAsync(DataType.DataBlock, errorVars[i].Area, errorVars[i].Address, count * 4);
+                    byte[] byteArray = await plcs[(int)errorVars[i].DeviceId].ReadBytesAsync(DataType.DataBlock, (int)errorVars[i].Area, (int)errorVars[i].Address, count * 4);
                     // Assuming each real is 4 bytes
                     // Convert the byte array to an array of floats
                     float[] floatArray = new float[count];
@@ -305,7 +305,7 @@ namespace ADM_Scada.Cores.PlcService
                         devices[index].Status = DeviceStatus.NotPresent;
                         break;
                 }
-                _ = MessageBox.Show($"Fail to connect PLC {devices[index].Name}");
+                _ = MessageBox.Show($"Fail to connect PLC {devices[index].DeviceName}");
                 return false;
             }
             return true;
@@ -346,13 +346,13 @@ namespace ADM_Scada.Cores.PlcService
             DeviceModel device = devices.Find(x => x.Id == a.DeviceId);
             try
             {
-                a.Value = (double)await plcs[a.DeviceId].ReadAsync(DataType.DataBlock, a.Area, a.Address, VarType.DWord, 1, 0);
+                a.Value = (float?)(double)await plcs[(int)a.DeviceId].ReadAsync(DataType.DataBlock, (int)a.Area, (int)a.Address, VarType.DWord, 1, 0);
             }
             catch (PlcException b)
             {
                 Random random = new Random();
-                _ = MessageBox.Show($"Read Variable {a.Name} from PLC {device.Name} fail! Error {b.ErrorCode}");
-                a.Value = random.NextDouble();
+                _ = MessageBox.Show($"Read Variable {a.Name} from PLC {device.DeviceName} fail! Error {b.ErrorCode}");
+                a.Value = (float?)random.NextDouble();
             }
             return a;
         }
@@ -363,11 +363,11 @@ namespace ADM_Scada.Cores.PlcService
 
             try
             {
-                await plcs[a.DeviceId].WriteAsync(DataType.DataBlock, a.Area, a.Address, a.Value);
+                await plcs[(int)a.DeviceId].WriteAsync(DataType.DataBlock, (int)a.Area, (int)a.Address, a.Value);
             }
             catch (PlcException b)
             {
-                _ = MessageBox.Show($"Set Variable {a.Name} from PLC {device.Name} fail! Error {b.ErrorCode}");
+                _ = MessageBox.Show($"Set Variable {a.Name} from PLC {device.DeviceName} fail! Error {b.ErrorCode}");
                 return false;
             }
             return true;

@@ -146,3 +146,5 @@ E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\System.Threading.Tasks.Extensions.xml
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Unity.Abstractions.pdb
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Unity.Container.pdb
 E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.csproj.CopyComplete
+E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Serilog.dll
+E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Serilog.xml
