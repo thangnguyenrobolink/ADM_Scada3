@@ -82,9 +82,9 @@ namespace ADM_Scada.Modules.Product.ViewModels
         {
             // Validation: Check if required properties are not empty
             if (string.IsNullOrWhiteSpace(ResProduct.Market)
-                || string.IsNullOrWhiteSpace(ResProduct.Name)
-                || string.IsNullOrWhiteSpace(ResProduct.Description)
-                || string.IsNullOrWhiteSpace(ResProduct.Code))
+                || string.IsNullOrWhiteSpace(ResProduct.ProdName)
+                || string.IsNullOrWhiteSpace(ResProduct.ProdFullName)
+                || string.IsNullOrWhiteSpace(ResProduct.ProdCode))
             {
                 // Handle validation error (e.g., show a message)
                 // You can also throw an exception or handle it based on your application's requirements.
@@ -133,11 +133,11 @@ namespace ADM_Scada.Modules.Product.ViewModels
             if (!string.IsNullOrEmpty(FilMarket))
                 filteredProducts = filteredProducts.Where(Product => Product.Market.Contains(FilMarket));
             if (!string.IsNullOrEmpty(FilName))
-                filteredProducts = filteredProducts.Where(Product => Product.Name.Contains(FilName));
+                filteredProducts = filteredProducts.Where(Product => Product.ProdName.Contains(FilName));
             if (!string.IsNullOrEmpty(FilCode))
-                filteredProducts = filteredProducts.Where(Product => Product.Code.Contains(FilCode));
+                filteredProducts = filteredProducts.Where(Product => Product.ProdCode.Contains(FilCode));
             if (!string.IsNullOrEmpty(FilCode))
-                filteredProducts = filteredProducts.Where(Product => Product.Code.Contains(FilCode));
+                filteredProducts = filteredProducts.Where(Product => Product.ProdCode.Contains(FilCode));
 
             // Update the Products collection with the filtered results
             Products = new ObservableCollection<ProductModel>(filteredProducts);

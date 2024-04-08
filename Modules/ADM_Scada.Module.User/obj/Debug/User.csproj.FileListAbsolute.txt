@@ -154,3 +154,7 @@ E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\obj\Debug\User.csproj.CoreCompil
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\obj\Debug\User.csproj.CopyComplete
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\obj\Debug\ADM_Scada.Module.User.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\obj\Debug\ADM_Scada.Module.User.pdb
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\Serilog.dll
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\Serilog.xml
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\System.Diagnostics.DiagnosticSource.xml

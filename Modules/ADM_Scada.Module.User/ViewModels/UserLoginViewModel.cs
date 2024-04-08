@@ -1,6 +1,5 @@
 ﻿using ADM_Scada.Core.Models;
 using ADM_Scada.Core.Respo;
-using ADM_Scada.Cores.Models;
 using ADM_Scada.Cores.PubEvent;
 using Prism.Commands;
 using Prism.Events;
@@ -34,7 +33,7 @@ namespace ADM_Scada.Modules.User.ViewModels
             get => users;
             set => SetProperty(ref users, value);
         }
-        public UserModel CurrentUser { get => currentUser ?? new UserModel() { FullName = "Guest", LoginName = "Guest", Level = 0, Avatar = "Avatar.jpeg" }; set => SetProperty(ref currentUser, value); }
+        public UserModel CurrentUser { get => currentUser ?? new UserModel(); set => SetProperty(ref currentUser, value); }
         public UserModel SelectedUser { get => selectedUser; set => SetProperty(ref selectedUser, value); }
         public string Password { get => password; set => SetProperty(ref password, value); }
         public string LoginName { get => loginname; set => SetProperty(ref loginname, value); }
@@ -104,7 +103,7 @@ namespace ADM_Scada.Modules.User.ViewModels
         {
             foreach (UserModel User in Users)
             {
-                User.IsEnable = CurrentUser.Level > User.Level || User.LoginName == CurrentUser.LoginName;
+                User.IsEnable = CurrentUser.UserGroup > User.UserGroup || User.UserName == CurrentUser.UserName;
             }
             Users = Users;
         }
@@ -122,18 +121,7 @@ namespace ADM_Scada.Modules.User.ViewModels
                 return;
             }
 
-            // Create a new user based on the provided properties
-            UserModel newUser = new UserModel
-            {
-                LoginName = ResLoginName,
-                FullName = ResFullName,
-                Code = ResCode,
-                Level = ResLevel, // Assuming ResLevel is a string, convert it to int
-                Password = ResPassword,
-                Avatar = ImagePath ?? "Avatar.jpeg"
-                // You may need to set other properties based on your UserModel definition
-            };
-
+            UserModel newUser = new UserModel();
             int newUserId = await userRepository.Create(newUser);
 
             // Set the generated Id to the new user
@@ -160,7 +148,7 @@ namespace ADM_Scada.Modules.User.ViewModels
 
             // Check if a user with the provided login name and password exists
             UserModel user = Users.FirstOrDefault(u =>
-                u.LoginName.Equals(LoginName, StringComparison.OrdinalIgnoreCase) &&
+                u.UserName.Equals(LoginName, StringComparison.OrdinalIgnoreCase) &&
                 u.Password == Password);
 
             if (user != null)
