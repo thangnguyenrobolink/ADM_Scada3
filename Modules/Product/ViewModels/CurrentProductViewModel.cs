@@ -1,4 +1,4 @@
-﻿using ADM_Scada.Cores.Models;
+﻿using ADM_Scada.Core.Models;
 using ADM_Scada.Cores.PubEvent;
 using Prism.Events;
 using Prism.Mvvm;

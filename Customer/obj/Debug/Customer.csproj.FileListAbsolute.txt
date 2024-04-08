@@ -146,3 +146,7 @@ E:\work\ADM_Scada\Customer\obj\Debug\Customer.csproj.CoreCompileInputs.cache
 E:\work\ADM_Scada\Customer\obj\Debug\Customer.csproj.CopyComplete
 E:\work\ADM_Scada\Customer\obj\Debug\Customer.dll
 E:\work\ADM_Scada\Customer\obj\Debug\Customer.pdb
+E:\work\ADM_Scada\Customer\bin\Debug\Serilog.dll
+E:\work\ADM_Scada\Customer\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+E:\work\ADM_Scada\Customer\bin\Debug\Serilog.xml
+E:\work\ADM_Scada\Customer\bin\Debug\System.Diagnostics.DiagnosticSource.xml

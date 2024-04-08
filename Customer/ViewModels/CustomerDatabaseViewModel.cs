@@ -1,9 +1,7 @@
 ﻿using ADM_Scada.Core.ExcelService;
 using ADM_Scada.Core.Models;
 using ADM_Scada.Core.Respo;
-using ADM_Scada.Cores.Model;
 using ADM_Scada.Cores.PubEvent;
-using ADM_Scada.Modules.Customer.Repositories;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -95,26 +93,26 @@ namespace Customer.ViewModels
         private async void AddCustomer()
         {
             // Validation: Check if required properties are not empty
-            if (string.IsNullOrWhiteSpace(ResCustomer.Company)
-                || string.IsNullOrWhiteSpace(ResCustomer.Name)
-                || string.IsNullOrWhiteSpace(ResCustomer.Code))
+            if (string.IsNullOrWhiteSpace(ResCustomer.CustCompany)
+                || string.IsNullOrWhiteSpace(ResCustomer.CustName)
+                || string.IsNullOrWhiteSpace(ResCustomer.CustCode))
             {
                 // Handle validation error (e.g., show a message)
                 // You can also throw an exception or handle it based on your application's requirements.
                 MessageBox.Show("Please fill in all required fields.");
                 return;
             }
-            if (string.IsNullOrWhiteSpace(ResCustomer.Phone))
+            if (string.IsNullOrWhiteSpace(ResCustomer.MobileNo))
             {
-                ResCustomer.Phone = "No Data";
+                ResCustomer.MobileNo = "No Data";
             }
-            if (string.IsNullOrWhiteSpace(ResCustomer.Email))
+            if (string.IsNullOrWhiteSpace(ResCustomer.EmailAddress))
             {
-                ResCustomer.Email = "No Data";
+                ResCustomer.EmailAddress = "No Data";
             }
-            if (string.IsNullOrWhiteSpace(ResCustomer.Address))
+            if (string.IsNullOrWhiteSpace(ResCustomer.CustAdd))
             {
-                ResCustomer.Address = "No Data";
+                ResCustomer.CustAdd = "No Data";
             }
             int newUserId = await customerRepository.Create(ResCustomer);
 
@@ -152,13 +150,13 @@ namespace Customer.ViewModels
 
             // Apply filters based on the provided properties
             if (!string.IsNullOrEmpty(FilCompany))
-                filteredCustomers = filteredCustomers.Where(customer => customer.Company.Contains(FilCompany));
+                filteredCustomers = filteredCustomers.Where(customer => customer.CustCompany.Contains(FilCompany));
 
             if (!string.IsNullOrEmpty(FilName))
-                filteredCustomers = filteredCustomers.Where(customer => customer.Name.Contains(FilName));
+                filteredCustomers = filteredCustomers.Where(customer => customer.CustName.Contains(FilName));
 
             if (!string.IsNullOrEmpty(FilCode))
-                filteredCustomers = filteredCustomers.Where(customer => customer.Code.Contains(FilCode));
+                filteredCustomers = filteredCustomers.Where(customer => customer.CustCode.Contains(FilCode));
 
             // Update the Customers collection with the filtered results
             Customers = new ObservableCollection<CustomerModel>(filteredCustomers);

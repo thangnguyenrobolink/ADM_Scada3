@@ -1,5 +1,5 @@
 ﻿using ADM_Scada.Core;
-using ADM_Scada.Cores.Models;
+using ADM_Scada.Core.Models;
 using ADM_Scada.Modules.User.Views;
 using Prism.Ioc;
 using Prism.Modularity;

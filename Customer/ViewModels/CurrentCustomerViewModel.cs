@@ -1,4 +1,4 @@
-﻿using ADM_Scada.Cores.Model;
+﻿using ADM_Scada.Core.Models;
 using ADM_Scada.Cores.PubEvent;
 using Prism.Events;
 using Prism.Mvvm;
@@ -24,7 +24,7 @@ namespace Customer.ViewModels
         {
 
             CurrentCustomer = curUser;
-            CurrentCustomer.TimeStamp = DateTime.Now;
+            CurrentCustomer.UpdatedDate = DateTime.Now;
             RaisePropertyChanged(nameof(CurrentCustomer));
         }
     }

@@ -74,7 +74,18 @@ namespace ADM_Scada.Core.Respo
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
-                    // Add parameters
+                    { "@UserCode", user.UserCode },
+                    { "@UserName", user.UserName },
+                    { "@Password", user.Password },
+                    { "@UserAvatar", user.UserAvatar },
+                    { "@UserGroup", user.UserGroup },
+                    { "@EmailAddress", user.EmailAddress },
+                    { "@TelNo", user.TelNo },
+                    { "@MobileNo", user.MobileNo },
+                    { "@CreatedDate", user.CreatedDate },
+                    { "@CreatedBy", user.CreatedBy },
+                    { "@UpdatedDate", user.UpdatedDate },
+                    { "@UpdatedBy", user.UpdatedBy }
                 };
                 return await ExecuteNonQueryAsync(query, parameters);
             }
@@ -100,7 +111,19 @@ namespace ADM_Scada.Core.Respo
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
-                    // Add parameters
+                    { "@UserCode", user.UserCode },
+                    { "@UserName", user.UserName },
+                    { "@Password", user.Password },
+                    { "@UserAvatar", user.UserAvatar },
+                    { "@UserGroup", user.UserGroup },
+                    { "@EmailAddress", user.EmailAddress },
+                    { "@TelNo", user.TelNo },
+                    { "@MobileNo", user.MobileNo },
+                    { "@CreatedDate", user.CreatedDate },
+                    { "@CreatedBy", user.CreatedBy },
+                    { "@UpdatedDate", user.UpdatedDate },
+                    { "@UpdatedBy", user.UpdatedBy },
+                    { "@Id", user.Id } // Adding ID parameter for WHERE clause
                 };
                 return await ExecuteNonQueryAsync(query, parameters) > 0;
             }

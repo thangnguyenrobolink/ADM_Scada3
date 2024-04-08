@@ -1,4 +1,4 @@
-﻿using ADM_Scada.Cores.Models;
+﻿using ADM_Scada.Core.Models;
 using ADM_Scada.Cores.PubEvent;
 using Prism.Events;
 using Prism.Mvvm;
@@ -33,8 +33,8 @@ namespace ADM_Scada.Modules.User.ViewModels
         {
             UserModule.CurrentUser = curUser;
             currentUser = curUser;
-            UserName = currentUser.FullName;
-            UserLevel = currentUser.Level;
+            UserName = currentUser.UserName;
+            UserLevel = currentUser.UserGroup;
         }
     }
 }

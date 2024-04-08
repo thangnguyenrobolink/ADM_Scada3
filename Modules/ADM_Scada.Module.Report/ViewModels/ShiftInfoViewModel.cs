@@ -1,4 +1,4 @@
-﻿using ADM_Scada.Cores.Models;
+﻿using ADM_Scada.Core.Models;
 using ADM_Scada.Cores.PubEvent;
 using Prism.Events;
 using Prism.Mvvm;
@@ -8,10 +8,10 @@ namespace ADM_Scada.Modules.Report.ViewModels
     public class ShiftInfoViewModel : BindableBase
     {
         private IEventAggregator _ea;
-        private ProductionHistoryModel currentShift;
-        private ProductionHistoryModel ProductName = new ProductionHistoryModel();
+        private ProdShiftDataModel currentShift;
+        private ProdShiftDataModel ProductName = new ProdShiftDataModel();
 
-        public ProductionHistoryModel CurrentShift { get => currentShift; set => SetProperty(ref currentShift, value); }
+        public ProdShiftDataModel CurrentShift { get => currentShift; set => SetProperty(ref currentShift, value); }
         public ShiftInfoViewModel(IEventAggregator ea)
         {
             _ea = ea;
@@ -19,7 +19,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
             _ = _ea.GetEvent<ShiftInfoChangeEvent>().Subscribe(UpdateProduct);
         }
 
-        private void UpdateProduct(ProductionHistoryModel curShift)
+        private void UpdateProduct(ProdShiftDataModel curShift)
         {
             CurrentShift = curShift;
             RaisePropertyChanged(nameof(CurrentShift));
