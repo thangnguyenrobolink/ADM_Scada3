@@ -15,11 +15,11 @@ namespace ADM_Scada.Core.Models
         public int? BoatId { get; set; }
         public string SoNumber { get; set; }
         public int? QtyCounted { get; set; }
-        public float? QtyOrderWeigh { get; set; }
-        public float? QtyTareWeigh { get; set; }
-        public float? QtyWeighed { get; set; }
-        public float? QtyInvoiceWeigh { get; set; }
-        public float? Gap { get; set; }
+        public decimal? QtyOrderWeigh { get; set; }
+        public decimal? QtyTareWeigh { get; set; }
+        public decimal? QtyWeighed { get; set; }
+        public decimal? QtyInvoiceWeigh { get; set; }
+        public decimal? Gap { get; set; }
         public string DocumentNo { get; set; }
         public int? ShiftDataId { get; set; }
         public int? UserId { get; set; }

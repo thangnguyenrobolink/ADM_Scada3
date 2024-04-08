@@ -1,5 +1,5 @@
-﻿using ADM_Scada.Cores.Models;
-using ADM_Scada.Cores.Respo;
+﻿using ADM_Scada.Core.Models;
+using ADM_Scada.Core.Respo;
 using S7.Net;
 using System;
 using System.Collections.Generic;

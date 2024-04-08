@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Windows.Forms;
 
 namespace ADM_Scada.Core.Respo
 {
@@ -12,6 +13,7 @@ namespace ADM_Scada.Core.Respo
 
         public RepositoryException(string message) : base(message)
         {
+
         }
 
         public RepositoryException(string message, Exception innerException) : base(message, innerException)
@@ -20,6 +22,11 @@ namespace ADM_Scada.Core.Respo
 
         protected RepositoryException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
+        }
+
+        public void ShowErrorDialog()
+        {
+            MessageBox.Show(Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

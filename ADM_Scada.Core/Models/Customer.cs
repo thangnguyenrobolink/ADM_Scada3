@@ -9,7 +9,7 @@ namespace ADM_Scada.Core.Models
         public string CustCode { get; set; }
         public string CustName { get; set; }
         public string CustAvatar { get; set; }
-        public string CustAddress { get; set; }
+        public string CustAdd { get; set; }
         public string PaymentTerm { get; set; }
         public string EmailAddress { get; set; }
         public string FaxNo { get; set; }

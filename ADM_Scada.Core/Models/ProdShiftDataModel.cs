@@ -15,7 +15,7 @@ namespace ADM_Scada.Core.Models
         public string ShiftNo { get; set; }
         public string CustCode { get; set; }
         public string DevideCode { get; set; }
-        public float? QtyToPack { get; set; }
+        public decimal? QtyToPack { get; set; }
         public string WholeUom { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }

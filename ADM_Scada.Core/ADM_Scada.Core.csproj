@@ -170,6 +170,7 @@
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -199,17 +200,11 @@
   <ItemGroup>
     <Compile Include="ExcelService\ExcelExporter.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\CustomerModel.cs" />
-    <Compile Include="Models\DeviceModel.cs" />
     <Compile Include="Models\DeviceModel1.cs" />
     <Compile Include="Models\ProdShiftDataModel.cs" />
-    <Compile Include="Models\ProductionHistoryModel.cs" />
-    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ProductModel1.cs" />
     <Compile Include="Models\UserGroupModel.cs" />
-    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserModel1.cs" />
-    <Compile Include="Models\Variable.cs" />
     <Compile Include="Models\VariableModel.cs" />
     <Compile Include="Models\WeighSessionDModel.cs" />
     <Compile Include="Models\WeighSessionModel.cs" />
@@ -222,12 +217,18 @@
     <Compile Include="PubEvent\PlcErrorEvent.cs" />
     <Compile Include="PubEvent\UserLoginEvent.cs" />
     <Compile Include="RegionNames.cs" />
+    <Compile Include="Respo\CustomerRepository.cs" />
     <Compile Include="Respo\DeviceRepository.cs" />
-    <Compile Include="Respo\RepositoryException.cs" />
+    <Compile Include="Respo\General\RepositoryException.cs" />
+    <Compile Include="Respo\ProdShiftDataRepository.cs" />
+    <Compile Include="Respo\ProductRepository.cs" />
+    <Compile Include="Respo\UserGroupRepository.cs" />
     <Compile Include="Respo\UserRepository.cs" />
     <Compile Include="Respo\VariableRepository.cs" />
-    <Compile Include="Respo\IDataRepository.cs" />
-    <Compile Include="Respo\RepositoryBase.cs" />
+    <Compile Include="Respo\General\IDataRepository.cs" />
+    <Compile Include="Respo\General\RepositoryBase.cs" />
+    <Compile Include="Respo\WeighSessionDRepository.cs" />
+    <Compile Include="Respo\WeighSessionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

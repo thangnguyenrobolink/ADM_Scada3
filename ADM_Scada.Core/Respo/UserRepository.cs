@@ -212,3 +212,4 @@ namespace ADM_Scada.Core.Respo
         }
     }
 }
+

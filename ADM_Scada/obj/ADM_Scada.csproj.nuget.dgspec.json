@@ -25,12 +25,16 @@
         "projectUniqueName": "E:\\work\\ADM_Scada\\ADM_Scada\\ADM_Scada.csproj",
         "projectName": "ADM_Scada",
         "projectPath": "E:\\work\\ADM_Scada\\ADM_Scada\\ADM_Scada.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\thang\\.nuget\\packages\\",
         "outputPath": "E:\\work\\ADM_Scada\\ADM_Scada\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -132,12 +136,16 @@
         "projectUniqueName": "E:\\work\\ADM_Scada\\Customer\\Customer.csproj",
         "projectName": "Customer",
         "projectPath": "E:\\work\\ADM_Scada\\Customer\\Customer.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\thang\\.nuget\\packages\\",
         "outputPath": "E:\\work\\ADM_Scada\\Customer\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -217,12 +225,16 @@
         "projectUniqueName": "E:\\work\\ADM_Scada\\Modules\\ADM.Scada.Module.Static\\Static.csproj",
         "projectName": "Static",
         "projectPath": "E:\\work\\ADM_Scada\\Modules\\ADM.Scada.Module.Static\\Static.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\thang\\.nuget\\packages\\",
         "outputPath": "E:\\work\\ADM_Scada\\Modules\\ADM.Scada.Module.Static\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -306,12 +318,16 @@
         "projectUniqueName": "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Plc\\Plc.csproj",
         "projectName": "Plc",
         "projectPath": "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Plc\\Plc.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\thang\\.nuget\\packages\\",
         "outputPath": "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Plc\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -402,12 +418,16 @@
         "projectUniqueName": "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Report\\Report.csproj",
         "projectName": "Report",
         "projectPath": "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Report\\Report.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\thang\\.nuget\\packages\\",
         "outputPath": "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Report\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -491,12 +511,16 @@
         "projectUniqueName": "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.User\\User.csproj",
         "projectName": "User",
         "projectPath": "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.User\\User.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\thang\\.nuget\\packages\\",
         "outputPath": "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.User\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -584,12 +608,16 @@
         "projectUniqueName": "E:\\work\\ADM_Scada\\Modules\\Product\\Product.csproj",
         "projectName": "Product",
         "projectPath": "E:\\work\\ADM_Scada\\Modules\\Product\\Product.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\thang\\.nuget\\packages\\",
         "outputPath": "E:\\work\\ADM_Scada\\Modules\\Product\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

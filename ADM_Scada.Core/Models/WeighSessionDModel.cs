@@ -8,7 +8,7 @@ namespace ADM_Scada.Core.Models
         public int Id { get; set; }
         public int? PId { get; set; }
         public DateTime? CreatedDate { get; set; }
-        public float? CurrentWeigh { get; set; }
+        public decimal? CurrentWeigh { get; set; }
         public string Barcode { get; set; }
         public string ProdCode { get; set; }
         public string ProdFullName { get; set; }
@@ -17,8 +17,8 @@ namespace ADM_Scada.Core.Models
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
         public int? QtyCounted { get; set; }
-        public float? QtyWeighed { get; set; }
-        public float? Gap { get; set; }
+        public decimal? QtyWeighed { get; set; }
+        public decimal? Gap { get; set; }
         public int? ShiftDataId { get; set; }
         public int? UserId { get; set; }
         public string DeviceId { get; set; }

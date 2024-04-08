@@ -1,4 +1,4 @@
-﻿using ADM_Scada.Cores.Models;
+﻿using ADM_Scada.Core.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
