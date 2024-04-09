@@ -48,10 +48,10 @@ namespace ADM_Scada.Core.Respo
             try
             {
                 string query = @"INSERT INTO [dbo].[prod_shift_data] (work_order_no, prod_code, lot_no, production_date, 
-                                expiry_date, user_name, shift_no, cust_code, devide_code, qty_to_pack, whole_uom, 
+                                expiry_date, user_name, shift_no, cust_code, device_code, qty_to_pack, whole_uom, 
                                 created_by, created_date, updated_by, updated_date) 
                                  VALUES (@WorkOrderNo, @ProdCode, @LotNo, @ProductionDate, @ExpiryDate, 
-                                @UserName, @ShiftNo, @CustCode, @DevideCode, @QtyToPack, @WholeUom, 
+                                @UserName, @ShiftNo, @CustCode, @deviceCode, @QtyToPack, @WholeUom, 
                                 @CreatedBy, @CreatedDate, @UpdatedBy, @UpdatedDate)";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
@@ -64,7 +64,7 @@ namespace ADM_Scada.Core.Respo
                     { "@UserName", prodShiftData.UserName },
                     { "@ShiftNo", prodShiftData.ShiftNo },
                     { "@CustCode", prodShiftData.CustCode },
-                    { "@DevideCode", prodShiftData.DevideCode },
+                    { "@deviceCode", prodShiftData.DeviceCode },
                     { "@QtyToPack", prodShiftData.QtyToPack },
                     { "@WholeUom", prodShiftData.WholeUom },
                     { "@CreatedBy", prodShiftData.CreatedBy },
@@ -88,7 +88,7 @@ namespace ADM_Scada.Core.Respo
                 string query = @"UPDATE [dbo].[prod_shift_data] 
                          SET prod_code = @ProdCode, lot_no = @LotNo, production_date = @ProductionDate, 
                              expiry_date = @ExpiryDate, user_name = @UserName, shift_no = @ShiftNo, 
-                             cust_code = @CustCode, devide_code = @DevideCode, qty_to_pack = @QtyToPack, 
+                             cust_code = @CustCode, device_code = @deviceCode, qty_to_pack = @QtyToPack, 
                              whole_uom = @WholeUom, created_by = @CreatedBy, created_date = @CreatedDate, 
                              updated_by = @UpdatedBy, updated_date = @UpdatedDate 
                          WHERE id = @Id";
@@ -103,7 +103,7 @@ namespace ADM_Scada.Core.Respo
                     { "@UserName", prodShiftData.UserName },
                     { "@ShiftNo", prodShiftData.ShiftNo },
                     { "@CustCode", prodShiftData.CustCode },
-                    { "@DevideCode", prodShiftData.DevideCode },
+                    { "@deviceCode", prodShiftData.DeviceCode },
                     { "@QtyToPack", prodShiftData.QtyToPack },
                     { "@WholeUom", prodShiftData.WholeUom },
                     { "@CreatedBy", prodShiftData.CreatedBy },
@@ -228,7 +228,7 @@ namespace ADM_Scada.Core.Respo
                 UserName = Convert.ToString(row["user_name"]),
                 ShiftNo = Convert.ToString(row["shift_no"]),
                 CustCode = Convert.ToString(row["cust_code"]),
-                DevideCode = Convert.ToString(row["devide_code"]),
+                DeviceCode = Convert.ToString(row["device_code"]),
                 QtyToPack = Convert.IsDBNull(row["qty_to_pack"]) ? (decimal?)null : Convert.ToDecimal(row["qty_to_pack"]),
                 WholeUom = Convert.ToString(row["whole_uom"]),
                 CreatedBy = Convert.ToString(row["created_by"]),

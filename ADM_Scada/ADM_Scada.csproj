@@ -70,8 +70,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\Regions\StackPanelRegionAdapter.cs" />
-    <Compile Include="Respo\IDataRepository.cs" />
-    <Compile Include="Respo\RepositoryBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

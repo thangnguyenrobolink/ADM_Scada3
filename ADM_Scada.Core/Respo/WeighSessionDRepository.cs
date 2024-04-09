@@ -45,8 +45,8 @@ namespace ADM_Scada.Core.Respo
         {
             try
             {
-                string query = @"INSERT INTO [dbo].[weigh_session_d] (p_id, created_date, current_weigh, barcode, prod_code, prod_fullname, prod_d365_code, production_date, start_time, end_time, qty_counted, qty_weighed, gap, shift_data_id, user_id, device_id, p_status_code, created_by, updated_date, updated_by) 
-                                 VALUES (@PId, @CreatedDate, @CurrentWeigh, @Barcode, @ProdCode, @ProdFullname, @ProdD365Code, @ProductionDate, @StartTime, @EndTime, @QtyCounted, @QtyWeighed, @Gap, @ShiftDataId, @UserId, @DeviceId, @PStatusCode, @CreatedBy, @UpdatedDate, @UpdatedBy)";
+                string query = @"INSERT INTO [dbo].[weigh_session_d] (p_id, created_date, current_weigh, barcode, prod_code, prod_fullname, prod_d365_code, production_date, start_time, end_time, qty_counted, qty_weighed, gap, shift_data_id, user_id, device_code, p_status_code, created_by, updated_date, updated_by) 
+                                 VALUES (@PId, @CreatedDate, @CurrentWeigh, @Barcode, @ProdCode, @ProdFullname, @ProdD365Code, @ProductionDate, @StartTime, @EndTime, @QtyCounted, @QtyWeighed, @Gap, @ShiftDataId, @UserId, @DeviceCode, @PStatusCode, @CreatedBy, @UpdatedDate, @UpdatedBy)";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
@@ -65,7 +65,7 @@ namespace ADM_Scada.Core.Respo
                     { "@Gap", entity.Gap },
                     { "@ShiftDataId", entity.ShiftDataId },
                     { "@UserId", entity.UserId },
-                    { "@DeviceId", entity.DeviceId },
+                    { "@DeviceCode", entity.DeviceCode },
                     { "@PStatusCode", entity.PStatusCode },
                     { "@CreatedBy", entity.CreatedBy },
                     { "@UpdatedDate", entity.UpdatedDate },
@@ -88,7 +88,7 @@ namespace ADM_Scada.Core.Respo
                                  SET created_date = @CreatedDate, current_weigh = @CurrentWeigh, barcode = @Barcode, prod_code = @ProdCode, 
                                      prod_fullname = @ProdFullname, prod_d365_code = @ProdD365Code, production_date = @ProductionDate, 
                                      start_time = @StartTime, end_time = @EndTime, qty_counted = @QtyCounted, qty_weighed = @QtyWeighed, 
-                                     gap = @Gap, shift_data_id = @ShiftDataId, user_id = @UserId, device_id = @DeviceId, 
+                                     gap = @Gap, shift_data_id = @ShiftDataId, user_id = @UserId, device_code = @DeviceCode, 
                                      p_status_code = @PStatusCode, created_by = @CreatedBy, updated_date = @UpdatedDate, 
                                      updated_by = @UpdatedBy 
                                  WHERE id = @Id";
@@ -110,7 +110,7 @@ namespace ADM_Scada.Core.Respo
                     { "@Gap", entity.Gap },
                     { "@ShiftDataId", entity.ShiftDataId },
                     { "@UserId", entity.UserId },
-                    { "@DeviceId", entity.DeviceId },
+                    { "@DeviceCode", entity.DeviceCode },
                     { "@PStatusCode", entity.PStatusCode },
                     { "@CreatedBy", entity.CreatedBy },
                     { "@UpdatedDate", entity.UpdatedDate },
@@ -236,7 +236,7 @@ namespace ADM_Scada.Core.Respo
                 Gap = (row["gap"] != DBNull.Value ? Convert.ToDecimal(row["gap"]) : (decimal?)null),
                 ShiftDataId = row["shift_data_id"] != DBNull.Value ? Convert.ToInt32(row["shift_data_id"]) : (int?)null,
                 UserId = row["user_id"] != DBNull.Value ? Convert.ToInt32(row["user_id"]) : (int?)null,
-                DeviceId = row["device_id"] != DBNull.Value ? Convert.ToString(row["device_id"]) : null,
+                DeviceCode = row["device_code"] != DBNull.Value ? Convert.ToString(row["device_code"]) : null,
                 PStatusCode = row["p_status_code"] != DBNull.Value ? Convert.ToString(row["p_status_code"]) : null,
                 CreatedBy = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : null,
                 UpdatedDate = row["updated_date"] != DBNull.Value ? Convert.ToDateTime(row["updated_date"]) : (DateTime?)null,

@@ -23,7 +23,7 @@ namespace ADM_Scada.Core.Respo
             }
             catch (Exception ex)
             {
-               
+
                 Log.Error(ex, "Error occurred while retrieving all variables.");
                 throw new RepositoryException("An error occurred while retrieving all variables. Please try again later.", ex);
 

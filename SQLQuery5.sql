@@ -6,6 +6,7 @@ CREATE TABLE  [dbo].[customer](
 	[id] [int] IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	[cust_code] [nvarchar](50) NULL,
 	[cust_name] [nvarchar](128) NULL,
+	[cust_company] [nvarchar](128) NULL,
 	[cust_avatar] [nvarchar](250) NULL,
 	[cust_add] [nvarchar](128) NULL,
 	[payment_term] [nvarchar](50) NULL,
@@ -55,7 +56,7 @@ CREATE TABLE  [dbo].[prod_shift_data](
 	[user_name] [nvarchar](50) NULL,
 	[shift_no] [nvarchar](10) NULL,
 	[cust_code] [nvarchar](50) NULL,
-	[devide_code] [nvarchar](50) NULL,
+	[device_code] [nvarchar](50) NULL,
 	[qty_to_pack] [decimal](18, 2) NULL,
 	[whole_uom] [nvarchar](10) NULL,
 	[created_by] [nvarchar](50) NULL,
@@ -98,22 +99,23 @@ GO
 CREATE TABLE  [dbo].[weigh_session_d](
 	[id] [int] IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	[p_id] [int] NULL,
-	[created_date] [datetime] NULL,
-	[current_weigh] DECIMAL(18,2),
-	[barcode] [nvarchar](20) NULL,
-	[prod_code] [nvarchar](50) NULL,
-	[prod_fullname] [nvarchar](255) NULL,
-	[prod_d365_code] [nvarchar](50) NULL,
-	[production_date] [datetime] NULL,
-	[start_time] [datetime] NULL,
-	[end_time] [datetime] NULL,
-	[qty_counted] INT,
-    [qty_weighed] DECIMAL(18,2),
-    [gap] DECIMAL(18,2),
-	[shift_data_id] [int] NULL,
+	
+	[current_weigh] DECIMAL(18,2),  -- from plc
+	[barcode] [nvarchar](20) NULL,  -- from plc
+	[prod_code] [nvarchar](50) NULL, -- from last [prod_shift_data] 
+	[prod_fullname] [nvarchar](255) NULL,   -- from last [prod_shift_data] 
+	[prod_d365_code] [nvarchar](50) NULL,  -- from [Product] that product_code = product_code of last [prod_shift_data] 
+	[production_date] [datetime] NULL,-- from [Product] that product_code = product_code of last [prod_shift_data] 
+	[start_time] [datetime] NULL, -- from [weigh_session] parent
+	[end_time] [datetime] NULL, -- from [weigh_session] parent
+	[qty_counted] INT, -- -- from [weigh_session] parent
+    [qty_weighed] DECIMAL(18,2), -- from [weigh_session] parent
+    [gap] DECIMAL(18,2),  -- from [weigh_session] parent
+	[shift_data_id] [int] NULL,   -- [prod_shift_data] id
 	[user_id] [int] NULL,
-	[device_id] [nvarchar](50) NULL,
-	[p_status_code] [nvarchar](1) NULL,
+	[device_code] [nvarchar](50) NULL,-- from [weigh_session] parent
+	[p_status_code] [nvarchar](1) NULL,-- from [weigh_session] parent
+	[created_date] [datetime] NULL, -- now
 	[created_by] [nvarchar](50) NULL,
 	[updated_date] [datetime] NULL,
 	[updated_by] [nvarchar](50) NULL
@@ -140,7 +142,7 @@ CREATE TABLE  [dbo].[user](
 	[user_name] [nvarchar](50) NULL,
 	[password][nvarchar](512) not null,
 	[user_avatar] [nvarchar](250) NULL,
-	[user_group] [nvarchar](50) NULL,
+	[user_group] [int] NULL,
 	[email_address] [nvarchar](50) NULL,
 	[tel_no] [nvarchar](50) NULL,
 	[mobile_no] [nvarchar](50) NULL,
@@ -173,7 +175,7 @@ CREATE TABLE [dbo].[variable] (
     [module] NVARCHAR(50),
     [unit] NVARCHAR(50),
     [message] NVARCHAR(255),
-    [value] [decimal](18,3),
+    [value] NVARCHAR(255),
     [purpose] NVARCHAR(50),
 	[created_date] [datetime] NULL,
 	[created_by] [nvarchar](50) NULL,

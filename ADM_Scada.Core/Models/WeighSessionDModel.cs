@@ -21,7 +21,7 @@ namespace ADM_Scada.Core.Models
         public decimal? Gap { get; set; }
         public int? ShiftDataId { get; set; }
         public int? UserId { get; set; }
-        public string DeviceId { get; set; }
+        public string DeviceCode { get; set; }
         public string PStatusCode { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }

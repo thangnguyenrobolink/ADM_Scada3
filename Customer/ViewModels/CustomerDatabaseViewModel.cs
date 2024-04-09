@@ -15,11 +15,9 @@ namespace Customer.ViewModels
 {
     public class CustomerDatabaseViewModel : BindableBase
     {
-        private string filCompany;
-        private string filName;
-        private string filCode;
-        private CustomerModel resCustomer;
-        public static CustomerModel currentCus;
+        // Databnase 
+        #region 
+        private readonly CustomerRepository customerRepository;
         public ObservableCollection<CustomerModel> FullCustomers { get; set; }
         private ObservableCollection<CustomerModel> customers;
         public ObservableCollection<CustomerModel> Customers
@@ -27,22 +25,35 @@ namespace Customer.ViewModels
             get => customers;
             set => SetProperty(ref customers, value);
         }
-        public CustomerModel CurrentCus { get => currentCus ?? new CustomerModel() ; set => SetProperty(ref currentCus, value); }
+        public static CustomerModel currentCus;
+        public CustomerModel CurrentCus { get => currentCus ?? new CustomerModel(); set => SetProperty(ref currentCus, value); }
+        #endregion
+        // Register New User
+        #region
+        private CustomerModel resCustomer;
         public CustomerModel ResCustomer { get => resCustomer; set => SetProperty(ref resCustomer, value); }
+
+        private string filCompany;
         public string FilCompany { get => filCompany; set { SetProperty(ref filCompany, value); FilterData(); } }
+        private string filName;
         public string FilName { get => filName; set { SetProperty(ref filName, value); FilterData(); } }
+        private string filCode;
         public string FilCode { get => filCode; set { SetProperty(ref filCode, value); FilterData(); } }
+        public string FileName { get; set; }
+        #endregion
 
-        private readonly CustomerRepository customerRepository;
-
+        /// Command Define
+        #region 
         public DelegateCommand<CustomerModel> EditCommand { get; private set; }
         public DelegateCommand<CustomerModel> DeleteCommand { get; private set; }
         public DelegateCommand ImageBrowseCommand { get; private set; }
         public DelegateCommand<CustomerModel> ChangeCustomerCommand { get; private set; }
         public DelegateCommand ExportExcelCommand { get; private set; }
         public DelegateCommand AddCustomerCommand { get; set; }
-        public string FileName { get; set; }
+        #endregion
 
+        // Execute Command
+        #region
         private void Edit(CustomerModel selectedModel)
         {
             // Handle the Edit button click
@@ -162,7 +173,17 @@ namespace Customer.ViewModels
             Customers = new ObservableCollection<CustomerModel>(filteredCustomers);
             RaisePropertyChanged(nameof(Customers));
         }
+        private void ExportExcel()
+        {
+            var excelExporter = new ExcelExporter();
+            excelExporter.ExportToExcel(Customers, FileName);
+        }
+        #endregion
+
+        // Event Register
+        #region
         private readonly IEventAggregator eventAggregator;
+        #endregion
         public CustomerDatabaseViewModel(IEventAggregator ed)
         {
             eventAggregator = ed;
@@ -179,10 +200,6 @@ namespace Customer.ViewModels
             ExportExcelCommand = new DelegateCommand(ExportExcel);
         }
 
-        private void ExportExcel()
-        {
-            var excelExporter = new ExcelExporter();
-            excelExporter.ExportToExcel(Customers, FileName);
-        }
+
     }
 }
