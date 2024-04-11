@@ -153,3 +153,7 @@ E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\ADM_Scada.Module.Rep
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\ADM_Scada.Module.Report.pdb
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\Serilog.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\ADM_Scada.Module.User.dll
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\Customer.dll
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\Customer.pdb
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\ADM_Scada.Module.User.pdb

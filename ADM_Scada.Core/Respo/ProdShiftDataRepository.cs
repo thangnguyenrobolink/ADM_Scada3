@@ -26,7 +26,20 @@ namespace ADM_Scada.Core.Respo
                 throw new RepositoryException("An error occurred while retrieving all production shift data. Please try again later.", ex);
             }
         }
-
+        public async Task<ProdShiftDataModel> GetLast()
+        {
+            try
+            {
+                string query = "SELECT TOP 1 * FROM [dbo].[prod_shift_data] ORDER BY created_date DESC";
+                DataTable dataTable = await ExecuteQueryAsync(query);
+                return ConvertDataTableToSingleObject(dataTable);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error occurred while retrieving the last weigh session.");
+                throw new RepositoryException("An error occurred while retrieving the last weigh session. Please try again later.", ex);
+            }
+        }
         public async Task<ProdShiftDataModel> GetByName(string workOrderNo)
         {
             try
@@ -47,12 +60,8 @@ namespace ADM_Scada.Core.Respo
         {
             try
             {
-                string query = @"INSERT INTO [dbo].[prod_shift_data] (work_order_no, prod_code, lot_no, production_date, 
-                                expiry_date, user_name, shift_no, cust_code, device_code, qty_to_pack, whole_uom, 
-                                created_by, created_date, updated_by, updated_date) 
-                                 VALUES (@WorkOrderNo, @ProdCode, @LotNo, @ProductionDate, @ExpiryDate, 
-                                @UserName, @ShiftNo, @CustCode, @deviceCode, @QtyToPack, @WholeUom, 
-                                @CreatedBy, @CreatedDate, @UpdatedBy, @UpdatedDate)";
+                string query = @"INSERT INTO [dbo].[prod_shift_data] (work_order_no, prod_code, lot_no, production_date, expiry_date, user_name, shift_no, cust_code, device_code, qty_tare_weigh, qty_order_weigh, loose_uom, created_by, created_date, updated_by, updated_date) 
+                                 VALUES (@WorkOrderNo, @ProdCode, @LotNo, @ProductionDate, @ExpiryDate, @UserName, @ShiftNo, @CustCode, @DeviceCode, @QtyTareWeigh, @QtyOrderWeigh, @LooseUom, @CreatedBy, @CreatedDate, @UpdatedBy, @UpdatedDate)";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
@@ -64,13 +73,14 @@ namespace ADM_Scada.Core.Respo
                     { "@UserName", prodShiftData.UserName },
                     { "@ShiftNo", prodShiftData.ShiftNo },
                     { "@CustCode", prodShiftData.CustCode },
-                    { "@deviceCode", prodShiftData.DeviceCode },
-                    { "@QtyToPack", prodShiftData.QtyToPack },
-                    { "@WholeUom", prodShiftData.WholeUom },
+                    { "@DeviceCode", prodShiftData.DeviceCode },
+                    { "@QtyTareWeigh", prodShiftData.QtyTareWeigh },
+                    { "@QtyOrderWeigh", prodShiftData.QtyOrderWeigh },
+                    { "@LooseUom", prodShiftData.LooseUom },
                     { "@CreatedBy", prodShiftData.CreatedBy },
-                    { "@CreatedDate", prodShiftData.CreatedDate },
+                    { "@CreatedDate", DateTime.Now },
                     { "@UpdatedBy", prodShiftData.UpdatedBy },
-                    { "@UpdatedDate", prodShiftData.UpdatedDate }
+                    { "@UpdatedDate", DateTime.Now }
                 };
                 return await ExecuteNonQueryAsync(query, parameters);
             }
@@ -86,12 +96,11 @@ namespace ADM_Scada.Core.Respo
             try
             {
                 string query = @"UPDATE [dbo].[prod_shift_data] 
-                         SET prod_code = @ProdCode, lot_no = @LotNo, production_date = @ProductionDate, 
-                             expiry_date = @ExpiryDate, user_name = @UserName, shift_no = @ShiftNo, 
-                             cust_code = @CustCode, device_code = @deviceCode, qty_to_pack = @QtyToPack, 
-                             whole_uom = @WholeUom, created_by = @CreatedBy, created_date = @CreatedDate, 
-                             updated_by = @UpdatedBy, updated_date = @UpdatedDate 
-                         WHERE id = @Id";
+                                 SET prod_code = @ProdCode, lot_no = @LotNo, production_date = @ProductionDate, expiry_date = @ExpiryDate, 
+                                     user_name = @UserName, shift_no = @ShiftNo, cust_code = @CustCode, device_code = @DeviceCode, 
+                                     qty_tare_weigh = @QtyTareWeigh, qty_order_weigh = @QtyOrderWeigh, loose_uom = @LooseUom, 
+                                     created_by = @CreatedBy, created_date = @CreatedDate, updated_by = @UpdatedBy, updated_date = @UpdatedDate 
+                                 WHERE id = @Id";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
@@ -103,13 +112,14 @@ namespace ADM_Scada.Core.Respo
                     { "@UserName", prodShiftData.UserName },
                     { "@ShiftNo", prodShiftData.ShiftNo },
                     { "@CustCode", prodShiftData.CustCode },
-                    { "@deviceCode", prodShiftData.DeviceCode },
-                    { "@QtyToPack", prodShiftData.QtyToPack },
-                    { "@WholeUom", prodShiftData.WholeUom },
+                    { "@DeviceCode", prodShiftData.DeviceCode },
+                    { "@QtyTareWeigh", prodShiftData.QtyTareWeigh },
+                    { "@QtyOrderWeigh", prodShiftData.QtyOrderWeigh },
+                    { "@LooseUom", prodShiftData.LooseUom },
                     { "@CreatedBy", prodShiftData.CreatedBy },
                     { "@CreatedDate", prodShiftData.CreatedDate },
                     { "@UpdatedBy", prodShiftData.UpdatedBy },
-                    { "@UpdatedDate", prodShiftData.UpdatedDate }
+                    { "@UpdatedDate", DateTime.Now}
                 };
                 return await ExecuteNonQueryAsync(query, parameters) > 0;
             }
@@ -229,8 +239,9 @@ namespace ADM_Scada.Core.Respo
                 ShiftNo = Convert.ToString(row["shift_no"]),
                 CustCode = Convert.ToString(row["cust_code"]),
                 DeviceCode = Convert.ToString(row["device_code"]),
-                QtyToPack = Convert.IsDBNull(row["qty_to_pack"]) ? (decimal?)null : Convert.ToDecimal(row["qty_to_pack"]),
-                WholeUom = Convert.ToString(row["whole_uom"]),
+                QtyTareWeigh = Convert.IsDBNull(row["qty_tare_weigh"]) ? (decimal?)null : Convert.ToDecimal(row["qty_tare_weigh"]),
+                QtyOrderWeigh = Convert.IsDBNull(row["qty_order_weigh"]) ? (decimal?)null : Convert.ToDecimal(row["qty_order_weigh"]),
+                LooseUom = Convert.ToString(row["loose_uom"]),
                 CreatedBy = Convert.ToString(row["created_by"]),
                 CreatedDate = Convert.IsDBNull(row["created_date"]) ? (DateTime?)null : Convert.ToDateTime(row["created_date"]),
                 UpdatedBy = Convert.ToString(row["updated_by"]),
@@ -247,6 +258,6 @@ namespace ADM_Scada.Core.Respo
 
             DataRow row = dataTable.Rows[0];
             return ConvertDataRowToProdShiftDataModel(row);
-        }
+        } 
     }
 }

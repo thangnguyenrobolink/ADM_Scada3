@@ -397,6 +397,7 @@
         "framework": ".NETFramework,Version=v4.7.2",
         "dependencies": {
           "ADM_Scada.Core": "1.0.0",
+          "Customer": "1.0.0",
           "LiveCharts.Wpf": "0.9.7",
           "MaterialDesignColors": "2.1.4",
           "MaterialDesignExtensions": "3.3.0",
@@ -407,7 +408,8 @@
           "Prism.Unity": "8.1.97",
           "Prism.Wpf": "8.1.97",
           "Serilog": "3.1.1",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "User": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Report.dll": {}
@@ -860,6 +862,7 @@
         "framework": ".NETFramework,Version=v4.7.2",
         "dependencies": {
           "ADM_Scada.Core": "1.0.0",
+          "Customer": "1.0.0",
           "LiveCharts.Wpf": "0.9.7",
           "MaterialDesignColors": "2.1.4",
           "MaterialDesignExtensions": "3.3.0",
@@ -870,7 +873,8 @@
           "Prism.Unity": "8.1.97",
           "Prism.Wpf": "8.1.97",
           "Serilog": "3.1.1",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "User": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Report.dll": {}
@@ -1323,6 +1327,7 @@
         "framework": ".NETFramework,Version=v4.7.2",
         "dependencies": {
           "ADM_Scada.Core": "1.0.0",
+          "Customer": "1.0.0",
           "LiveCharts.Wpf": "0.9.7",
           "MaterialDesignColors": "2.1.4",
           "MaterialDesignExtensions": "3.3.0",
@@ -1333,7 +1338,8 @@
           "Prism.Unity": "8.1.97",
           "Prism.Wpf": "8.1.97",
           "Serilog": "3.1.1",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "User": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Report.dll": {}
@@ -1786,6 +1792,7 @@
         "framework": ".NETFramework,Version=v4.7.2",
         "dependencies": {
           "ADM_Scada.Core": "1.0.0",
+          "Customer": "1.0.0",
           "LiveCharts.Wpf": "0.9.7",
           "MaterialDesignColors": "2.1.4",
           "MaterialDesignExtensions": "3.3.0",
@@ -1796,7 +1803,8 @@
           "Prism.Unity": "8.1.97",
           "Prism.Wpf": "8.1.97",
           "Serilog": "3.1.1",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "User": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Report.dll": {}

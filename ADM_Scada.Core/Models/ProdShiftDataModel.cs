@@ -15,8 +15,9 @@ namespace ADM_Scada.Core.Models
         public string ShiftNo { get; set; }
         public string CustCode { get; set; }
         public string DeviceCode { get; set; }
-        public decimal? QtyToPack { get; set; }
-        public string WholeUom { get; set; }
+        public decimal? QtyTareWeigh { get; set; }
+        public decimal? QtyOrderWeigh { get; set; }
+        public string LooseUom { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string UpdatedBy { get; set; }

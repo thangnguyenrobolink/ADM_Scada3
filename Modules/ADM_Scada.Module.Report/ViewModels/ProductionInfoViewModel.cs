@@ -20,6 +20,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
         // Database
         #region
         private ObservableCollection<WeighSessionModel> sessions;
+        private readonly ProdShiftDataRepository prodShiftDataRepository = new ProdShiftDataRepository();
         private readonly ProductRepository productRepository = new ProductRepository();
         private readonly CustomerRepository customerRepository = new CustomerRepository();
         private readonly WeighSessionRepository weighSessionRepository = new WeighSessionRepository();
@@ -89,6 +90,32 @@ namespace ADM_Scada.Modules.Report.ViewModels
 
         //Command Execute
         #region
+        public async Task<bool> CheckAndSaveOrUpdateProdShiftDataAsync(ProdShiftDataModel prodShiftData)
+        {
+            try
+            {
+                // Check if a record with the provided code exists
+                var existingProdShiftData = await prodShiftDataRepository.GetByName(prodShiftData.WorkOrderNo);
+
+                if (existingProdShiftData == null)
+                {
+                    // Record does not exist, create a new one
+                    await prodShiftDataRepository.Create(prodShiftData);
+                }
+                else
+                {
+                    // Record exists, update it
+                    await prodShiftDataRepository.Update(prodShiftData);
+                }
+
+                return true; // Success
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Error checking and saving/updating ProdShiftDataModel: {ex.Message}");
+                return false; // Failure
+            }
+        }
         private void ChangeShiftInfo()
         {
             // Validation: Check if login credentials are valid

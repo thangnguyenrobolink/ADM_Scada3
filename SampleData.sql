@@ -48,13 +48,30 @@ VALUES
 ('34514F3000', 'Pig feed - M16 Powder - 30kg- NEW', NULL, NULL, 4, 'Cambodia', 'M16', NULL, '1111', NULL, NULL, 30.00, 'kg', 'bag', '2024-04-05', 'Admin', '2024-04-05', 'Admin'),
 ('34515F0500', 'Pig feed - M18 Powder - 05kg- NEW', NULL, NULL, 4, 'Cambodia', 'M18', 'M18-5kg_2024C.bmp', '1112', NULL, NULL, 5.00, 'kg', 'bag', '2024-04-05', 'Admin', '2024-04-05', 'Admin'),
 ('34516F3000', 'Pig feed - M18 Powder - 30kg- NEW', NULL, NULL, 4, 'Cambodia', 'M18', 'M18-30kg_2024C.bmp', '1113', NULL, NULL, 30.00, 'kg', 'bag', '2024-04-05', 'Admin', '2024-04-05', 'Admin');
-INSERT INTO [dbo].[prod_shift_data] ([work_order_no], [prod_code], [lot_no], [production_date], [expiry_date], [user_name], [shift_no], [cust_code], [device_code], [qty_to_pack], [whole_uom], [created_by], [created_date], [updated_by], [updated_date]) 
+INSERT INTO [dbo].[prod_shift_data] (
+    [work_order_no], 
+    [prod_code], 
+    [lot_no], 
+    [production_date], 
+    [expiry_date], 
+    [user_name], 
+    [shift_no], 
+    [cust_code], 
+    [device_code], 
+    [qty_tare_weigh], 
+    [qty_order_weigh], 
+    [loose_uom], 
+    [created_by], 
+    [created_date], 
+    [updated_by], 
+    [updated_date]
+) 
 VALUES 
-('WO12345', '01015M3000', 'LOT123', '2024-04-05', '2024-04-10', 'John Doe', 'Shift A', 'CUST001', 'DEV001', 100.00, 'bag', 'Admin', '2024-04-05', 'Admin', '2024-04-05'),
-('WO12346', '01016W3000', 'LOT124', '2024-04-05', '2024-04-10', 'Jane Smith', 'Shift B', 'CUST002', 'DEV002', 150.00, 'bag', 'Admin', '2024-04-05', 'Admin', '2024-04-05'),
-('WO12347', '15521G3000', 'LOT125', '2024-04-05', '2024-04-10', 'Michael Johnson', 'Shift C', 'CUST003', 'DEV003', 200.00, 'bag', 'Admin', '2024-04-05', 'Admin', '2024-04-05'),
-('WO12348', '26033W0200', 'LOT126', '2024-04-05', '2024-04-10', 'Emily Brown', 'Shift A', 'CUST004', 'DEV004', 120.00, 'bag', 'Admin', '2024-04-05', 'Admin', '2024-04-05'),
-('WO12349', '28016F3000', 'LOT127', '2024-04-05', '2024-04-10', 'David Wilson', 'Shift B', 'CUST005', 'DEV005', 180.00, 'bag', 'Admin', '2024-04-05', 'Admin', '2024-04-05');
+('WO12345', '01015M3000', 'LOT123', '2024-04-05', '2024-04-10', 'John Doe', 'Shift A', 'CUST001', 'DEV001', 100.00, 100.00, 'bag', 'Admin', '2024-04-05', 'Admin', '2024-04-05'),
+('WO12346', '01016W3000', 'LOT124', '2024-04-05', '2024-04-10', 'Jane Smith', 'Shift B', 'CUST002', 'DEV002', 150.00, 150.00, 'bag', 'Admin', '2024-04-05', 'Admin', '2024-04-05'),
+('WO12347', '15521G3000', 'LOT125', '2024-04-05', '2024-04-10', 'Michael Johnson', 'Shift C', 'CUST003', 'DEV003', 200.00, 200.00, 'bag', 'Admin', '2024-04-05', 'Admin', '2024-04-05'),
+('WO12348', '26033W0200', 'LOT126', '2024-04-05', '2024-04-10', 'Emily Brown', 'Shift A', 'CUST004', 'DEV004', 120.00, 120.00, 'bag', 'Admin', '2024-04-05', 'Admin', '2024-04-05'),
+('WO12349', '28016F3000', 'LOT127', '2024-04-05', '2024-04-10', 'David Wilson', 'Shift B', 'CUST005', 'DEV005', 180.00, 180.00, 'bag', 'Admin', '2024-04-05', 'Admin', '2024-04-05');
 INSERT INTO [dbo].[device] ([device_name], [ip_address], [port], [created_date], [created_by], [updated_date], [updated_by]) 
 VALUES 
 ('Device1', '192.168.1.101', '8080', '2024-04-07', 'Admin', '2024-04-07', 'Admin'),
@@ -77,40 +94,80 @@ VALUES
 ('IT Team Group', '2024-04-05', 'Admin', '2024-04-05', 'Admin'),
 ('Sales Team Group', '2024-04-05', 'Admin','2024-04-05', 'Admin');
 
-INSERT INTO [dbo].[weigh_session] ([session_code], [start_time], [end_time], [cust_id], [cust_name], [cust_address], [boat_id], [so_number], [qty_counted], [qty_order_weigh], [qty_tare_weigh], [qty_weighed], [qty_invoice_weigh], [gap], [document_no], [shift_data_id], [user_id], [device_code], [status_code], [created_date], [created_by], [updated_date], [updated_by])
+INSERT INTO [dbo].[weigh_session] (
+    [session_code], 
+    [start_time], 
+    [end_time], 
+    [cust_id], 
+    [cust_name], 
+    [cust_address], 
+    [boat_id], 
+    [so_number], 
+    [qty_counted], 
+    [qty_weighed], 
+    [qty_tare_weigh], 
+    [qty_good_weigh], 
+    [qty_order_weigh], 
+    [gap], 
+    [document_no], 
+    [shift_data_id], 
+    [user_id], 
+    [device_code], 
+    [status_code], 
+    [created_date], 
+    [created_by], 
+    [updated_date], 
+    [updated_by]
+) 
 VALUES 
-('ADMD10000001', '2024-04-05 08:00:00', '2024-04-05 10:00:00', 1, 'Customer A', 'Address A', 1, 'SO001', 100, 200.00, 5.00, 195.00, 190.00, 5.00, 'DOC001', 1, 1, 'DEV001', 'A', '2024-04-05 08:00:00', 'Admin', '2024-04-05 10:00:00', 'Admin'),
-('ADMD10000002', '2024-04-05 09:00:00', '2024-04-05 11:00:00', 2, 'Customer B', 'Address B', 2, 'SO002', 150, 250.00, 6.00, 244.00, 240.00, 4.00, 'DOC002', 1, 2, 'DEV002', 'A', '2024-04-05 09:00:00', 'Admin', '2024-04-05 11:00:00', 'Admin'),
-('ADMD10000003', '2024-04-05 10:00:00', '2024-04-05 12:00:00', 3, 'Customer C', 'Address C', 3, 'SO003', 200, 300.00, 7.00, 293.00, 290.00, 3.00, 'DOC003', 1, 3, 'DEV003', 'A', '2024-04-05 10:00:00', 'Admin', '2024-04-05 12:00:00', 'Admin'),
-('ADMD10000004', '2024-04-05 11:00:00', '2024-04-05 13:00:00', 4, 'Customer D', 'Address D', 4, 'SO004', 250, 350.00, 8.00, 342.00, 340.00, 2.00, 'DOC004', 2, 1, 'DEV004', 'A', '2024-04-05 11:00:00', 'Admin', '2024-04-05 13:00:00', 'Admin'),
-('ADMD10000005', '2024-04-05 12:00:00', '2024-04-05 14:00:00', 5, 'Customer E', 'Address E', 5, 'SO005', 300, 400.00, 9.00, 391.00, 390.00, 1.00, 'DOC005', 2, 2, 'DEV005', 'A', '2024-04-05 12:00:00', 'Admin', '2024-04-05 14:00:00', 'Admin');
+('ADMD10000001', '2024-04-05 08:00:00', '2024-04-05 10:00:00', 1, 'Customer A', 'Address A', 1, 'SO001', 100, 200, 5.00, 195.00, 190.00, 5.00, 'DOC001', 1, 1, 'DEV001', 'A', '2024-04-05 08:00:00', 'Admin', '2024-04-05 10:00:00', 'Admin'),
+('ADMD10000002', '2024-04-05 09:00:00', '2024-04-05 11:00:00', 2, 'Customer B', 'Address B', 2, 'SO002', 150, 250, 6.00, 244.00, 240.00, 4.00, 'DOC002', 1, 2, 'DEV002', 'A', '2024-04-05 09:00:00', 'Admin', '2024-04-05 11:00:00', 'Admin'),
+('ADMD10000003', '2024-04-05 10:00:00', '2024-04-05 12:00:00', 3, 'Customer C', 'Address C', 3, 'SO003', 200, 300, 7.00, 293.00, 290.00, 3.00, 'DOC003', 1, 3, 'DEV003', 'A', '2024-04-05 10:00:00', 'Admin', '2024-04-05 12:00:00', 'Admin'),
+('ADMD10000004', '2024-04-05 11:00:00', '2024-04-05 13:00:00', 4, 'Customer D', 'Address D', 4, 'SO004', 250, 350, 8.00, 342.00, 340.00, 2.00, 'DOC004', 2, 1, 'DEV004', 'A', '2024-04-05 11:00:00', 'Admin', '2024-04-05 13:00:00', 'Admin'),
+('ADMD10000005', '2024-04-05 12:00:00', '2024-04-05 14:00:00', 5, 'Customer E', 'Address E', 5, 'SO005', 300, 400, 9.00, 391.00, 390.00, 1.00, 'DOC005', 2, 2, 'DEV005', 'A', '2024-04-05 12:00:00', 'Admin', '2024-04-05 14:00:00', 'Admin');
+
 
 DECLARE @ParentSessionID INT
 SET @ParentSessionID = 2
 
-INSERT INTO [dbo].[weigh_session_d] 
-([p_id], [current_weigh], [barcode], [prod_code], [prod_fullname], [prod_d365_code], [production_date], [start_time], [end_time], [qty_counted], [qty_weighed], [gap], [shift_data_id], [user_id], [device_code], [p_status_code], [created_date], [created_by], [updated_date], [updated_by])
+-- Insert the first 10 records with some modifications
+INSERT INTO [dbo].[weigh_session_d] (
+    [session_code], 
+    [current_weigh], 
+    [barcode], 
+    [prod_code], 
+    [prod_fullname], 
+    [prod_d365_code], 
+    [production_date], 
+    [start_time], 
+    [end_time], 
+    [qty_counted], 
+    [qty_weighed], 
+    [gap], 
+    [shift_data_id], 
+    [created_date], 
+    [created_by], 
+    [updated_date], 
+    [updated_by]
+)
 SELECT TOP 10
-    @ParentSessionID, 
-    w.[qty_tare_weigh] , -- Data from weigh_session parent table
-    'BARCODE00' , -- Sample barcode from PLC
-    s.[prod_code], -- Product code from last prod_shift_data
-    prod.[prod_fullname], -- Product full name from last prod_shift_data
-    prod.[hash_code], -- Product D365 code from Product table where product_code matches with last prod_shift_data
-    s.[production_date], -- Production date from Product table where product_code matches with last prod_shift_data
-    w.[start_time], -- Start time from weigh_session parent table
-    w.[end_time], -- End time from weigh_session parent table
-    w.[qty_counted], -- Quantity counted from weigh_session parent table
-    w.[qty_weighed], -- Quantity weighed from weigh_session parent table
-    w.[gap], -- Gap from weigh_session parent table
-    w.[shift_data_id], -- Shift data id from last prod_shift_data
-    w.[user_id], -- User id from weigh_session parent table
-    w.[device_code], -- Sample device id
-    w.status_code, -- Sample status code
-	GETDATE(), -- Current date and time
-    'Admin', -- Created by
-    GETDATE(), -- Updated date (current date and time)
-    'Admin' -- Updated by
+    'ADMD10000001',  -- Sample session code
+    w.[qty_tare_weigh],  -- Data from weigh_session parent table
+    'BARCODE00',  -- Sample barcode from PLC
+    s.[prod_code],  -- Product code from last prod_shift_data
+    prod.[prod_fullname],  -- Product full name from last prod_shift_data
+    prod.[hash_code],  -- Product D365 code from Product table where product_code matches with last prod_shift_data
+    s.[production_date],  -- Production date from Product table where product_code matches with last prod_shift_data
+    w.[start_time],  -- Start time from weigh_session parent table
+    w.[end_time],  -- End time from weigh_session parent table
+    w.[qty_counted],  -- Quantity counted from weigh_session parent table
+    w.[qty_weighed],  -- Quantity weighed from weigh_session parent table
+    w.[gap],  -- Gap from weigh_session parent table
+    w.[shift_data_id],  -- Shift data id from last prod_shift_data
+    GETDATE(),  -- Current date and time
+    'Admin',  -- Created by
+    GETDATE(),  -- Updated date (current date and time)
+    'Admin'  -- Updated by
 FROM 
     [dbo].[weigh_session] w
 INNER JOIN
@@ -119,29 +176,45 @@ INNER JOIN
     [dbo].[Product] prod ON s.[prod_code] = prod.[prod_code]
 WHERE 
     w.[id] = @ParentSessionID
-INSERT INTO [dbo].[weigh_session_d] 
-([p_id], [current_weigh], [barcode], [prod_code], [prod_fullname], [prod_d365_code], [production_date], [start_time], [end_time], [qty_counted], [qty_weighed], [gap], [shift_data_id], [user_id], [device_code], [p_status_code], [created_date], [created_by], [updated_date], [updated_by])
-SELECT
-    @ParentSessionID, 
-    w.[qty_tare_weigh] - RAND(1) , -- Data from weigh_session parent table
-    'BARCODE00' , -- Sample barcode from PLC
-    s.[prod_code], -- Product code from last prod_shift_data
-    prod.[prod_fullname], -- Product full name from last prod_shift_data
-    prod.[hash_code], -- Product D365 code from Product table where product_code matches with last prod_shift_data
-    s.[production_date], -- Production date from Product table where product_code matches with last prod_shift_data
-    w.[start_time], -- Start time from weigh_session parent table
-    w.[end_time], -- End time from weigh_session parent table
-    w.[qty_counted], -- Quantity counted from weigh_session parent table
-    w.[qty_weighed], -- Quantity weighed from weigh_session parent table
-    w.[gap], -- Gap from weigh_session parent table
-    w.[shift_data_id], -- Shift data id from last prod_shift_data
-    w.[user_id], -- User id from weigh_session parent table
-    w.[device_code], -- Sample device id
-    w.status_code, -- Sample status code
-	GETDATE(), -- Current date and time
-    'Admin', -- Created by
-    GETDATE(), -- Updated date (current date and time)
-    'Admin' -- Updated by
+
+-- Insert the next 10 records with some modifications
+INSERT INTO [dbo].[weigh_session_d] (
+    [session_code], 
+    [current_weigh], 
+    [barcode], 
+    [prod_code], 
+    [prod_fullname], 
+    [prod_d365_code], 
+    [production_date], 
+    [start_time], 
+    [end_time], 
+    [qty_counted], 
+    [qty_weighed], 
+    [gap], 
+    [shift_data_id], 
+    [created_date], 
+    [created_by], 
+    [updated_date], 
+    [updated_by]
+)
+SELECT TOP 10
+    'ADMD10000001',  -- Sample session code
+    w.[qty_tare_weigh] - RAND(1),  -- Data from weigh_session parent table with modification
+    'BARCODE00',  -- Sample barcode from PLC
+    s.[prod_code],  -- Product code from last prod_shift_data
+    prod.[prod_fullname],  -- Product full name from last prod_shift_data
+    prod.[hash_code],  -- Product D365 code from Product table where product_code matches with last prod_shift_data
+    s.[production_date],  -- Production date from Product table where product_code matches with last prod_shift_data
+    w.[start_time],  -- Start time from weigh_session parent table
+    w.[end_time],  -- End time from weigh_session parent table
+    w.[qty_counted],  -- Quantity counted from weigh_session parent table
+    w.[qty_weighed],  -- Quantity weighed from weigh_session parent table
+    w.[gap],  -- Gap from weigh_session parent table
+    w.[shift_data_id],  -- Shift data id from last prod_shift_data
+    GETDATE(),  -- Current date and time
+    'Admin',  -- Created by
+    GETDATE(),  -- Updated date (current date and time)
+    'Admin'  -- Updated by
 FROM 
     [dbo].[weigh_session] w
 INNER JOIN
@@ -150,6 +223,7 @@ INNER JOIN
     [dbo].[Product] prod ON s.[prod_code] = prod.[prod_code]
 WHERE 
     w.[id] = @ParentSessionID
+
 INSERT INTO [dbo].[variable] 
 ([device_id], [type], [area], [address], [name], [module], [unit], [message], [value], [purpose], [created_date], [created_by], [updated_date], [updated_by])
 VALUES

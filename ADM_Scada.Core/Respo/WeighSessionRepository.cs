@@ -49,12 +49,11 @@ namespace ADM_Scada.Core.Respo
             {
                 string query = @"INSERT INTO [dbo].[weigh_session] (session_code, start_time, end_time, cust_id, 
                                 cust_name, cust_address, boat_id, so_number, qty_counted, qty_order_weigh, 
-                                qty_tare_weigh, qty_weighed, qty_invoice_weigh, gap, document_no, shift_data_id, 
+                                qty_tare_weigh, qty_weighed, gap, document_no, shift_data_id, 
                                 user_id, device_code, status_code, created_date, created_by, updated_date, updated_by) 
                                  VALUES (@SessionCode, @StartTime, @EndTime, @CustId, @CustName, @CustAddress, @BoatId, 
-                                @SoNumber, @QtyCounted, @QtyOrderWeigh, @QtyTareWeigh, @QtyWeighed, @QtyInvoiceWeigh, 
-                                @Gap, @DocumentNo, @ShiftDataId, @UserId, @DeviceCode, @StatusCode, @CreatedDate, 
-                                @CreatedBy, @UpdatedDate, @UpdatedBy)";
+                                @SoNumber, @QtyCounted, @QtyOrderWeigh, @QtyTareWeigh, @QtyWeighed, @Gap, @DocumentNo, 
+                                @ShiftDataId, @UserId, @DeviceCode, @StatusCode, @CreatedDate, @CreatedBy, @UpdatedDate, @UpdatedBy)";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
@@ -70,7 +69,6 @@ namespace ADM_Scada.Core.Respo
                     { "@QtyOrderWeigh", weighSession.QtyOrderWeigh },
                     { "@QtyTareWeigh", weighSession.QtyTareWeigh },
                     { "@QtyWeighed", weighSession.QtyWeighed },
-                    { "@QtyInvoiceWeigh", weighSession.QtyInvoiceWeigh },
                     { "@Gap", weighSession.Gap },
                     { "@DocumentNo", weighSession.DocumentNo },
                     { "@ShiftDataId", weighSession.ShiftDataId },
@@ -99,8 +97,8 @@ namespace ADM_Scada.Core.Respo
                          SET start_time = @StartTime, end_time = @EndTime, cust_id = @CustId, 
                              cust_name = @CustName, cust_address = @CustAddress, boat_id = @BoatId, 
                              so_number = @SoNumber, qty_counted = @QtyCounted, qty_order_weigh = @QtyOrderWeigh, 
-                             qty_tare_weigh = @QtyTareWeigh, qty_weighed = @QtyWeighed, qty_invoice_weigh = @QtyInvoiceWeigh, 
-                             gap = @Gap, document_no = @DocumentNo, shift_data_id = @ShiftDataId, user_id = @UserId, 
+                             qty_tare_weigh = @QtyTareWeigh, qty_weighed = @QtyWeighed, gap = @Gap, 
+                             document_no = @DocumentNo, shift_data_id = @ShiftDataId, user_id = @UserId, 
                              device_code = @DeviceCode, status_code = @StatusCode, created_date = @CreatedDate, 
                              created_by = @CreatedBy, updated_date = @UpdatedDate, updated_by = @UpdatedBy 
                          WHERE id = @Id";
@@ -119,7 +117,6 @@ namespace ADM_Scada.Core.Respo
                     { "@QtyOrderWeigh", weighSession.QtyOrderWeigh },
                     { "@QtyTareWeigh", weighSession.QtyTareWeigh },
                     { "@QtyWeighed", weighSession.QtyWeighed },
-                    { "@QtyInvoiceWeigh", weighSession.QtyInvoiceWeigh },
                     { "@Gap", weighSession.Gap },
                     { "@DocumentNo", weighSession.DocumentNo },
                     { "@ShiftDataId", weighSession.ShiftDataId },
@@ -222,6 +219,7 @@ namespace ADM_Scada.Core.Respo
                 throw new RepositoryException($"An error occurred while checking if weigh session exists with ID '{id}'. Please try again later.", ex);
             }
         }
+
         public async Task<WeighSessionModel> GetLast()
         {
             try
@@ -236,6 +234,7 @@ namespace ADM_Scada.Core.Respo
                 throw new RepositoryException("An error occurred while retrieving the last weigh session. Please try again later.", ex);
             }
         }
+
         private List<WeighSessionModel> ConvertDataTableToList(DataTable dataTable)
         {
             List<WeighSessionModel> weighSessions = new List<WeighSessionModel>();
@@ -259,13 +258,12 @@ namespace ADM_Scada.Core.Respo
                 CustId = Convert.IsDBNull(row["cust_id"]) ? (int?)null : Convert.ToInt32(row["cust_id"]),
                 CustName = Convert.ToString(row["cust_name"]),
                 CustAddress = Convert.ToString(row["cust_address"]),
-                BoatId = Convert.IsDBNull(row["boat_id"]) ? (int?)null : Convert.ToInt32(row["boat_id"]),
+                BoatId =  Convert.ToString(row["boat_id"]),
                 SoNumber = Convert.ToString(row["so_number"]),
                 QtyCounted = Convert.IsDBNull(row["qty_counted"]) ? (int?)null : Convert.ToInt32(row["qty_counted"]),
                 QtyOrderWeigh = Convert.IsDBNull(row["qty_order_weigh"]) ? (decimal?)null : Convert.ToDecimal(row["qty_order_weigh"]),
                 QtyTareWeigh = Convert.IsDBNull(row["qty_tare_weigh"]) ? (decimal?)null : Convert.ToDecimal(row["qty_tare_weigh"]),
                 QtyWeighed = Convert.IsDBNull(row["qty_weighed"]) ? (decimal?)null : Convert.ToDecimal(row["qty_weighed"]),
-                QtyInvoiceWeigh = Convert.IsDBNull(row["qty_invoice_weigh"]) ? (decimal?)null : Convert.ToDecimal(row["qty_invoice_weigh"]),
                 Gap = Convert.IsDBNull(row["gap"]) ? (decimal?)null : Convert.ToDecimal(row["gap"]),
                 DocumentNo = Convert.ToString(row["document_no"]),
                 ShiftDataId = Convert.IsDBNull(row["shift_data_id"]) ? (int?)null : Convert.ToInt32(row["shift_data_id"]),

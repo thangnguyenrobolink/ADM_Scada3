@@ -442,6 +442,12 @@
             "projectReferences": {
               "E:\\work\\ADM_Scada\\ADM_Scada.Core\\ADM_Scada.Core.csproj": {
                 "projectPath": "E:\\work\\ADM_Scada\\ADM_Scada.Core\\ADM_Scada.Core.csproj"
+              },
+              "E:\\work\\ADM_Scada\\Customer\\Customer.csproj": {
+                "projectPath": "E:\\work\\ADM_Scada\\Customer\\Customer.csproj"
+              },
+              "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.User\\User.csproj": {
+                "projectPath": "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.User\\User.csproj"
               }
             }
           }
