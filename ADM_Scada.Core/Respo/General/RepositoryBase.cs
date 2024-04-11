@@ -10,7 +10,7 @@ namespace ADM_Scada.Core.Respo
 {
     public abstract class RepositoryBase
     {
-        private readonly string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString ?? "";
 
         protected RepositoryBase(string connectionString)
         {

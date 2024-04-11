@@ -14,7 +14,7 @@ namespace Customer.ViewModels
 
         public CustomerModel CurrentCustomer { get => currentCustomer; set => SetProperty(ref currentCustomer, value); }
         public CurrentCustomerViewModel(IEventAggregator ea)
-        {
+        {   
             currentCustomer = CustomerDatabaseViewModel.currentCus;
             _ea = ea;
             _ = _ea.GetEvent<CustomerChangeEvent>().Subscribe(UpdateCustomer);
