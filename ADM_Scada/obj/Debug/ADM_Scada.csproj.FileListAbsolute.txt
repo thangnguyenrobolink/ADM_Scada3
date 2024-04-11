@@ -162,12 +162,10 @@ E:\work\ADM_Scada\ADM_Scada\bin\Debug\ADM_Scada.Module.User.pdb
 E:\work\ADM_Scada\ADM_Scada\bin\Debug\Product.pdb
 E:\work\ADM_Scada\ADM_Scada\bin\Debug\S7.Net.xml
 E:\work\ADM_Scada\ADM_Scada\bin\Debug\ClosedXML.xml
-E:\work\ADM_Scada\ADM_Scada\bin\Debug\System.Memory.xml
 E:\work\ADM_Scada\ADM_Scada\bin\Debug\DocumentFormat.OpenXml.xml
 E:\work\ADM_Scada\ADM_Scada\bin\Debug\SixLabors.Fonts.xml
 E:\work\ADM_Scada\ADM_Scada\bin\Debug\ExcelNumberFormat.xml
 E:\work\ADM_Scada\ADM_Scada\bin\Debug\System.IO.Packaging.xml
-E:\work\ADM_Scada\ADM_Scada\bin\Debug\System.Numerics.Vectors.xml
 E:\work\ADM_Scada\ADM_Scada\obj\Debug\ADM_Scada.csproj.AssemblyReference.cache
 E:\work\ADM_Scada\ADM_Scada\obj\Debug\ADM_Scada.exe.config
 E:\work\ADM_Scada\ADM_Scada\obj\Debug\CustomControl\ButtonStyle.baml
@@ -186,5 +184,3 @@ E:\work\ADM_Scada\ADM_Scada\obj\Debug\ADM_Scada.exe
 E:\work\ADM_Scada\ADM_Scada\obj\Debug\ADM_Scada.pdb
 E:\work\ADM_Scada\ADM_Scada\bin\Debug\Serilog.dll
 E:\work\ADM_Scada\ADM_Scada\bin\Debug\System.Diagnostics.DiagnosticSource.dll
-E:\work\ADM_Scada\ADM_Scada\bin\Debug\Serilog.xml
-E:\work\ADM_Scada\ADM_Scada\bin\Debug\System.Diagnostics.DiagnosticSource.xml

@@ -8,13 +8,13 @@ namespace ADM_Scada.Modules.User.ViewModels
     public class UserStatusRegionViewModel : BindableBase
     {
         private IEventAggregator _ea;
-        private UserModel currentUser;
+        public static UserModel currentUser;
         private string userName = "Guest";
         private int userLevel = 0;
 
         public string UserName
         {
-            get => userName;
+            get => userName;    
             set => SetProperty(ref userName, value);
         }
         public int UserLevel

@@ -5,6 +5,10 @@ namespace ADM_Scada.Core.Models
     // Customer class representing the customer table
     public class CustomerModel
     {
+        public override string ToString()
+        {
+            return $"{CustCode} {CustName}";
+        }
         public int Id { get; set; }
         public string CustCode { get; set; }
         public string CustName { get; set; }

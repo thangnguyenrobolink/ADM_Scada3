@@ -222,7 +222,20 @@ namespace ADM_Scada.Core.Respo
                 throw new RepositoryException($"An error occurred while checking if weigh session exists with ID '{id}'. Please try again later.", ex);
             }
         }
-
+        public async Task<WeighSessionModel> GetLast()
+        {
+            try
+            {
+                string query = "SELECT TOP 1 * FROM [dbo].[weigh_session] ORDER BY start_time DESC";
+                DataTable dataTable = await ExecuteQueryAsync(query);
+                return ConvertDataTableToSingleObject(dataTable);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error occurred while retrieving the last weigh session.");
+                throw new RepositoryException("An error occurred while retrieving the last weigh session. Please try again later.", ex);
+            }
+        }
         private List<WeighSessionModel> ConvertDataTableToList(DataTable dataTable)
         {
             List<WeighSessionModel> weighSessions = new List<WeighSessionModel>();

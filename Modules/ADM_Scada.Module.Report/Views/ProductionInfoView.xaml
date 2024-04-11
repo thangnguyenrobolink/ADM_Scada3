@@ -9,8 +9,8 @@
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="800"/>
-            <ColumnDefinition Width="360"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="160"/>
         </Grid.ColumnDefinitions>
         <TabControl Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
                     HorizontalContentAlignment="Center"
@@ -77,7 +77,7 @@
                                 Style="{StaticResource MaterialDesignBody2TextBlock}" 
                                 Margin="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <ComboBox Grid.Column="1" Grid.Row="1"  BorderBrush="SlateGray"
-                                      ItemsSource="{Binding Customers}"
+                                      ItemsSource="{Binding FullCustomers}"
                                       materialDesign:HintAssist.Hint="Select Customer"
                                       SelectedItem ="{Binding CurrentProduct, UpdateSourceTrigger=LostFocus}"
                                       Style="{StaticResource MaterialDesignOutlinedComboBox}"  Margin="8"/>
@@ -188,7 +188,7 @@
                                    Style="{StaticResource MaterialDesignBody2TextBlock}" 
                                    Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <ComboBox Grid.Column="1" Grid.Row="3"  BorderBrush="SlateGray"
-                                      ItemsSource="{Binding Products}"
+                                      ItemsSource="{Binding FullProducts}"
                                       materialDesign:HintAssist.Hint="Select Product"
                                       SelectedItem ="{Binding CurrentProduct, UpdateSourceTrigger=LostFocus}"
                                       Style="{StaticResource MaterialDesignOutlinedComboBox}"  Margin="8"/>
@@ -232,12 +232,12 @@
                         Command="{Binding ChangeShiftInfoCommand}" Height="50" FontSize="20"
                        Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"  
                              Foreground="DarkOrange" materialDesign:ButtonAssist.CornerRadius="20"
-                        Margin="10"
+                        Margin="10" IsEnabled="{Binding IsSessionEnded}"
                         Grid.ColumnSpan="2" BorderBrush="#00000000" Background="#FFFFE5B7" VerticalAlignment="Center"/>
                     <Button Content="End" FontSize="20" Grid.Row="3" Width="150" HorizontalAlignment="Right"
                         Command="{Binding ChangeShiftInfoCommand}"  materialDesign:ButtonAssist.CornerRadius="20"
                         Style="{StaticResource MaterialDesignFlatDarkBgButton}" Height="50"
-                        Margin="10"
+                        Margin="10" IsEnabled="{Binding IsSessionWorking}"
                         Grid.ColumnSpan="2" Background="#FFF1CDCD" BorderBrush="#00000000" Foreground="Red"/>
                     <!--#endregion-->
 

@@ -65,9 +65,9 @@
                         CanUserAddRows="False" ItemsSource="{Binding Customers}" Margin="16 0" Background="Transparent" LostFocus="DataGrid_LostFocus" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" IsReadOnly="false" CanUserResize="False" Width="auto" Binding="{Binding Path =Id}"/>
-                    <DataGridTextColumn Header="Company" Binding="{Binding Path =Company, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="Auto" />
-                    <DataGridTextColumn Header="Name" Binding="{Binding Path =Name, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="Auto" />
-                    <DataGridTextColumn Header="Code" Binding="{Binding Path =Code, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
+                    <DataGridTextColumn Header="Company" Binding="{Binding Path =CustCompany, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="Auto" />
+                    <DataGridTextColumn Header="Name" Binding="{Binding Path =CustName, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="Auto" />
+                    <DataGridTextColumn Header="Code" Binding="{Binding Path =CustCode, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
                     <DataGridTemplateColumn Header="Operations" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -93,9 +93,9 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Phone" Binding="{Binding Path =Phone, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
-                    <DataGridTextColumn Header="Mail" Binding="{Binding Path =Email, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
-                    <DataGridTextColumn Header="Address" Binding="{Binding Path =Address, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
+                    <DataGridTextColumn Header="TelNo" Binding="{Binding Path =TelNo, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
+                    <DataGridTextColumn Header="Mail" Binding="{Binding Path =EmailAddress, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
+                    <DataGridTextColumn Header="Address" Binding="{Binding Path =CustAdd, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
 
                 </DataGrid.Columns>
             </DataGrid>

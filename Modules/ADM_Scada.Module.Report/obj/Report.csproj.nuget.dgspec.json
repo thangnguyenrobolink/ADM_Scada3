@@ -93,6 +93,10 @@
               "target": "Package",
               "version": "[8.1.97, )"
             },
+            "Serilog": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
             "System.Runtime.CompilerServices.Unsafe": {
               "target": "Package",
               "version": "[6.0.0, )"

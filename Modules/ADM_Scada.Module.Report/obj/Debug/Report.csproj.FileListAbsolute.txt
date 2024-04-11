@@ -134,13 +134,10 @@ E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\ADM_Scada.Core.pdb
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\ADM_Scada.Core.dll.config
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\S7.Net.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\ClosedXML.xml
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\System.Memory.xml
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\System.Buffers.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\DocumentFormat.OpenXml.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\SixLabors.Fonts.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\ExcelNumberFormat.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\System.IO.Packaging.xml
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\System.Numerics.Vectors.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\Report.csproj.AssemblyReference.cache
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\Views\ProductionInfoView.baml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\Views\ShiftInfoView.baml
@@ -156,5 +153,3 @@ E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\ADM_Scada.Module.Rep
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\ADM_Scada.Module.Report.pdb
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\Serilog.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\System.Diagnostics.DiagnosticSource.dll
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\Serilog.xml
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\System.Diagnostics.DiagnosticSource.xml

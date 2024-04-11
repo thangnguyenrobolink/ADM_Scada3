@@ -64,20 +64,34 @@
                                 materialDesign:HintAssist.Hint="Find Market" 
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="200" />
             </StackPanel>
-            <DataGrid Grid.Row="2" AutoGenerateColumns="False" RowStyle="{StaticResource DataGridRowStyle1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  MaxHeight="300"
-                          SelectionMode="Extended"   GridLinesVisibility="None"    CellStyle="{StaticResource DataGridCellStyle1}"
-                          materialDesign:DataGridAssist.CornerRadius="10"
-                          materialDesign:ScrollViewerAssist.SupportHorizontalScroll="False"
-                        CanUserAddRows="False" ItemsSource="{Binding Products}" Margin="16 0" Background="Transparent" LostFocus="DataGrid_LostFocus" >
+            <DataGrid Grid.Row="2" AutoGenerateColumns="False" RowStyle="{StaticResource DataGridRowStyle1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  MaxHeight="600"
+          SelectionMode="Extended" GridLinesVisibility="None" CellStyle="{StaticResource DataGridCellStyle1}"
+          materialDesign:DataGridAssist.CornerRadius="10"
+          materialDesign:ScrollViewerAssist.SupportHorizontalScroll="False"
+          CanUserAddRows="False" ItemsSource="{Binding Products}" Margin="16 0" Background="Transparent" LostFocus="DataGrid_LostFocus">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#" IsReadOnly="false" CanUserResize="False" Width="auto" Binding="{Binding Path =Id}"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Path =Name, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="Auto" />
-                    <DataGridTextColumn Header="Code" Binding="{Binding Path =Code, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
-                    <DataGridTextColumn Header="Desciption" Binding="{Binding Path =Description, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="Auto" />
-                    <DataGridTextColumn Header="Exp" Binding="{Binding Path =Exp, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
-                    <DataGridTextColumn Header="Market" Binding="{Binding Path =Market, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
-                    <DataGridTextColumn Header="Ingredient" Binding="{Binding Path =Ingredient, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
-                    <DataGridTemplateColumn Header="Operations" Width="auto">
+                    <DataGridTemplateColumn Header="#" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Id, UpdateSourceTrigger=LostFocus}" BorderThickness="0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Code" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding ProdCode, UpdateSourceTrigger=LostFocus}"  BorderThickness="0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Description" Width="Auto" > 
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding ProdFullName}" IsReadOnly="True"  BorderThickness="0"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Operations" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -97,8 +111,70 @@
                                 CommandParameter="{Binding}">
                                         <materialDesign:PackIcon Kind="DeleteOutline" Foreground="IndianRed" />
                                     </Button>
-
                                 </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Code_D365" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding HashCode, UpdateSourceTrigger=LostFocus}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Text" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Ingredient, UpdateSourceTrigger=LostFocus}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Exp" Width="Auto"  >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Exp, UpdateSourceTrigger=LostFocus}"  BorderThickness="0"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Market" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Market, UpdateSourceTrigger=LostFocus}"  BorderThickness="0"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Name" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding ProdName}" IsReadOnly="False" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Label" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding LabelPath}" IsReadOnly="False" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Barcode" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Barcode}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="DelayM4" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding DelayM4}" IsReadOnly="False" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="DelayM5" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding DelayM5}" IsReadOnly="False" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

@@ -24,5 +24,9 @@ namespace ADM_Scada.Core.Models
         public string CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
+        public override string ToString()
+        {
+            return $"{ProdFullName} | {ProdCode} | {Market} | {Barcode}";
+        }
     }
 }

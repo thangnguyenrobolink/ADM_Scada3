@@ -110,6 +110,9 @@
       <Version>8.1.97</Version>
     </PackageReference>
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+    <PackageReference Include="Serilog">
+      <Version>3.1.1</Version>
+    </PackageReference>
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
       <Version>6.0.0</Version>
     </PackageReference>
@@ -118,6 +121,14 @@
     <ProjectReference Include="..\..\ADM_Scada.Core\ADM_Scada.Core.csproj">
       <Project>{bfe156db-30a2-4abb-aabd-e8a01c0cfea8}</Project>
       <Name>ADM_Scada.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Customer\Customer.csproj">
+      <Project>{A6144702-CDE7-465D-B209-5E975B78ADB7}</Project>
+      <Name>Customer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADM_Scada.Module.User\User.csproj">
+      <Project>{14D7F7FA-9A1F-413E-9AD5-7B97FA47611E}</Project>
+      <Name>User</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
