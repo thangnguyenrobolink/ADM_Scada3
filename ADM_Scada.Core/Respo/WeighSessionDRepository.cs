@@ -26,8 +26,23 @@ namespace ADM_Scada.Core.Respo
                 throw new RepositoryException("An error occurred while retrieving all weigh sessions. Please try again later.", ex);
             }
         }
+        public async Task<WeighSessionDModel> GetBySessionCode(string sessionCode)
+        {
+            try
+            {
+                string query = "SELECT * FROM [dbo].[weigh_session_d] WHERE session_code = @SessionCode";
+                Dictionary<string, object> parameters = new Dictionary<string, object> { { "@SessionCode", sessionCode } };
+                DataTable dataTable = await ExecuteQueryAsync(query, parameters);
+                return ConvertDataTableToSingleObject(dataTable);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error occurred while retrieving weigh session by session code: {SessionCode}", sessionCode);
+                throw new RepositoryException($"An error occurred while retrieving weigh session with session code '{sessionCode}'. Please try again later.", ex);
+            }
+        }
 
-        public async Task<WeighSessionDModel> GetByName(string s)
+        public async Task<WeighSessionDModel> GetByName(string name)
         {
             try
             {
@@ -36,8 +51,8 @@ namespace ADM_Scada.Core.Respo
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error occurred while retrieving weigh session by name: {Name}", s);
-                throw new RepositoryException($"An error occurred while retrieving weigh session '{s}'. Please try again later.", ex);
+                Log.Error(ex, "Error occurred while retrieving weigh session by name: {Name}", name);
+                throw new RepositoryException($"An error occurred while retrieving weigh session '{name}'. Please try again later.", ex);
             }
         }
 
@@ -45,32 +60,26 @@ namespace ADM_Scada.Core.Respo
         {
             try
             {
-                string query = @"INSERT INTO [dbo].[weigh_session_d] (p_id, created_date, current_weigh, barcode, prod_code, prod_fullname, prod_d365_code, production_date, start_time, end_time, qty_counted, qty_weighed, gap, shift_data_id, user_id, device_code, p_status_code, created_by, updated_date, updated_by) 
-                                 VALUES (@PId, @CreatedDate, @CurrentWeigh, @Barcode, @ProdCode, @ProdFullname, @ProdD365Code, @ProductionDate, @StartTime, @EndTime, @QtyCounted, @QtyWeighed, @Gap, @ShiftDataId, @UserId, @DeviceCode, @PStatusCode, @CreatedBy, @UpdatedDate, @UpdatedBy)";
+                string query = @"INSERT INTO [dbo].[weigh_session_d] (session_code, current_weigh, barcode, prod_code, prod_fullname, prod_d365_code, production_date, start_time, end_time, qty_counted, qty_weighed, gap, shift_data_id, created_date, created_by, updated_date, updated_by) 
+                         VALUES (@SessionCode, @CurrentWeigh, @Barcode, @ProdCode, @ProdFullName, @ProdD365Code, @ProductionDate, @StartTime, @EndTime, @QtyCounted, @QtyWeighed, @Gap, @ShiftDataId, GETDATE(), @CreatedBy, NULL, NULL)";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                {
-                    { "@PId", entity.PId },
-                    { "@CreatedDate", entity.CreatedDate },
-                    { "@CurrentWeigh", entity.CurrentWeigh },
-                    { "@Barcode", entity.Barcode },
-                    { "@ProdCode", entity.ProdCode },
-                    { "@ProdFullname", entity.ProdFullName },
-                    { "@ProdD365Code", entity.ProdD365Code },
-                    { "@ProductionDate", entity.ProductionDate },
-                    { "@StartTime", entity.StartTime },
-                    { "@EndTime", entity.EndTime },
-                    { "@QtyCounted", entity.QtyCounted },
-                    { "@QtyWeighed", entity.QtyWeighed },
-                    { "@Gap", entity.Gap },
-                    { "@ShiftDataId", entity.ShiftDataId },
-                    { "@UserId", entity.UserId },
-                    { "@DeviceCode", entity.DeviceCode },
-                    { "@PStatusCode", entity.PStatusCode },
-                    { "@CreatedBy", entity.CreatedBy },
-                    { "@UpdatedDate", entity.UpdatedDate },
-                    { "@UpdatedBy", entity.UpdatedBy }
-                };
+        {
+            { "@SessionCode", entity.SessionCode },
+            { "@CurrentWeigh", entity.CurrentWeigh },
+            { "@Barcode", entity.Barcode },
+            { "@ProdCode", entity.ProdCode },
+            { "@ProdFullName", entity.ProdFullName },
+            { "@ProdD365Code", entity.ProdD365Code },
+            { "@ProductionDate", entity.ProductionDate },
+            { "@StartTime", entity.StartTime },
+            { "@EndTime", entity.EndTime },
+            { "@QtyCounted", entity.QtyCounted },
+            { "@QtyWeighed", entity.QtyWeighed },
+            { "@Gap", entity.Gap },
+            { "@ShiftDataId", entity.ShiftDataId },
+            { "@CreatedBy", entity.CreatedBy }
+        };
                 return await ExecuteNonQueryAsync(query, parameters);
             }
             catch (Exception ex)
@@ -85,37 +94,30 @@ namespace ADM_Scada.Core.Respo
             try
             {
                 string query = @"UPDATE [dbo].[weigh_session_d] 
-                                 SET created_date = @CreatedDate, current_weigh = @CurrentWeigh, barcode = @Barcode, prod_code = @ProdCode, 
-                                     prod_fullname = @ProdFullname, prod_d365_code = @ProdD365Code, production_date = @ProductionDate, 
-                                     start_time = @StartTime, end_time = @EndTime, qty_counted = @QtyCounted, qty_weighed = @QtyWeighed, 
-                                     gap = @Gap, shift_data_id = @ShiftDataId, user_id = @UserId, device_code = @DeviceCode, 
-                                     p_status_code = @PStatusCode, created_by = @CreatedBy, updated_date = @UpdatedDate, 
-                                     updated_by = @UpdatedBy 
-                                 WHERE id = @Id";
+                         SET session_code = @SessionCode, current_weigh = @CurrentWeigh, barcode = @Barcode, prod_code = @ProdCode, 
+                             prod_fullname = @ProdFullName, prod_d365_code = @ProdD365Code, production_date = @ProductionDate, 
+                             start_time = @StartTime, end_time = @EndTime, qty_counted = @QtyCounted, qty_weighed = @QtyWeighed, 
+                             gap = @Gap, shift_data_id = @ShiftDataId, updated_date = GETDATE(), updated_by = @UpdatedBy 
+                         WHERE id = @Id";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                {
-                    { "@Id", entity.Id },
-                    { "@CreatedDate", entity.CreatedDate },
-                    { "@CurrentWeigh", entity.CurrentWeigh },
-                    { "@Barcode", entity.Barcode },
-                    { "@ProdCode", entity.ProdCode },
-                    { "@ProdFullname", entity.ProdFullName },
-                    { "@ProdD365Code", entity.ProdD365Code },
-                    { "@ProductionDate", entity.ProductionDate },
-                    { "@StartTime", entity.StartTime },
-                    { "@EndTime", entity.EndTime },
-                    { "@QtyCounted", entity.QtyCounted },
-                    { "@QtyWeighed", entity.QtyWeighed },
-                    { "@Gap", entity.Gap },
-                    { "@ShiftDataId", entity.ShiftDataId },
-                    { "@UserId", entity.UserId },
-                    { "@DeviceCode", entity.DeviceCode },
-                    { "@PStatusCode", entity.PStatusCode },
-                    { "@CreatedBy", entity.CreatedBy },
-                    { "@UpdatedDate", entity.UpdatedDate },
-                    { "@UpdatedBy", entity.UpdatedBy }
-                };
+        {
+            { "@Id", entity.Id },
+            { "@SessionCode", entity.SessionCode },
+            { "@CurrentWeigh", entity.CurrentWeigh },
+            { "@Barcode", entity.Barcode },
+            { "@ProdCode", entity.ProdCode },
+            { "@ProdFullName", entity.ProdFullName },
+            { "@ProdD365Code", entity.ProdD365Code },
+            { "@ProductionDate", entity.ProductionDate },
+            { "@StartTime", entity.StartTime },
+            { "@EndTime", entity.EndTime },
+            { "@QtyCounted", entity.QtyCounted },
+            { "@QtyWeighed", entity.QtyWeighed },
+            { "@Gap", entity.Gap },
+            { "@ShiftDataId", entity.ShiftDataId },
+            { "@UpdatedBy", entity.UpdatedBy }
+        };
                 return await ExecuteNonQueryAsync(query, parameters) > 0;
             }
             catch (Exception ex)
@@ -221,9 +223,8 @@ namespace ADM_Scada.Core.Respo
             return new WeighSessionDModel
             {
                 Id = Convert.ToInt32(row["id"]),
-                PId = row["p_id"] != DBNull.Value ? Convert.ToInt32(row["p_id"]) : (int?)null,
-                CreatedDate = row["created_date"] != DBNull.Value ? Convert.ToDateTime(row["created_date"]) : (DateTime?)null,
-                CurrentWeigh = (row["current_weigh"] != DBNull.Value ? Convert.ToDecimal(row["current_weigh"]) : (decimal?)null),
+                SessionCode = row["session_code"] != DBNull.Value ? Convert.ToString(row["session_code"]) : null,
+                CurrentWeigh = row["current_weigh"] != DBNull.Value ? Convert.ToDecimal(row["current_weigh"]) : (decimal?)null,
                 Barcode = row["barcode"] != DBNull.Value ? Convert.ToString(row["barcode"]) : null,
                 ProdCode = row["prod_code"] != DBNull.Value ? Convert.ToString(row["prod_code"]) : null,
                 ProdFullName = row["prod_fullname"] != DBNull.Value ? Convert.ToString(row["prod_fullname"]) : null,
@@ -232,17 +233,16 @@ namespace ADM_Scada.Core.Respo
                 StartTime = row["start_time"] != DBNull.Value ? Convert.ToDateTime(row["start_time"]) : (DateTime?)null,
                 EndTime = row["end_time"] != DBNull.Value ? Convert.ToDateTime(row["end_time"]) : (DateTime?)null,
                 QtyCounted = row["qty_counted"] != DBNull.Value ? Convert.ToInt32(row["qty_counted"]) : (int?)null,
-                QtyWeighed = (row["qty_weighed"] != DBNull.Value ? Convert.ToDecimal(row["qty_weighed"]) : (decimal?)null),
-                Gap = (row["gap"] != DBNull.Value ? Convert.ToDecimal(row["gap"]) : (decimal?)null),
+                QtyWeighed = row["qty_weighed"] != DBNull.Value ? Convert.ToDecimal(row["qty_weighed"]) : (decimal?)null,
+                Gap = row["gap"] != DBNull.Value ? Convert.ToDecimal(row["gap"]) : (decimal?)null,
                 ShiftDataId = row["shift_data_id"] != DBNull.Value ? Convert.ToInt32(row["shift_data_id"]) : (int?)null,
-                UserId = row["user_id"] != DBNull.Value ? Convert.ToInt32(row["user_id"]) : (int?)null,
-                DeviceCode = row["device_code"] != DBNull.Value ? Convert.ToString(row["device_code"]) : null,
-                PStatusCode = row["p_status_code"] != DBNull.Value ? Convert.ToString(row["p_status_code"]) : null,
+                CreatedDate = row["created_date"] != DBNull.Value ? Convert.ToDateTime(row["created_date"]) : (DateTime?)null,
                 CreatedBy = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : null,
                 UpdatedDate = row["updated_date"] != DBNull.Value ? Convert.ToDateTime(row["updated_date"]) : (DateTime?)null,
                 UpdatedBy = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : null
             };
         }
+
 
         private WeighSessionDModel ConvertDataTableToSingleObject(DataTable dataTable)
         {

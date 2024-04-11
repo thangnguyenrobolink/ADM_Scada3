@@ -169,17 +169,15 @@
                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
 
                             <TextBlock Grid.Row="2"  Grid.Column="2"
-                                   Text="Shift" FontWeight="DemiBold" HorizontalAlignment="Center"
+                                   Text="UOM" FontWeight="DemiBold" HorizontalAlignment="Center"
                                    Style="{StaticResource MaterialDesignBody2TextBlock}" 
                                    Margin="8" VerticalAlignment="Center"/>
-                            <ComboBox Grid.Column="1" Grid.Row="2" BorderBrush="SlateGray"
-                                        materialDesign:HintAssist.Hint="A - D1 / B - D2 / C - D3"
-                                  SelectedIndex="{Binding CurrentShift.Shift, UpdateSourceTrigger=LostFocus}" 
-                                   Style="{StaticResource MaterialDesignOutlinedComboBox}"  Margin="8">
-                                <ComboBoxItem Content="D1" />
-                                <ComboBoxItem Content="D2" />
-                                <ComboBoxItem Content="D3" />
-                            </ComboBox>
+                            <TextBox Grid.Column="1" Grid.Row="2"  BorderBrush="SlateGray"
+                                        materialDesign:HintAssist.Hint="Define Weigh unit"
+                                     
+                                     Text="{Binding CurrentShift.LooseUom, UpdateSourceTrigger=LostFocus}" 
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="8"/>
+
                             <!--#endregion-->
                             <!-- Product name -->
                             <!--#region NewRegion -->
@@ -200,8 +198,8 @@
                                        Style="{StaticResource MaterialDesignBody2TextBlock}" 
                                        Margin="8" HorizontalAlignment="Center"/>
                             <TextBox Grid.Column="1" Grid.Row="4"  BorderBrush="SlateGray"
-                                        materialDesign:HintAssist.Hint="Define loose volume per bag"
-                                     materialDesign:TextFieldAssist.SuffixText="kg"
+                                        materialDesign:HintAssist.Hint="Define weigh of a bag"
+                                     materialDesign:TextFieldAssist.SuffixText="{Binding LooseUom.LooseUom}"
                                      Text="{Binding CurrentShift.WO, UpdateSourceTrigger=LostFocus}" 
                                      Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="8"/>
                             <!--#endregion-->
@@ -213,7 +211,7 @@
                                     Margin="8" HorizontalAlignment="Center"/>
                             <TextBox Grid.Column="1" Grid.Row="5"  BorderBrush="SlateGray"
                                     materialDesign:HintAssist.Hint="Total loose volume of all bag"
-                                    materialDesign:TextFieldAssist.SuffixText="kg"
+                                    materialDesign:TextFieldAssist.SuffixText="{Binding LooseUom.LooseUom}"
                                     Text="{Binding CurrentShift.WO, UpdateSourceTrigger=LostFocus}" 
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 Margin="8" />

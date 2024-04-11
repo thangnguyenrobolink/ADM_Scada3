@@ -6,8 +6,7 @@ namespace ADM_Scada.Core.Models
     public class WeighSessionDModel
     {
         public int Id { get; set; }
-        public int? PId { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public string SessionCode { get; set; }
         public decimal? CurrentWeigh { get; set; }
         public string Barcode { get; set; }
         public string ProdCode { get; set; }
@@ -20,9 +19,7 @@ namespace ADM_Scada.Core.Models
         public decimal? QtyWeighed { get; set; }
         public decimal? Gap { get; set; }
         public int? ShiftDataId { get; set; }
-        public int? UserId { get; set; }
-        public string DeviceCode { get; set; }
-        public string PStatusCode { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
