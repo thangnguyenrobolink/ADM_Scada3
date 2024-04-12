@@ -211,6 +211,7 @@
     <Compile Include="PlcService\Class1.cs" />
     <Compile Include="PlcService\IPLCCommunicationService.cs" />
     <Compile Include="PlcService\PlcCommunicateService.cs" />
+    <Compile Include="PubEvent\CurrentSessionChangeEvent.cs" />
     <Compile Include="PubEvent\ShiftInfoChangeEvent.cs" />
     <Compile Include="PubEvent\ProductChangeEvent.cs" />
     <Compile Include="PubEvent\CustomerChangeEvent.cs" />

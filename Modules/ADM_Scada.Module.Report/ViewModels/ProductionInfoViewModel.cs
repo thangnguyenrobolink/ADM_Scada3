@@ -2,7 +2,6 @@
 using ADM_Scada.Core.Respo;
 using ADM_Scada.Cores.PubEvent;
 using ADM_Scada.Modules.User.ViewModels;
-using Customer.ViewModels;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -10,6 +9,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,12 +19,14 @@ namespace ADM_Scada.Modules.Report.ViewModels
     {
         // Database
         #region
+
         private ObservableCollection<WeighSessionModel> sessions;
         private readonly ProdShiftDataRepository prodShiftDataRepository = new ProdShiftDataRepository();
         private readonly ProductRepository productRepository = new ProductRepository();
         private readonly CustomerRepository customerRepository = new CustomerRepository();
         private readonly WeighSessionRepository weighSessionRepository = new WeighSessionRepository();
         private readonly WeighSessionDRepository weighSessionDRepository = new WeighSessionDRepository();
+        private readonly DeviceRepository deviceRepository = new DeviceRepository();
 
         public ObservableCollection<ProductModel> WeighSession { get => weighSession; set => SetProperty(ref weighSession, value); }
         public ObservableCollection<CustomerModel> WeighSessionD { get => weighSessionD; set => SetProperty(ref weighSessionD, value); }
@@ -32,28 +34,71 @@ namespace ADM_Scada.Modules.Report.ViewModels
         private ObservableCollection<ProductModel> weighSession;
         private ObservableCollection<CustomerModel> weighSessionD;
         public ObservableCollection<WeighSessionModel> Sessions { get => sessions; private set => SetProperty(ref sessions, value); }
-
+        public ObservableCollection<DeviceModel> Devices { get => devices; set => SetProperty(ref devices, value); }
         public ObservableCollection<ProductModel> FullProducts { get => fullProducts; set => SetProperty(ref fullProducts, value); }
         public ObservableCollection<CustomerModel> FullCustomers { get => fullCustomers; set => SetProperty(ref fullCustomers, value); }
 
         private ObservableCollection<ProductModel> fullProducts;
+        private ObservableCollection<DeviceModel> devices;
         private ObservableCollection<CustomerModel> fullCustomers;
+        public List<string> DeviceNames { get => deviceNames; set => SetProperty(ref deviceNames , value); }
         #endregion
 
         // Event aggr
         #region
         private readonly IEventAggregator eventAggregator;
+        private void UpdateCustomer(CustomerModel curUser)
+        {
+           
+            if (CurrentCustomer != curUser)
+            { 
+                CurrentCustomer = curUser;
+                RaisePropertyChanged(nameof(CurrentCustomer));
+            }
+            RaisePropertyChanged(nameof(CurrentCustomer));
+        }
         #endregion
 
         // UI variable
         #region
+        //current customer
+        public static CustomerModel currentCust;
+        public CustomerModel CurrentCustomer
+        {
+            get => currentCust ?? new CustomerModel();
+            set
+            {
+                _ = SetProperty(ref currentCust, value);
+                eventAggregator?.GetEvent<CustomerChangeEvent>().Publish(currentCust);
+                UpdateCurrentSession();
+            }
+        }
+        //current product
+        public static ProductModel currentProduct;
+        public ProductModel CurrentProduct
+        {
+            get => currentProduct ?? new ProductModel();
+            set 
+            { 
+                _ = SetProperty(ref currentProduct, value); 
+                eventAggregator?.GetEvent<ProductChangeEvent>().Publish(currentProduct);
+                UpdateCurrentShift();
+            }
+        }
+        // current So
         public static ProdShiftDataModel currentShift = new ProdShiftDataModel();
         public ProdShiftDataModel CurrentShift
         {
             get => currentShift ?? new ProdShiftDataModel();
-            set => SetProperty(ref currentShift, value);
+            set
+            {
+                SetProperty(ref currentShift, value);
+                eventAggregator?.GetEvent<ShiftInfoChangeEvent>().Publish(currentShift);
+                UpdateCurrentSession();
+            }
+
         }
-        //
+        //Current session
         public static WeighSessionModel currentSession = new WeighSessionModel();
         public WeighSessionModel CurrentSession
         {
@@ -61,20 +106,26 @@ namespace ADM_Scada.Modules.Report.ViewModels
             set
             {
                 SetProperty(ref currentSession, value);
-                UpdateSessionProperties();
+                eventAggregator?.GetEvent<CurrentSessionChangeEvent>().Publish(currentSession);
+                UpdateSessionPropertiesAsync();
             }
         }
         private void UpdateCurrentSession()
+        { } 
+        private void UpdateCurrentShift()
         { }
 
-        private void UpdateSessionProperties()
+        private async void UpdateSessionPropertiesAsync()
         {
             IsSessionWorking = CurrentSession.StatusCode == "S";
             IsSessionEnded = CurrentSession.StatusCode != "S";
+            CurrentCustomer = FullCustomers.FirstOrDefault(c => c.Id == CurrentSession.CustId);
+            CurrentShift = await prodShiftDataRepository.GetByName(CurrentSession.SoNumber);
+            CurrentProduct = FullProducts.FirstOrDefault(p => p.ProdCode == CurrentShift.ProdCode);
         }
         private bool isSessionWorking;
         private bool isSessionEnded;
-        
+        private List<string> deviceNames;
 
         public bool IsSessionWorking { get => CurrentSession.StatusCode == "S"; set => SetProperty(ref isSessionWorking, value); }
         public bool IsSessionEnded { get => CurrentSession.StatusCode != "S"; set => SetProperty(ref isSessionEnded, value); }
@@ -119,7 +170,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
         private void ChangeShiftInfo()
         {
             // Validation: Check if login credentials are valid
-            if (CurrentShift.LotNo == null || CurrentShift.WorkOrderNo == null || CurrentShift.UpdatedDate == null)
+            if (CurrentShift.QtyOrderWeigh == null || CurrentShift.WorkOrderNo == null || CurrentShift.UpdatedDate == null)
             {
                 // Handle validation error (e.g., show a message)
                 MessageBox.Show("Please Fill infomatrion!");
@@ -140,6 +191,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
             bool b = await AddNewSession();
         }
         #endregion
+
         //Database method
         #region
         private async Task<bool> AddNewSession()
@@ -182,6 +234,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
         public ProductionInfoViewModel(IEventAggregator ea)
         {
             eventAggregator = ea;
+            _ = eventAggregator.GetEvent<CustomerChangeEvent>().Subscribe(UpdateCustomer);
             try
             {
                 InitializeCommands();
@@ -209,8 +262,8 @@ namespace ADM_Scada.Modules.Report.ViewModels
                 FetchFullProductsAsync(),
                 FetchFullCustomersAsync(),
                 FetchSessionsAsync(),
-                FetchLastSessionAsync()
-            );
+                FetchLastSessionAsync(),
+                FetchDevicesAsync());
         }
 
         private async Task FetchFullProductsAsync()
@@ -234,6 +287,18 @@ namespace ADM_Scada.Modules.Report.ViewModels
             catch (Exception ex)
             {
                 HandleDataFetchError("All Customers", ex);
+            }
+        }
+        private async Task FetchDevicesAsync()
+        {
+            try
+            {
+                Devices = new ObservableCollection<DeviceModel>(await deviceRepository.GetAll());
+                DeviceNames = Devices.Select(device => device.DeviceName).ToList();
+            }
+            catch (Exception ex)
+            {
+                HandleDataFetchError("All Devices", ex);
             }
         }
 

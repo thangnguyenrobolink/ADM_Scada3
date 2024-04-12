@@ -76,10 +76,10 @@ CREATE TABLE  [dbo].[weigh_session] (
     [cust_id] INT,
     [cust_name] NVARCHAR(128),
     [cust_address] NVARCHAR(128),
-    [boat_id] INT,
+    [boat_id] NVARCHAR(50),
     [so_number] NVARCHAR(50),
     [qty_counted] INT,
-	[qty_weighed] INT,
+	[qty_weighed] DECIMAL(18,2),
     [qty_tare_weigh] DECIMAL(18,2),
     [qty_good_weigh] DECIMAL(18,2), --//
 	[qty_order_weigh] DECIMAL(18,2),
@@ -99,8 +99,7 @@ DROP TABLE  [dbo].[weigh_session_d]
 GO
 CREATE TABLE  [dbo].[weigh_session_d](
 	[id] [int] IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	[p_id] [int] NULL,
-	
+	[session_code] NVARCHAR(50),
 	[current_weigh] DECIMAL(18,2),  -- from plc
 	[barcode] [nvarchar](20) NULL,  -- from plc
 	[prod_code] [nvarchar](50) NULL, -- from last [prod_shift_data] 
@@ -113,9 +112,6 @@ CREATE TABLE  [dbo].[weigh_session_d](
     [qty_weighed] DECIMAL(18,2), -- from [weigh_session] parent
     [gap] DECIMAL(18,2),  -- from [weigh_session] parent
 	[shift_data_id] [int] NULL,   -- [prod_shift_data] id
-	[user_id] [int] NULL,
-	[device_code] [nvarchar](50) NULL,-- from [weigh_session] parent
-	[p_status_code] [nvarchar](1) NULL,-- from [weigh_session] parent
 	[created_date] [datetime] NULL, -- now
 	[created_by] [nvarchar](50) NULL,
 	[updated_date] [datetime] NULL,

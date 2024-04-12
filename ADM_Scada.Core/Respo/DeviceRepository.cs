@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
 using ADM_Scada.Core.Models;
 using Serilog;
@@ -10,14 +9,11 @@ namespace ADM_Scada.Core.Respo
 {
     public class DeviceRepository : RepositoryBase, IDataRepository<DeviceModel>
     {
-        public DeviceRepository() { }
-
-        // Method to retrieve all devices
         public async Task<List<DeviceModel>> GetAll()
         {
             try
             {
-                string query = "SELECT * FROM [dbo].[Device]";
+                string query = "SELECT * FROM [dbo].[device]";
                 DataTable dataTable = await ExecuteQueryAsync(query);
                 return ConvertDataTableToList(dataTable);
             }
@@ -27,12 +23,11 @@ namespace ADM_Scada.Core.Respo
                 throw new RepositoryException("An error occurred while retrieving all devices. Please try again later.", ex);
             }
         }
-        // Method to retrieve a device by name
         public async Task<DeviceModel> GetByName(string deviceName)
         {
             try
             {
-                string query = "SELECT * FROM [dbo].[Device] WHERE DeviceName = @DeviceName";
+                string query = "SELECT * FROM [dbo].[device] WHERE device_name = @DeviceName";
                 Dictionary<string, object> parameters = new Dictionary<string, object> { { "@DeviceName", deviceName } };
                 DataTable dataTable = await ExecuteQueryAsync(query, parameters);
                 return ConvertDataTableToSingleObject(dataTable);
@@ -44,111 +39,12 @@ namespace ADM_Scada.Core.Respo
             }
         }
 
-        // Method to retrieve a device by ID
-        public async Task<DeviceModel> GetById(int id)
-        {
-            try
-            {
-                string query = "SELECT * FROM [dbo].[Device] WHERE Id = @Id";
-                Dictionary<string, object> parameters = new Dictionary<string, object> { { "@Id", id } };
-                DataTable dataTable = await ExecuteQueryAsync(query, parameters);
-                return ConvertDataTableToSingleObject(dataTable);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "Error occurred while retrieving device by ID: {DeviceId}", id);
-                throw new RepositoryException($"An error occurred while retrieving device with ID '{id}'. Please try again later.", ex);
-            }
-        }
-
-        // Method to create a new device
-        public async Task<int> Create(DeviceModel device)
-        {
-            try
-            {
-                string query = @"INSERT INTO [dbo].[Device] (DeviceName, IpAddress, Port, CreatedDate, CreatedBy, UpdatedDate, UpdatedBy) 
-                                 VALUES (@DeviceName, @IpAddress, @Port, @CreatedDate, @CreatedBy, @UpdatedDate, @UpdatedBy)";
-
-                // Set CreatedDate and UpdatedDate
-                device.CreatedDate = DateTime.Now;
-                device.UpdatedDate = DateTime.Now;
-
-                Dictionary<string, object> parameters = new Dictionary<string, object>
-                {
-                    { "@DeviceName", device.DeviceName },
-                    { "@IpAddress", device.IpAddress },
-                    { "@Port", device.Port },
-                    { "@CreatedDate", device.CreatedDate },
-                    { "@CreatedBy", device.CreatedBy },
-                    { "@UpdatedDate", device.UpdatedDate },
-                    { "@UpdatedBy", device.UpdatedBy }
-                };
-                return await ExecuteNonQueryAsync(query, parameters);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "Error occurred while creating device: {DeviceName}", device.DeviceName);
-                throw new RepositoryException($"An error occurred while creating device '{device.DeviceName}'. Please try again later.", ex);
-            }
-        }
-
-        // Method to update a device
-        public async Task<bool> Update(DeviceModel device)
-        {
-            try
-            {
-                string query = @"UPDATE [dbo].[Device] 
-                         SET DeviceName = @DeviceName, IpAddress = @IpAddress, Port = @Port, 
-                             CreatedDate = @CreatedDate, CreatedBy = @CreatedBy, 
-                             UpdatedDate = @UpdatedDate, UpdatedBy = @UpdatedBy 
-                         WHERE Id = @Id";
-
-                // Set UpdatedDate
-                device.UpdatedDate = DateTime.Now;
-
-                Dictionary<string, object> parameters = new Dictionary<string, object>
-                {
-                    { "@Id", device.Id },
-                    { "@DeviceName", device.DeviceName },
-                    { "@IpAddress", device.IpAddress },
-                    { "@Port", device.Port },
-                    { "@CreatedDate", device.CreatedDate },
-                    { "@CreatedBy", device.CreatedBy },
-                    { "@UpdatedDate", device.UpdatedDate },
-                    { "@UpdatedBy", device.UpdatedBy }
-                };
-                return await ExecuteNonQueryAsync(query, parameters) > 0;
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "Error occurred while updating device with ID: {DeviceId}", device.Id);
-                throw new RepositoryException($"An error occurred while updating device with ID '{device.Id}'. Please try again later.", ex);
-            }
-        }
-
-        // Method to delete a device
-        public async Task<bool> Delete(int id)
-        {
-            try
-            {
-                string query = "DELETE FROM [dbo].[Device] WHERE Id = @Id";
-                Dictionary<string, object> parameters = new Dictionary<string, object> { { "@Id", id } };
-                return await ExecuteNonQueryAsync(query, parameters) > 0;
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "Error occurred while deleting device with ID: {DeviceId}", id);
-                throw new RepositoryException($"An error occurred while deleting device with ID '{id}'. Please try again later.", ex);
-            }
-        }
-
-        // Method to retrieve filtered devices
         public async Task<List<DeviceModel>> GetFiltered(params Func<DeviceModel, bool>[] filters)
         {
             try
             {
-                string whereClause = string.Join(" AND ", filters.Select(filter => $"({filter})"));
-                string query = $"SELECT * FROM [dbo].[Device] WHERE {whereClause}";
+                string whereClause = string.Join(" AND ", Array.ConvertAll(filters, filter => $"({filter})"));
+                string query = $"SELECT * FROM [dbo].[device] WHERE {whereClause}";
                 DataTable dataTable = await ExecuteQueryAsync(query);
                 return ConvertDataTableToList(dataTable);
             }
@@ -159,12 +55,11 @@ namespace ADM_Scada.Core.Respo
             }
         }
 
-        // Method to count the number of devices
         public async Task<int> Count()
         {
             try
             {
-                string query = "SELECT COUNT(*) FROM [dbo].[Device]";
+                string query = "SELECT COUNT(*) FROM [dbo].[device]";
                 object result = await ExecuteScalarAsync(query);
                 return Convert.ToInt32(result);
             }
@@ -174,25 +69,113 @@ namespace ADM_Scada.Core.Respo
                 throw new RepositoryException("An error occurred while counting devices. Please try again later.", ex);
             }
         }
+        public async Task<DeviceModel> GetById(int id)
+        {
+            try
+            {
+                string query = "SELECT * FROM [dbo].[device] WHERE id = @Id";
+                Dictionary<string, object> parameters = new Dictionary<string, object> { { "@Id", id } };
+                DataTable dataTable = await ExecuteQueryAsync(query, parameters);
+                return ConvertDataTableToSingleObject(dataTable);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error occurred while retrieving device by ID: {Id}", id);
+                throw new RepositoryException($"An error occurred while retrieving device with ID '{id}'. Please try again later.", ex);
+            }
+        }
 
-        // Method to check if a device with the given ID exists
+        public async Task<int> Create(DeviceModel entity)
+        {
+            try
+            {
+                string query = @"INSERT INTO [dbo].[device] (device_name, ip_address, port, created_date, created_by, updated_date, updated_by) 
+                                 VALUES (@DeviceName, @IPAddress, @Port, @CreatedDate, @CreatedBy, @UpdatedDate, @UpdatedBy)";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@DeviceName", entity.DeviceName },
+                    { "@IPAddress", entity.IpAddress },
+                    { "@Port", entity.Port },
+                    { "@CreatedDate", entity.CreatedDate },
+                    { "@CreatedBy", entity.CreatedBy },
+                    { "@UpdatedDate", entity.UpdatedDate },
+                    { "@UpdatedBy", entity.UpdatedBy }
+                };
+
+                return await ExecuteNonQueryAsync(query, parameters);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error occurred while creating device.");
+                throw new RepositoryException($"An error occurred while creating device. Please try again later.", ex);
+            }
+        }
+
+        public async Task<bool> Update(DeviceModel entity)
+        {
+            try
+            {
+                string query = @"UPDATE [dbo].[device] 
+                                 SET device_name = @DeviceName, ip_address = @IPAddress, port = @Port, 
+                                     created_date = @CreatedDate, created_by = @CreatedBy, 
+                                     updated_date = @UpdatedDate, updated_by = @UpdatedBy 
+                                 WHERE id = @Id";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@Id", entity.Id },
+                    { "@DeviceName", entity.DeviceName },
+                    { "@IPAddress", entity.IpAddress },
+                    { "@Port", entity.Port },
+                    { "@CreatedDate", entity.CreatedDate },
+                    { "@CreatedBy", entity.CreatedBy },
+                    { "@UpdatedDate", entity.UpdatedDate },
+                    { "@UpdatedBy", entity.UpdatedBy }
+                };
+
+                return await ExecuteNonQueryAsync(query, parameters) > 0;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error occurred while updating device with ID: {Id}", entity.Id);
+                throw new RepositoryException($"An error occurred while updating device with ID '{entity.Id}'. Please try again later.", ex);
+            }
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            try
+            {
+                string query = "DELETE FROM [dbo].[device] WHERE id = @Id";
+                Dictionary<string, object> parameters = new Dictionary<string, object> { { "@Id", id } };
+                return await ExecuteNonQueryAsync(query, parameters) > 0;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error occurred while deleting device with ID: {Id}", id);
+                throw new RepositoryException($"An error occurred while deleting device with ID '{id}'. Please try again later.", ex);
+            }
+        }
+
         public async Task<bool> Exists(int id)
         {
             try
             {
-                string query = "SELECT COUNT(*) FROM [dbo].[Device] WHERE Id = @Id";
+                string query = "SELECT COUNT(*) FROM [dbo].[device] WHERE id = @Id";
                 Dictionary<string, object> parameters = new Dictionary<string, object> { { "@Id", id } };
                 int count = Convert.ToInt32(await ExecuteScalarAsync(query, parameters));
                 return count > 0;
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error occurred while checking if device exists with ID: {DeviceId}", id);
+                Log.Error(ex, "Error occurred while checking if device exists with ID: {Id}", id);
                 throw new RepositoryException($"An error occurred while checking if device exists with ID '{id}'. Please try again later.", ex);
             }
         }
 
-        // Method to convert DataTable to a list of DeviceModel objectsÁDASDASD
+        // Additional methods can be added as needed
+
         private List<DeviceModel> ConvertDataTableToList(DataTable dataTable)
         {
             List<DeviceModel> deviceList = new List<DeviceModel>();
@@ -205,23 +188,21 @@ namespace ADM_Scada.Core.Respo
             return deviceList;
         }
 
-        // Method to convert DataRow to a DeviceModel object
         private DeviceModel ConvertDataRowToDeviceModel(DataRow row)
         {
             return new DeviceModel
             {
-                Id = Convert.ToInt32(row["Id"]),
-                DeviceName = Convert.ToString(row["DeviceName"]),
-                IpAddress = Convert.ToString(row["IpAddress"]),
-                Port = Convert.ToString(row["Port"]),
-                CreatedDate = Convert.IsDBNull(row["CreatedDate"]) ? (DateTime?)null : Convert.ToDateTime(row["CreatedDate"]),
-                CreatedBy = Convert.ToString(row["CreatedBy"]),
-                UpdatedDate = Convert.IsDBNull(row["UpdatedDate"]) ? (DateTime?)null : Convert.ToDateTime(row["UpdatedDate"]),
-                UpdatedBy = Convert.ToString(row["UpdatedBy"])
+                Id = Convert.ToInt32(row["id"]),
+                DeviceName = Convert.ToString(row["device_name"]),
+                IpAddress = Convert.ToString(row["ip_address"]),
+                Port = Convert.ToString(row["port"]),
+                CreatedDate = Convert.IsDBNull(row["created_date"]) ? (DateTime?)null : Convert.ToDateTime(row["created_date"]),
+                CreatedBy = Convert.ToString(row["created_by"]),
+                UpdatedDate = Convert.IsDBNull(row["updated_date"]) ? (DateTime?)null : Convert.ToDateTime(row["updated_date"]),
+                UpdatedBy = Convert.ToString(row["updated_by"])
             };
         }
 
-        // Method to convert DataTable to a single DeviceModel object
         private DeviceModel ConvertDataTableToSingleObject(DataTable dataTable)
         {
             if (dataTable.Rows.Count == 0)

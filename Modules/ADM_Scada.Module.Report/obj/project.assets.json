@@ -323,28 +323,6 @@
           "bin/placeholder/ADM_Scada.Core.dll": {}
         }
       },
-      "Customer/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.7.2",
-        "dependencies": {
-          "ADM_Scada.Core": "1.0.0",
-          "MaterialDesignColors": "2.1.4",
-          "MaterialDesignExtensions": "3.3.0",
-          "MaterialDesignThemes": "4.9.0",
-          "MaterialDesignThemes.MahApps": "0.3.0",
-          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
-          "Prism.Core": "8.1.97",
-          "Prism.Unity": "8.1.97",
-          "Prism.Wpf": "8.1.97",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Customer.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Customer.dll": {}
-        }
-      },
       "User/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.7.2",
@@ -690,28 +668,6 @@
         },
         "runtime": {
           "bin/placeholder/ADM_Scada.Core.dll": {}
-        }
-      },
-      "Customer/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.7.2",
-        "dependencies": {
-          "ADM_Scada.Core": "1.0.0",
-          "MaterialDesignColors": "2.1.4",
-          "MaterialDesignExtensions": "3.3.0",
-          "MaterialDesignThemes": "4.9.0",
-          "MaterialDesignThemes.MahApps": "0.3.0",
-          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
-          "Prism.Core": "8.1.97",
-          "Prism.Unity": "8.1.97",
-          "Prism.Wpf": "8.1.97",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Customer.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Customer.dll": {}
         }
       },
       "User/1.0.0": {
@@ -1061,28 +1017,6 @@
           "bin/placeholder/ADM_Scada.Core.dll": {}
         }
       },
-      "Customer/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.7.2",
-        "dependencies": {
-          "ADM_Scada.Core": "1.0.0",
-          "MaterialDesignColors": "2.1.4",
-          "MaterialDesignExtensions": "3.3.0",
-          "MaterialDesignThemes": "4.9.0",
-          "MaterialDesignThemes.MahApps": "0.3.0",
-          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
-          "Prism.Core": "8.1.97",
-          "Prism.Unity": "8.1.97",
-          "Prism.Wpf": "8.1.97",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Customer.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Customer.dll": {}
-        }
-      },
       "User/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.7.2",
@@ -1428,28 +1362,6 @@
         },
         "runtime": {
           "bin/placeholder/ADM_Scada.Core.dll": {}
-        }
-      },
-      "Customer/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.7.2",
-        "dependencies": {
-          "ADM_Scada.Core": "1.0.0",
-          "MaterialDesignColors": "2.1.4",
-          "MaterialDesignExtensions": "3.3.0",
-          "MaterialDesignThemes": "4.9.0",
-          "MaterialDesignThemes.MahApps": "0.3.0",
-          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
-          "Prism.Core": "8.1.97",
-          "Prism.Unity": "8.1.97",
-          "Prism.Wpf": "8.1.97",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Customer.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Customer.dll": {}
         }
       },
       "User/1.0.0": {
@@ -2077,11 +1989,6 @@
       "path": "../../ADM_Scada.Core/ADM_Scada.Core.csproj",
       "msbuildProject": "../../ADM_Scada.Core/ADM_Scada.Core.csproj"
     },
-    "Customer/1.0.0": {
-      "type": "project",
-      "path": "../../Customer/Customer.csproj",
-      "msbuildProject": "../../Customer/Customer.csproj"
-    },
     "User/1.0.0": {
       "type": "project",
       "path": "../ADM_Scada.Module.User/User.csproj",
@@ -2091,7 +1998,6 @@
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
       "ADM_Scada.Core >= 1.0.0",
-      "Customer >= 1.0.0",
       "LiveCharts.Wpf >= 0.9.7",
       "MaterialDesignColors >= 2.1.4",
       "MaterialDesignExtensions >= 3.3.0",
@@ -2140,9 +2046,6 @@
           "projectReferences": {
             "E:\\work\\ADM_Scada\\ADM_Scada.Core\\ADM_Scada.Core.csproj": {
               "projectPath": "E:\\work\\ADM_Scada\\ADM_Scada.Core\\ADM_Scada.Core.csproj"
-            },
-            "E:\\work\\ADM_Scada\\Customer\\Customer.csproj": {
-              "projectPath": "E:\\work\\ADM_Scada\\Customer\\Customer.csproj"
             },
             "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.User\\User.csproj": {
               "projectPath": "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.User\\User.csproj"

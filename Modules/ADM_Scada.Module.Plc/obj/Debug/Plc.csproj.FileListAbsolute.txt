@@ -139,12 +139,10 @@ E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\ADM_Scada.Core.dll.conf
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\Customer.pdb
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\S7.Net.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\ClosedXML.xml
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\System.Memory.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\DocumentFormat.OpenXml.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\SixLabors.Fonts.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\ExcelNumberFormat.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\System.IO.Packaging.xml
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\System.Numerics.Vectors.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\obj\Debug\Plc.csproj.AssemblyReference.cache
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\obj\Debug\Views\DashBoardView.g.cs
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\obj\Debug\Views\SettingView.g.cs
@@ -162,5 +160,7 @@ E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\obj\Debug\ADM_Scada.Module.Plc.dl
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\obj\Debug\ADM_Scada.Module.Plc.pdb
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\Serilog.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\System.Diagnostics.DiagnosticSource.dll
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\Serilog.xml
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\ADM_Scada.Module.Report.dll
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\ADM_Scada.Module.User.dll
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\ADM_Scada.Module.Report.pdb
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\ADM_Scada.Module.User.pdb

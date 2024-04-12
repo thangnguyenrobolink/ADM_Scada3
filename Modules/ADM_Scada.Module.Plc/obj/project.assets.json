@@ -189,6 +189,23 @@
           "lib/net47/Prism.Wpf.dll": {}
         }
       },
+      "Serilog/3.1.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "7.0.2"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net471/Serilog.dll": {}
+        },
+        "runtime": {
+          "lib/net471/Serilog.dll": {}
+        }
+      },
       "System.Buffers/4.5.1": {
         "type": "package",
         "frameworkAssemblies": [
@@ -199,6 +216,53 @@
         },
         "runtime": {
           "lib/net461/System.Buffers.dll": {}
+        }
+      },
+      "System.Diagnostics.DiagnosticSource/7.0.2": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "lib/net462/System.Diagnostics.DiagnosticSource.dll": {}
+        },
+        "runtime": {
+          "lib/net462/System.Diagnostics.DiagnosticSource.dll": {}
+        },
+        "build": {
+          "buildTransitive/net462/_._": {}
+        }
+      },
+      "System.Memory/4.5.5": {
+        "type": "package",
+        "dependencies": {
+          "System.Buffers": "4.5.1",
+          "System.Numerics.Vectors": "4.5.0",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.3"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/net461/System.Memory.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Memory.dll": {}
+        }
+      },
+      "System.Numerics.Vectors/4.5.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Numerics",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net46/System.Numerics.Vectors.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {
@@ -272,6 +336,7 @@
           "Prism.Core": "8.1.97",
           "Prism.Unity": "8.1.97",
           "Prism.Wpf": "8.1.97",
+          "Report": "1.0.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
@@ -279,6 +344,55 @@
         },
         "runtime": {
           "bin/placeholder/Customer.dll": {}
+        }
+      },
+      "Report/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.2",
+        "dependencies": {
+          "ADM_Scada.Core": "1.0.0",
+          "LiveCharts.Wpf": "0.9.7",
+          "MaterialDesignColors": "2.1.4",
+          "MaterialDesignExtensions": "3.3.0",
+          "MaterialDesignThemes": "4.9.0",
+          "MaterialDesignThemes.MahApps": "0.3.0",
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
+          "Prism.Core": "8.1.97",
+          "Prism.Unity": "8.1.97",
+          "Prism.Wpf": "8.1.97",
+          "Serilog": "3.1.1",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "User": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Report.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Report.dll": {}
+        }
+      },
+      "User/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.2",
+        "dependencies": {
+          "ADM_Scada.Core": "1.0.0",
+          "LiveCharts.Wpf": "0.9.7",
+          "MaterialDesignColors": "2.1.4",
+          "MaterialDesignExtensions": "3.3.0",
+          "MaterialDesignThemes": "4.9.0",
+          "MaterialDesignThemes.MahApps": "0.3.0",
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
+          "Prism.Core": "8.1.97",
+          "Prism.Unity": "8.1.97",
+          "Prism.Wpf": "8.1.97",
+          "System.Buffers": "4.5.1",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "bin/placeholder/User.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/User.dll": {}
         }
       }
     },
@@ -470,6 +584,23 @@
           "lib/net47/Prism.Wpf.dll": {}
         }
       },
+      "Serilog/3.1.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "7.0.2"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net471/Serilog.dll": {}
+        },
+        "runtime": {
+          "lib/net471/Serilog.dll": {}
+        }
+      },
       "System.Buffers/4.5.1": {
         "type": "package",
         "frameworkAssemblies": [
@@ -480,6 +611,53 @@
         },
         "runtime": {
           "lib/net461/System.Buffers.dll": {}
+        }
+      },
+      "System.Diagnostics.DiagnosticSource/7.0.2": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "lib/net462/System.Diagnostics.DiagnosticSource.dll": {}
+        },
+        "runtime": {
+          "lib/net462/System.Diagnostics.DiagnosticSource.dll": {}
+        },
+        "build": {
+          "buildTransitive/net462/_._": {}
+        }
+      },
+      "System.Memory/4.5.5": {
+        "type": "package",
+        "dependencies": {
+          "System.Buffers": "4.5.1",
+          "System.Numerics.Vectors": "4.5.0",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.3"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/net461/System.Memory.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Memory.dll": {}
+        }
+      },
+      "System.Numerics.Vectors/4.5.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Numerics",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net46/System.Numerics.Vectors.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {
@@ -553,6 +731,7 @@
           "Prism.Core": "8.1.97",
           "Prism.Unity": "8.1.97",
           "Prism.Wpf": "8.1.97",
+          "Report": "1.0.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
@@ -560,6 +739,55 @@
         },
         "runtime": {
           "bin/placeholder/Customer.dll": {}
+        }
+      },
+      "Report/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.2",
+        "dependencies": {
+          "ADM_Scada.Core": "1.0.0",
+          "LiveCharts.Wpf": "0.9.7",
+          "MaterialDesignColors": "2.1.4",
+          "MaterialDesignExtensions": "3.3.0",
+          "MaterialDesignThemes": "4.9.0",
+          "MaterialDesignThemes.MahApps": "0.3.0",
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
+          "Prism.Core": "8.1.97",
+          "Prism.Unity": "8.1.97",
+          "Prism.Wpf": "8.1.97",
+          "Serilog": "3.1.1",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "User": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Report.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Report.dll": {}
+        }
+      },
+      "User/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.2",
+        "dependencies": {
+          "ADM_Scada.Core": "1.0.0",
+          "LiveCharts.Wpf": "0.9.7",
+          "MaterialDesignColors": "2.1.4",
+          "MaterialDesignExtensions": "3.3.0",
+          "MaterialDesignThemes": "4.9.0",
+          "MaterialDesignThemes.MahApps": "0.3.0",
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
+          "Prism.Core": "8.1.97",
+          "Prism.Unity": "8.1.97",
+          "Prism.Wpf": "8.1.97",
+          "System.Buffers": "4.5.1",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "bin/placeholder/User.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/User.dll": {}
         }
       }
     },
@@ -751,6 +979,23 @@
           "lib/net47/Prism.Wpf.dll": {}
         }
       },
+      "Serilog/3.1.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "7.0.2"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net471/Serilog.dll": {}
+        },
+        "runtime": {
+          "lib/net471/Serilog.dll": {}
+        }
+      },
       "System.Buffers/4.5.1": {
         "type": "package",
         "frameworkAssemblies": [
@@ -761,6 +1006,53 @@
         },
         "runtime": {
           "lib/net461/System.Buffers.dll": {}
+        }
+      },
+      "System.Diagnostics.DiagnosticSource/7.0.2": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "lib/net462/System.Diagnostics.DiagnosticSource.dll": {}
+        },
+        "runtime": {
+          "lib/net462/System.Diagnostics.DiagnosticSource.dll": {}
+        },
+        "build": {
+          "buildTransitive/net462/_._": {}
+        }
+      },
+      "System.Memory/4.5.5": {
+        "type": "package",
+        "dependencies": {
+          "System.Buffers": "4.5.1",
+          "System.Numerics.Vectors": "4.5.0",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.3"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/net461/System.Memory.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Memory.dll": {}
+        }
+      },
+      "System.Numerics.Vectors/4.5.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Numerics",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net46/System.Numerics.Vectors.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {
@@ -834,6 +1126,7 @@
           "Prism.Core": "8.1.97",
           "Prism.Unity": "8.1.97",
           "Prism.Wpf": "8.1.97",
+          "Report": "1.0.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
@@ -841,6 +1134,55 @@
         },
         "runtime": {
           "bin/placeholder/Customer.dll": {}
+        }
+      },
+      "Report/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.2",
+        "dependencies": {
+          "ADM_Scada.Core": "1.0.0",
+          "LiveCharts.Wpf": "0.9.7",
+          "MaterialDesignColors": "2.1.4",
+          "MaterialDesignExtensions": "3.3.0",
+          "MaterialDesignThemes": "4.9.0",
+          "MaterialDesignThemes.MahApps": "0.3.0",
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
+          "Prism.Core": "8.1.97",
+          "Prism.Unity": "8.1.97",
+          "Prism.Wpf": "8.1.97",
+          "Serilog": "3.1.1",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "User": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Report.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Report.dll": {}
+        }
+      },
+      "User/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.2",
+        "dependencies": {
+          "ADM_Scada.Core": "1.0.0",
+          "LiveCharts.Wpf": "0.9.7",
+          "MaterialDesignColors": "2.1.4",
+          "MaterialDesignExtensions": "3.3.0",
+          "MaterialDesignThemes": "4.9.0",
+          "MaterialDesignThemes.MahApps": "0.3.0",
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
+          "Prism.Core": "8.1.97",
+          "Prism.Unity": "8.1.97",
+          "Prism.Wpf": "8.1.97",
+          "System.Buffers": "4.5.1",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "bin/placeholder/User.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/User.dll": {}
         }
       }
     },
@@ -1032,6 +1374,23 @@
           "lib/net47/Prism.Wpf.dll": {}
         }
       },
+      "Serilog/3.1.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "7.0.2"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net471/Serilog.dll": {}
+        },
+        "runtime": {
+          "lib/net471/Serilog.dll": {}
+        }
+      },
       "System.Buffers/4.5.1": {
         "type": "package",
         "frameworkAssemblies": [
@@ -1042,6 +1401,53 @@
         },
         "runtime": {
           "lib/net461/System.Buffers.dll": {}
+        }
+      },
+      "System.Diagnostics.DiagnosticSource/7.0.2": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "lib/net462/System.Diagnostics.DiagnosticSource.dll": {}
+        },
+        "runtime": {
+          "lib/net462/System.Diagnostics.DiagnosticSource.dll": {}
+        },
+        "build": {
+          "buildTransitive/net462/_._": {}
+        }
+      },
+      "System.Memory/4.5.5": {
+        "type": "package",
+        "dependencies": {
+          "System.Buffers": "4.5.1",
+          "System.Numerics.Vectors": "4.5.0",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.3"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/net461/System.Memory.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Memory.dll": {}
+        }
+      },
+      "System.Numerics.Vectors/4.5.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Numerics",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net46/System.Numerics.Vectors.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {
@@ -1115,6 +1521,7 @@
           "Prism.Core": "8.1.97",
           "Prism.Unity": "8.1.97",
           "Prism.Wpf": "8.1.97",
+          "Report": "1.0.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
@@ -1122,6 +1529,55 @@
         },
         "runtime": {
           "bin/placeholder/Customer.dll": {}
+        }
+      },
+      "Report/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.2",
+        "dependencies": {
+          "ADM_Scada.Core": "1.0.0",
+          "LiveCharts.Wpf": "0.9.7",
+          "MaterialDesignColors": "2.1.4",
+          "MaterialDesignExtensions": "3.3.0",
+          "MaterialDesignThemes": "4.9.0",
+          "MaterialDesignThemes.MahApps": "0.3.0",
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
+          "Prism.Core": "8.1.97",
+          "Prism.Unity": "8.1.97",
+          "Prism.Wpf": "8.1.97",
+          "Serilog": "3.1.1",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "User": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Report.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Report.dll": {}
+        }
+      },
+      "User/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.2",
+        "dependencies": {
+          "ADM_Scada.Core": "1.0.0",
+          "LiveCharts.Wpf": "0.9.7",
+          "MaterialDesignColors": "2.1.4",
+          "MaterialDesignExtensions": "3.3.0",
+          "MaterialDesignThemes": "4.9.0",
+          "MaterialDesignThemes.MahApps": "0.3.0",
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
+          "Prism.Core": "8.1.97",
+          "Prism.Unity": "8.1.97",
+          "Prism.Wpf": "8.1.97",
+          "System.Buffers": "4.5.1",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "bin/placeholder/User.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/User.dll": {}
         }
       }
     }
@@ -1443,6 +1899,33 @@
         "readme.txt"
       ]
     },
+    "Serilog/3.1.1": {
+      "sha512": "P6G4/4Kt9bT635bhuwdXlJ2SCqqn2nhh4gqFqQueCOr9bK/e7W9ll/IoX1Ter948cV2Z/5+5v8pAfJYUISY03A==",
+      "type": "package",
+      "path": "serilog/3.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net462/Serilog.dll",
+        "lib/net462/Serilog.xml",
+        "lib/net471/Serilog.dll",
+        "lib/net471/Serilog.xml",
+        "lib/net5.0/Serilog.dll",
+        "lib/net5.0/Serilog.xml",
+        "lib/net6.0/Serilog.dll",
+        "lib/net6.0/Serilog.xml",
+        "lib/net7.0/Serilog.dll",
+        "lib/net7.0/Serilog.xml",
+        "lib/netstandard2.0/Serilog.dll",
+        "lib/netstandard2.0/Serilog.xml",
+        "lib/netstandard2.1/Serilog.dll",
+        "lib/netstandard2.1/Serilog.xml",
+        "serilog.3.1.1.nupkg.sha512",
+        "serilog.nuspec"
+      ]
+    },
     "System.Buffers/4.5.1": {
       "sha512": "Rw7ijyl1qqRS0YQD/WycNst8hUUMgrMH4FCn1nNm27M4VxchZ1js3fVjQaANHO5f3sN4isvP4a+Met9Y4YomAg==",
       "type": "package",
@@ -1470,6 +1953,103 @@
         "ref/uap10.0.16299/_._",
         "system.buffers.4.5.1.nupkg.sha512",
         "system.buffers.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Diagnostics.DiagnosticSource/7.0.2": {
+      "sha512": "hYr3I9N9811e0Bjf2WNwAGGyTuAFbbTgX1RPLt/3Wbm68x3IGcX5Cl75CMmgT6WlNwLQ2tCCWfqYPpypjaf2xA==",
+      "type": "package",
+      "path": "system.diagnostics.diagnosticsource/7.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Diagnostics.DiagnosticSource.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Diagnostics.DiagnosticSource.targets",
+        "lib/net462/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net462/System.Diagnostics.DiagnosticSource.xml",
+        "lib/net6.0/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net6.0/System.Diagnostics.DiagnosticSource.xml",
+        "lib/net7.0/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net7.0/System.Diagnostics.DiagnosticSource.xml",
+        "lib/netstandard2.0/System.Diagnostics.DiagnosticSource.dll",
+        "lib/netstandard2.0/System.Diagnostics.DiagnosticSource.xml",
+        "system.diagnostics.diagnosticsource.7.0.2.nupkg.sha512",
+        "system.diagnostics.diagnosticsource.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "System.Memory/4.5.5": {
+      "sha512": "XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw==",
+      "type": "package",
+      "path": "system.memory/4.5.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Memory.dll",
+        "lib/net461/System.Memory.xml",
+        "lib/netcoreapp2.1/_._",
+        "lib/netstandard1.1/System.Memory.dll",
+        "lib/netstandard1.1/System.Memory.xml",
+        "lib/netstandard2.0/System.Memory.dll",
+        "lib/netstandard2.0/System.Memory.xml",
+        "ref/netcoreapp2.1/_._",
+        "system.memory.4.5.5.nupkg.sha512",
+        "system.memory.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Numerics.Vectors/4.5.0": {
+      "sha512": "QQTlPTl06J/iiDbJCiepZ4H//BVraReU4O4EoRw1U02H5TLUIT7xn3GnDp9AXPSlJUDyFs4uWjWafNX6WrAojQ==",
+      "type": "package",
+      "path": "system.numerics.vectors/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Numerics.Vectors.dll",
+        "lib/net46/System.Numerics.Vectors.xml",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.0/System.Numerics.Vectors.dll",
+        "lib/netstandard1.0/System.Numerics.Vectors.xml",
+        "lib/netstandard2.0/System.Numerics.Vectors.dll",
+        "lib/netstandard2.0/System.Numerics.Vectors.xml",
+        "lib/portable-net45+win8+wp8+wpa81/System.Numerics.Vectors.dll",
+        "lib/portable-net45+win8+wp8+wpa81/System.Numerics.Vectors.xml",
+        "lib/uap10.0.16299/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/System.Numerics.Vectors.dll",
+        "ref/net45/System.Numerics.Vectors.xml",
+        "ref/net46/System.Numerics.Vectors.dll",
+        "ref/net46/System.Numerics.Vectors.xml",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard1.0/System.Numerics.Vectors.dll",
+        "ref/netstandard1.0/System.Numerics.Vectors.xml",
+        "ref/netstandard2.0/System.Numerics.Vectors.dll",
+        "ref/netstandard2.0/System.Numerics.Vectors.xml",
+        "ref/uap10.0.16299/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.numerics.vectors.4.5.0.nupkg.sha512",
+        "system.numerics.vectors.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
@@ -1605,6 +2185,16 @@
       "type": "project",
       "path": "../../Customer/Customer.csproj",
       "msbuildProject": "../../Customer/Customer.csproj"
+    },
+    "Report/1.0.0": {
+      "type": "project",
+      "path": "../ADM_Scada.Module.Report/Report.csproj",
+      "msbuildProject": "../ADM_Scada.Module.Report/Report.csproj"
+    },
+    "User/1.0.0": {
+      "type": "project",
+      "path": "../ADM_Scada.Module.User/User.csproj",
+      "msbuildProject": "../ADM_Scada.Module.User/User.csproj"
     }
   },
   "projectFileDependencyGroups": {

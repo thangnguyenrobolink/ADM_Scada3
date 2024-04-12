@@ -1,5 +1,6 @@
 ﻿using ADM_Scada.Core.Models;
 using ADM_Scada.Cores.PubEvent;
+using ADM_Scada.Modules.Report.ViewModels;
 using Prism.Events;
 using Prism.Mvvm;
 using System;
@@ -10,9 +11,8 @@ namespace Customer.ViewModels
     {
         private IEventAggregator _ea;
         private CustomerModel currentCustomer;
-        private CustomerModel customerName = new CustomerModel();
 
-        public CustomerModel CurrentCustomer { get => currentCustomer; set => SetProperty(ref currentCustomer, value); }
+        public CustomerModel CurrentCustomer { get => currentCustomer ?? ProductionInfoViewModel.currentCust; set => SetProperty(ref currentCustomer, value); }
         public CurrentCustomerViewModel(IEventAggregator ea)
         {   
             currentCustomer = CustomerDatabaseViewModel.currentCus;
@@ -24,7 +24,6 @@ namespace Customer.ViewModels
         {
 
             CurrentCustomer = curUser;
-            CurrentCustomer.UpdatedDate = DateTime.Now;
             RaisePropertyChanged(nameof(CurrentCustomer));
         }
     }

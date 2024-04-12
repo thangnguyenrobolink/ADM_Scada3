@@ -79,7 +79,7 @@
                             <ComboBox Grid.Column="1" Grid.Row="1"  BorderBrush="SlateGray"
                                       ItemsSource="{Binding FullCustomers}"
                                       materialDesign:HintAssist.Hint="Select Customer"
-                                      SelectedItem ="{Binding CurrentProduct, UpdateSourceTrigger=LostFocus}"
+                                      SelectedItem ="{Binding CurrentCustomer}"
                                       Style="{StaticResource MaterialDesignOutlinedComboBox}"  Margin="8"/>
 
                             <TextBlock Grid.Row="2" 
@@ -87,7 +87,7 @@
                                     FontWeight="DemiBold"
                                     Style="{StaticResource MaterialDesignBody2TextBlock}" 
                                     Margin="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBox Grid.Column="1" Grid.Row="2"
+                            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding CurrentCustomer.CustAdd}"
                                        Margin="8" BorderBrush="SlateGray"
                                       materialDesign:HintAssist.Hint="Customer's Address"
                                       Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
@@ -97,7 +97,7 @@
                                     FontWeight="DemiBold" 
                                 Style="{StaticResource MaterialDesignBody2TextBlock}" 
                                 Margin="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBox Grid.Column="1" Grid.Row="3"
+                            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding CurrentSession.BoatId}"
                                        Margin="8" BorderBrush="SlateGray"
                                       materialDesign:HintAssist.Hint="Boat License Number"
                                       Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
@@ -108,10 +108,12 @@
                                 Style="{StaticResource MaterialDesignBody2TextBlock}" 
                                 Margin="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <ComboBox Grid.Column="1" Grid.Row="4"  BorderBrush="SlateGray"
-                                      ItemsSource="{Binding Customers}"
-                                      materialDesign:HintAssist.Hint="Select Customer"
-                                      SelectedItem ="{Binding CurrentProduct, UpdateSourceTrigger=LostFocus}"
-                                      Style="{StaticResource MaterialDesignOutlinedComboBox}"  Margin="8"/>
+                                      materialDesign:HintAssist.Hint="Select Dock" 
+                                      ItemsSource="{Binding DeviceNames}"
+                                      SelectedItem ="{Binding CurrentSession.DeviceCode, UpdateSourceTrigger=LostFocus}"
+                                      Style="{StaticResource MaterialDesignOutlinedComboBox}"  Margin="8">
+                                    
+                            </ComboBox>
                             <ContentControl Grid.Row="0" Grid.Column="2"  Grid.RowSpan="6" HorizontalAlignment="Center" Margin="8 8 0 8 " VerticalAlignment="Center" 
                             prism:RegionManager.RegionName="{x:Static core:RegionNames.CustomerRegion}"/>
                         </Grid>
@@ -163,7 +165,7 @@
                                 Style="{StaticResource MaterialDesignBody2TextBlock}" 
                                 Margin="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                            <TextBox Grid.Column="1" Grid.Row="1"
+                            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding CurrentShift.WorkOrderNo}"
                                       x:Name="SO_No_Field" Margin="8" BorderBrush="SlateGray"
                                       materialDesign:HintAssist.Hint="Stock Delivery Order"
                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
@@ -173,8 +175,7 @@
                                    Style="{StaticResource MaterialDesignBody2TextBlock}" 
                                    Margin="8" VerticalAlignment="Center"/>
                             <TextBox Grid.Column="1" Grid.Row="2"  BorderBrush="SlateGray"
-                                        materialDesign:HintAssist.Hint="Define Weigh unit"
-                                     
+                                     materialDesign:HintAssist.Hint="Define Weigh unit"
                                      Text="{Binding CurrentShift.LooseUom, UpdateSourceTrigger=LostFocus}" 
                                      Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="8"/>
 
@@ -199,8 +200,8 @@
                                        Margin="8" HorizontalAlignment="Center"/>
                             <TextBox Grid.Column="1" Grid.Row="4"  BorderBrush="SlateGray"
                                         materialDesign:HintAssist.Hint="Define weigh of a bag"
-                                     materialDesign:TextFieldAssist.SuffixText="{Binding LooseUom.LooseUom}"
-                                     Text="{Binding CurrentShift.WO, UpdateSourceTrigger=LostFocus}" 
+                                     materialDesign:TextFieldAssist.SuffixText="{Binding CurrentShift.LooseUom}"
+                                     Text="{Binding CurrentShift.QtyTareWeigh, UpdateSourceTrigger=LostFocus}" 
                                      Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="8"/>
                             <!--#endregion-->
                             <!-- tare quanity -->
@@ -211,8 +212,8 @@
                                     Margin="8" HorizontalAlignment="Center"/>
                             <TextBox Grid.Column="1" Grid.Row="5"  BorderBrush="SlateGray"
                                     materialDesign:HintAssist.Hint="Total loose volume of all bag"
-                                    materialDesign:TextFieldAssist.SuffixText="{Binding LooseUom.LooseUom}"
-                                    Text="{Binding CurrentShift.WO, UpdateSourceTrigger=LostFocus}" 
+                                    materialDesign:TextFieldAssist.SuffixText="{Binding CurrentShift.LooseUom}"
+                                    Text="{Binding CurrentShift.QtyOrderWeigh, UpdateSourceTrigger=LostFocus}" 
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 Margin="8" />
                             <!--#endregion-->

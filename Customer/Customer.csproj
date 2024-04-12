@@ -88,6 +88,10 @@
       <Project>{BFE156DB-30A2-4ABB-AABD-E8A01C0CFEA8}</Project>
       <Name>ADM_Scada.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\ADM_Scada.Module.Report\Report.csproj">
+      <Project>{0143B704-B21C-4E01-BCBE-045EA611EC2A}</Project>
+      <Name>Report</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\CurrentCustomerView.xaml">

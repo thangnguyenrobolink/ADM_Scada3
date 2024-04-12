@@ -122,10 +122,6 @@
       <Project>{bfe156db-30a2-4abb-aabd-e8a01c0cfea8}</Project>
       <Name>ADM_Scada.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Customer\Customer.csproj">
-      <Project>{A6144702-CDE7-465D-B209-5E975B78ADB7}</Project>
-      <Name>Customer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ADM_Scada.Module.User\User.csproj">
       <Project>{14D7F7FA-9A1F-413E-9AD5-7B97FA47611E}</Project>
       <Name>User</Name>
