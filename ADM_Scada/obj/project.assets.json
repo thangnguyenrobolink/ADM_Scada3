@@ -384,6 +384,7 @@
           "Prism.Core": "8.1.97",
           "Prism.Unity": "8.1.97",
           "Prism.Wpf": "8.1.97",
+          "Report": "1.0.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
@@ -849,6 +850,7 @@
           "Prism.Core": "8.1.97",
           "Prism.Unity": "8.1.97",
           "Prism.Wpf": "8.1.97",
+          "Report": "1.0.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
@@ -1314,6 +1316,7 @@
           "Prism.Core": "8.1.97",
           "Prism.Unity": "8.1.97",
           "Prism.Wpf": "8.1.97",
+          "Report": "1.0.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
@@ -1779,6 +1782,7 @@
           "Prism.Core": "8.1.97",
           "Prism.Unity": "8.1.97",
           "Prism.Wpf": "8.1.97",
+          "Report": "1.0.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {

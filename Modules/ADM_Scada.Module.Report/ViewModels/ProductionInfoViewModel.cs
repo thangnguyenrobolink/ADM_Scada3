@@ -92,11 +92,10 @@ namespace ADM_Scada.Modules.Report.ViewModels
             get => currentShift ?? new ProdShiftDataModel();
             set
             {
-                SetProperty(ref currentShift, value);
+                _ = SetProperty(ref currentShift, value);
                 eventAggregator?.GetEvent<ShiftInfoChangeEvent>().Publish(currentShift);
                 UpdateCurrentSession();
             }
-
         }
         //Current session
         public static WeighSessionModel currentSession = new WeighSessionModel();
@@ -108,13 +107,28 @@ namespace ADM_Scada.Modules.Report.ViewModels
                 SetProperty(ref currentSession, value);
                 eventAggregator?.GetEvent<CurrentSessionChangeEvent>().Publish(currentSession);
                 UpdateSessionPropertiesAsync();
+                RaisePropertyChanged(nameof(CurrentSession));
             }
         }
         private void UpdateCurrentSession()
-        { } 
+        {
+            // Customer
+            CurrentSession.CustId = CurrentCustomer.Id;
+            CurrentSession.CustName = CurrentCustomer.CustName;
+            CurrentSession.CustAddress = CurrentCustomer.CustAdd;
+            // Stock order
+            CurrentSession.SoNumber = CurrentShift.WorkOrderNo;
+            CurrentSession.QtyTareWeigh = CurrentShift.QtyTareWeigh;
+            CurrentSession.QtyOrderWeigh = CurrentShift.QtyOrderWeigh;
+            CurrentSession.ShiftDataId = CurrentShift.Id;
+            CurrentSession.UserId = UserStatusRegionViewModel.currentUser.Id;
+            //
+            RaisePropertyChanged(nameof(CurrentSession));
+        } 
         private void UpdateCurrentShift()
-        { }
-
+        {
+            CurrentShift.ProdCode = CurrentProduct.ProdCode;
+        }
         private async void UpdateSessionPropertiesAsync()
         {
             IsSessionWorking = CurrentSession.StatusCode == "S";
@@ -127,8 +141,8 @@ namespace ADM_Scada.Modules.Report.ViewModels
         private bool isSessionEnded;
         private List<string> deviceNames;
 
-        public bool IsSessionWorking { get => CurrentSession.StatusCode == "S"; set => SetProperty(ref isSessionWorking, value); }
-        public bool IsSessionEnded { get => CurrentSession.StatusCode != "S"; set => SetProperty(ref isSessionEnded, value); }
+        public bool IsSessionWorking { get => CurrentSession.StatusCode == "S"; set { SetProperty(ref isSessionWorking, value); RaisePropertyChanged(nameof(IsSessionWorking)); } }
+        public bool IsSessionEnded { get => CurrentSession.StatusCode != "S"; set { SetProperty(ref isSessionEnded, value); RaisePropertyChanged(nameof(IsSessionEnded)); } }
         #endregion
 
         // Command config
@@ -229,7 +243,6 @@ namespace ADM_Scada.Modules.Report.ViewModels
         }
         #endregion
 
-
         ///
         public ProductionInfoViewModel(IEventAggregator ea)
         {
@@ -253,9 +266,6 @@ namespace ADM_Scada.Modules.Report.ViewModels
             EndSessionCommand = new DelegateCommand(EndCurrentSession);
             StartSessionCommand = new DelegateCommand(StartNewSession);
         }
-
-
-
         private async Task FetchInitialDataAsync()
         {
             await Task.WhenAll(

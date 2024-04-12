@@ -125,6 +125,10 @@
       <Project>{bfe156db-30a2-4abb-aabd-e8a01c0cfea8}</Project>
       <Name>ADM_Scada.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ADM_Scada.Module.Report\Report.csproj">
+      <Project>{0143B704-B21C-4E01-BCBE-045EA611EC2A}</Project>
+      <Name>Report</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

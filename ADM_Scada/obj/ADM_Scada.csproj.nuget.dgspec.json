@@ -642,6 +642,9 @@
             "projectReferences": {
               "E:\\work\\ADM_Scada\\ADM_Scada.Core\\ADM_Scada.Core.csproj": {
                 "projectPath": "E:\\work\\ADM_Scada\\ADM_Scada.Core\\ADM_Scada.Core.csproj"
+              },
+              "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Report\\Report.csproj": {
+                "projectPath": "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Report\\Report.csproj"
               }
             }
           }

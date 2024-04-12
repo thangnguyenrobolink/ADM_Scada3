@@ -16,7 +16,7 @@ namespace ADM_Scada.Core.Models
         public string SoNumber { get; set; }
         public int? QtyCounted { get; set; }
         public decimal? QtyWeighed { get; set; }
-        public decimal? QtyTareWeigh { get; set; }
+        public decimal? QtyTareWeigh { get; set; }  
         public decimal? QtyGoodWeigh { get; set; }
         public decimal? QtyOrderWeigh { get; set; }
         public decimal? Gap { get; set; }

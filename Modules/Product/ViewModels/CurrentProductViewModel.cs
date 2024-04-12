@@ -1,5 +1,6 @@
 ﻿using ADM_Scada.Core.Models;
 using ADM_Scada.Cores.PubEvent;
+using ADM_Scada.Modules.Report.ViewModels;
 using Prism.Events;
 using Prism.Mvvm;
 using System;
@@ -10,9 +11,8 @@ namespace ADM_Scada.Modules.Product.ViewModels
     {
         private IEventAggregator _ea;
         private ProductModel currentProduct;
-        private ProductModel ProductName = new ProductModel();
 
-        public ProductModel CurrentProduct { get => currentProduct; set => SetProperty(ref currentProduct, value); }
+        public ProductModel CurrentProduct { get => currentProduct ?? ProductionInfoViewModel.currentProduct; set => SetProperty(ref currentProduct, value); }
         public CurrentProductViewModel(IEventAggregator ea)
         {
             _ea = ea;

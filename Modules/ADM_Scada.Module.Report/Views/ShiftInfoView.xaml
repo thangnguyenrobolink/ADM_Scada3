@@ -9,7 +9,7 @@
             FontFamily="{materialDesign:MaterialDesignFont}"
              xmlns:prism="http://prismlibrary.com/"  Width="350 "
              prism:ViewModelLocator.AutoWireViewModel="True" >
-    <materialDesign:Card x:Name="Infocard" UniformCornerRadius="10" Background="White" Margin="4 4 4 4"  materialDesign:ElevationAssist.Elevation="Dp1">
+    <materialDesign:Card x:Name="Infocard" UniformCornerRadius="10" Background="White" Margin="4 4 4 4"  materialDesign:ElevationAssist.Elevation="Dp0">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -27,27 +27,27 @@
                 </RadialGradientBrush>
             </Grid.Background>
 
-            <TextBlock Text="Shift Infomation" TextWrapping="Wrap" TextAlignment="Left" Grid.Row="0" Grid.Column="0" 
+            <TextBlock Text="SO Infomation" TextWrapping="Wrap" TextAlignment="Left" Grid.Row="0" Grid.Column="0" 
                            Foreground="#FF245D9B" FontSize="18" FontWeight="DemiBold"
                                      VerticalAlignment="Center" Margin="24 4 4 4"
                                     HorizontalAlignment="Left"/>
             <!--Wo and Lot-->
             <!--ádasd-->
             <materialDesign:PackIcon Kind="OrderBoolAscending" Width="30" Height="30" Margin="4"  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding  CurrentShift.WO}" HorizontalAlignment="Left" Margin="44 4"  Grid.Row="1" Grid.Column="0" TextWrapping="Wrap"
+            <TextBlock Text="{Binding  CurrentShift.WorkOrderNo}" HorizontalAlignment="Left" Margin="44 4"  Grid.Row="1" Grid.Column="0" TextWrapping="Wrap"
                                      VerticalAlignment="Center" />
-            <materialDesign:PackIcon Kind="InfoCircleOutline" Width="30" Height="30" Margin="4"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding  CurrentShift.LOT}" HorizontalAlignment="Left" Margin="44 4"  Grid.Row="1" Grid.Column="1" TextWrapping="Wrap"
+            <materialDesign:PackIcon Kind="ArchiveMinusOutline" Width="30" Height="30" Margin="4"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding  CurrentShift.QtyTareWeigh}" HorizontalAlignment="Left" Margin="44 4"  Grid.Row="1" Grid.Column="1" TextWrapping="Wrap"
                                      VerticalAlignment="Center" />
            
             <!--ádasd-->
-            <materialDesign:PackIcon Kind="Calendar" Width="30" Height="30" Margin="8"  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding  CurrentShift.TimeStamp}" HorizontalAlignment="Left"  Margin="44 4"  Grid.Row="2" Grid.Column="0" TextWrapping="Wrap"
+            <materialDesign:PackIcon Kind="Weight" Width="30" Height="30" Margin="8"  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding  CurrentShift.QtyOrderWeigh}" HorizontalAlignment="Left"  Margin="44 4"  Grid.Row="2" Grid.Column="0" TextWrapping="Wrap"
                                      VerticalAlignment="Center" />
             
             <!--ádasd-->
-            <materialDesign:PackIcon Kind="SunClockOutline" Width="30" Height="30" Margin="4"  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding  CurrentShift.Shift}" HorizontalAlignment="Left" Margin="44 4"  Grid.Row="2" Grid.Column="1" TextWrapping="Wrap"
+            <materialDesign:PackIcon Kind="WeightKilogram" Width="30" Height="30" Margin="4"  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding  CurrentShift.LooseUom}" HorizontalAlignment="Left" Margin="44 4"  Grid.Row="2" Grid.Column="1" TextWrapping="Wrap"
                                      VerticalAlignment="Center" />
             <!--ádasd-->
 

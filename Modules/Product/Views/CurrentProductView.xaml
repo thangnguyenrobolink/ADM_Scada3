@@ -9,7 +9,7 @@
             FontFamily="{materialDesign:MaterialDesignFont}"
              xmlns:prism="http://prismlibrary.com/"  Width="350 "
              prism:ViewModelLocator.AutoWireViewModel="True" >
-    <materialDesign:Card x:Name="Infocard" UniformCornerRadius="10" Background="White" Margin="4 4 4 4"  materialDesign:ElevationAssist.Elevation="Dp1">
+    <materialDesign:Card x:Name="Infocard" UniformCornerRadius="10" Background="White" Margin="4 4 4 4"  materialDesign:ElevationAssist.Elevation="Dp0">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -41,17 +41,17 @@
                       materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=Loupe}"
                       Content="{materialDesign:PackIcon Kind=ArrowCollapse}"
                       Style="{StaticResource MaterialDesignActionSecondaryToggleButton}" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked"
-                       />        
-            <TextBlock Text="{Binding CurrentProduct.Name}" TextWrapping="Wrap" TextAlignment="Center" Grid.Row="1" Grid.Column="0"
+                       />
+            <TextBlock Text="{Binding CurrentProduct.ProdFullName}" TextWrapping="Wrap" TextAlignment="Center" Grid.Row="1" Grid.Column="0"
                            Foreground="#FF245D9B" FontSize="14" FontWeight="Normal"
                                      VerticalAlignment="Center" Margin="24 4 24 4"
                                     HorizontalAlignment="Left"/>
-            <TextBlock Text="{Binding CurrentProduct.Code}" TextWrapping="Wrap" TextAlignment="Center" Grid.Row="1" Grid.Column="1"
+            <TextBlock Text="{Binding CurrentProduct.ProdCode}" TextWrapping="Wrap" TextAlignment="Center" Grid.Row="1" Grid.Column="1"
                            Foreground="#FF245D9B" FontSize="14" VerticalAlignment="Center" Margin="4 4 4 4"
                                     HorizontalAlignment="Left"/>
             <!--ádasd-->
             <materialDesign:PackIcon Kind="TimelineAlertOutline" Width="30" Height="30" Margin="8"  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding  CurrentProduct.TimeStamp}" HorizontalAlignment="Left"  Margin="44 4"  Grid.Row="2" Grid.Column="0" TextWrapping="Wrap"
+            <TextBlock Text="{Binding  CurrentProduct.ProdName}" HorizontalAlignment="Left"  Margin="44 4"  Grid.Row="2" Grid.Column="0" TextWrapping="Wrap"
                                      VerticalAlignment="Center" />
             <!--ádasd-->
             <materialDesign:PackIcon Kind="Earth" Width="30" Height="30" Margin="8"  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -66,8 +66,8 @@
             <TextBlock Text="{Binding  CurrentProduct.Ingredient}" HorizontalAlignment="Left" Margin="44 4"  Grid.Row="3" Grid.Column="0"  TextWrapping="Wrap"
                                      VerticalAlignment="Center" />
             <!--ádasd-->
-            <materialDesign:PackIcon Kind="InfoCircleOutline" Width="30" Height="30" Margin="8"  Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding  CurrentProduct.Description}" HorizontalAlignment="Left" Margin="44 4"  Grid.Row="4" Grid.ColumnSpan="2" TextWrapping="Wrap"
+            <materialDesign:PackIcon Kind="Barcode" Width="30" Height="30" Margin="8"  Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding  CurrentProduct.Barcode}" HorizontalAlignment="Left" Margin="44 4"  Grid.Row="4" Grid.ColumnSpan="2" TextWrapping="Wrap"
                                      VerticalAlignment="Center" />
         </Grid>
 

@@ -80,6 +80,7 @@
                                       ItemsSource="{Binding FullCustomers}"
                                       materialDesign:HintAssist.Hint="Select Customer"
                                       SelectedItem ="{Binding CurrentCustomer}"
+                                      IsEnabled="{Binding IsSessionEnded, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                       Style="{StaticResource MaterialDesignOutlinedComboBox}"  Margin="8"/>
 
                             <TextBlock Grid.Row="2" 
@@ -89,6 +90,7 @@
                                     Margin="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding CurrentCustomer.CustAdd}"
                                        Margin="8" BorderBrush="SlateGray"
+                                      IsEnabled="{Binding IsSessionEnded, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                       materialDesign:HintAssist.Hint="Customer's Address"
                                       Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
 
@@ -100,6 +102,7 @@
                             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding CurrentSession.BoatId}"
                                        Margin="8" BorderBrush="SlateGray"
                                       materialDesign:HintAssist.Hint="Boat License Number"
+                                      IsEnabled="{Binding IsSessionEnded, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                       Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
 
                             <!-- Word Order -->
@@ -111,6 +114,7 @@
                                       materialDesign:HintAssist.Hint="Select Dock" 
                                       ItemsSource="{Binding DeviceNames}"
                                       SelectedItem ="{Binding CurrentSession.DeviceCode, UpdateSourceTrigger=LostFocus}"
+                                      IsEnabled="{Binding IsSessionEnded, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                       Style="{StaticResource MaterialDesignOutlinedComboBox}"  Margin="8">
                                     
                             </ComboBox>
@@ -219,8 +223,11 @@
                             <!--#endregion-->
 
                             <!-- Current Product -->
-                            <ContentControl Grid.Row="1" Grid.Column="0" Grid.RowSpan="8" HorizontalAlignment="Center" Margin="8 8 0 8 " VerticalAlignment="Center" 
+                            <ContentControl Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" HorizontalAlignment="Center" Margin="8 8 0 8 " VerticalAlignment="Center" 
                             prism:RegionManager.RegionName="{x:Static core:RegionNames.ProductRegion}"/>
+                            <ContentControl Grid.Row="4" Grid.RowSpan="2" HorizontalAlignment="Center" Margin="8 8 0 8 " VerticalAlignment="Center" 
+                            prism:RegionManager.RegionName="{x:Static core:RegionNames.ShiftRegion}"/>
+
                         </Grid>
                     </materialDesign:Card>
 
@@ -231,12 +238,12 @@
                         Command="{Binding ChangeShiftInfoCommand}" Height="50" FontSize="20"
                        Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"  
                              Foreground="DarkOrange" materialDesign:ButtonAssist.CornerRadius="20"
-                        Margin="10" IsEnabled="{Binding IsSessionEnded}"
+                        Margin="10" IsEnabled="{Binding IsSessionEnded, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         Grid.ColumnSpan="2" BorderBrush="#00000000" Background="#FFFFE5B7" VerticalAlignment="Center"/>
                     <Button Content="End" FontSize="20" Grid.Row="3" Width="150" HorizontalAlignment="Right"
                         Command="{Binding ChangeShiftInfoCommand}"  materialDesign:ButtonAssist.CornerRadius="20"
                         Style="{StaticResource MaterialDesignFlatDarkBgButton}" Height="50"
-                        Margin="10" IsEnabled="{Binding IsSessionWorking}"
+                        Margin="10" IsEnabled="{Binding IsSessionWorking, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                         Grid.ColumnSpan="2" Background="#FFF1CDCD" BorderBrush="#00000000" Foreground="Red"/>
                     <!--#endregion-->
 
@@ -320,8 +327,6 @@
             </Grid.RowDefinitions>
 
 
-            <ContentControl Grid.Row="2" HorizontalAlignment="Center" Margin="8 8 0 8 " VerticalAlignment="Center" 
-                            prism:RegionManager.RegionName="{x:Static core:RegionNames.ShiftRegion}"/>
-        </Grid>
+               </Grid>
     </Grid>
 </UserControl>

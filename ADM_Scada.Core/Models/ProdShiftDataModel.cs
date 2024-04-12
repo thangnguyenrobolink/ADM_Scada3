@@ -12,7 +12,7 @@ namespace ADM_Scada.Core.Models
         public DateTime? ProductionDate { get; set; }
         public DateTime? ExpiryDate { get; set; }
         public string UserName { get; set; }
-        public string ShiftNo { get; set; }
+        public string ShiftNo { get; set; } 
         public string CustCode { get; set; }
         public string DeviceCode { get; set; }
         public decimal? QtyTareWeigh { get; set; }

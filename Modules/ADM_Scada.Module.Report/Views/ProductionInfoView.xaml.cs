@@ -12,4 +12,4 @@ namespace ADM_Scada.Modules.Report.Views
             InitializeComponent();
         }
     }
-}
+}   
