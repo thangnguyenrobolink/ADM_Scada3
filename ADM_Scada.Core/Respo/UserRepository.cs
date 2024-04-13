@@ -218,7 +218,19 @@ namespace ADM_Scada.Core.Respo
         {
             return new UserModel
             {
-                // Set properties from DataRow
+                Id = Convert.ToInt32(row["id"]),
+                UserCode = row["user_code"].ToString(),
+                UserName = row["user_name"].ToString(),
+                Password = row["password"].ToString(),
+                UserAvatar = row["user_avatar"].ToString(),
+                UserGroup = Convert.ToInt32(row["user_group"]),
+                EmailAddress = row["email_address"].ToString(),
+                TelNo = row["tel_no"].ToString(),
+                MobileNo = row["mobile_no"].ToString(),
+                CreatedDate = Convert.ToDateTime(row["created_date"]),
+                CreatedBy = row["created_by"].ToString(),
+                UpdatedDate = Convert.ToDateTime(row["updated_date"]),
+                UpdatedBy = row["updated_by"].ToString()
             };
         }
 

@@ -16,7 +16,6 @@ namespace ADM_Scada.Modules.User.ViewModels
 {
     public class UserLoginViewModel : BindableBase
     {
-        private webappdemoHttpClient api = new webappdemoHttpClient();
         //database
         #region
         private readonly UserRepository userRepository;
@@ -41,7 +40,8 @@ namespace ADM_Scada.Modules.User.ViewModels
         private string resLoginName;
         private int resLevel;
         private string resPassword;
-        private string resFullName;
+        private string resMail;
+        private string resTelno;
 
 
         public UserModel CurrentUser { get => currentUser ?? new UserModel(); set => SetProperty(ref currentUser, value); }
@@ -52,7 +52,8 @@ namespace ADM_Scada.Modules.User.ViewModels
         public int ResLevel { get => resLevel; set => SetProperty(ref resLevel, value); }
         public string ResCode { get => resCode; set => SetProperty(ref resCode, value); }
         public string ResPassword { get => resPassword; set => SetProperty(ref resPassword, value); }
-        public string ResFullName { get => resFullName; set => SetProperty(ref resFullName, value); }
+        public string ResEmail { get => resMail; set => SetProperty(ref resMail, value); }
+        public string ResTelNo { get => resTelno; set => SetProperty(ref resTelno, value); }
         public string ImagePath { get => imagePath ?? "Avatar.jpeg"; set => SetProperty(ref imagePath, value); }
         #endregion
         // button Command
@@ -117,7 +118,7 @@ namespace ADM_Scada.Modules.User.ViewModels
         {
             foreach (UserModel User in Users)
             {
-                User.IsEnable = CurrentUser.UserGroup > User.UserGroup || User.UserName == CurrentUser.UserName;
+                User.IsEnable = CurrentUser.UserGroup >= User.UserGroup || User.UserName == CurrentUser.UserName;
             }
             Users = Users;
         }
@@ -125,7 +126,6 @@ namespace ADM_Scada.Modules.User.ViewModels
         {
             // Validation: Check if required properties are not empty
             if (string.IsNullOrWhiteSpace(ResLoginName)
-                || string.IsNullOrWhiteSpace(ResFullName)
                 || string.IsNullOrWhiteSpace(ResCode)
                 || string.IsNullOrWhiteSpace(ResPassword))
             {
@@ -135,7 +135,20 @@ namespace ADM_Scada.Modules.User.ViewModels
                 return;
             }
 
-            UserModel newUser = new UserModel();
+            UserModel newUser = new UserModel()
+            {
+                UserName = ResLoginName,
+                Password = ResPassword,
+                UserAvatar = ImagePath,
+                UserCode = ResCode,
+                UserGroup = ResLevel,
+                EmailAddress = ResEmail,
+                TelNo = ResTelNo,
+                UpdatedBy = CurrentUser.UserName,
+                CreatedBy = CurrentUser.UserName,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
+            };
             int newUserId = await userRepository.Create(newUser);
 
             // Set the generated Id to the new user
@@ -145,7 +158,8 @@ namespace ADM_Scada.Modules.User.ViewModels
             Users.Add(newUser);
             // Optionally, you can reset the properties after adding a new user
             ResLoginName = string.Empty;
-            ResFullName = string.Empty;
+            ResEmail = string.Empty;
+            ResTelNo = string.Empty;
             ResCode = string.Empty;
             ResLevel = 0;
             ResPassword = string.Empty;
@@ -181,13 +195,10 @@ namespace ADM_Scada.Modules.User.ViewModels
             }
         }
         #endregion
-        public UserLoginViewModel(IEventAggregator ea, UserRepository userRepository)
+        public UserLoginViewModel(IEventAggregator ea, UserRepository _userRepository)
         {
-            _ = api.MakeApiRequestAsync();
             eventAggregator = ea;
-            this.userRepository = userRepository;
-
-            Users = new ObservableCollection<UserModel>();
+            this.userRepository = _userRepository;
             _ = Task.Run(async () => Users = new ObservableCollection<UserModel>((IEnumerable<UserModel>)await userRepository.GetAll()));
 
             EditCommand = new DelegateCommand<UserModel>(Edit);

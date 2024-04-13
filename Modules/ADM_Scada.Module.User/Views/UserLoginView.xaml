@@ -50,7 +50,7 @@
                                Margin="0,16,0,8"/>
 
                     <TextBox Grid.Row="1" Width="200"
-                                x:Name="NameTextBox" Text="{Binding UserName}"
+                                x:Name="NameTextBox" Text="{Binding LoginName}"
                                 materialDesign:HintAssist.Hint="Enter Login Name" 
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 TextWrapping="Wrap"
@@ -117,11 +117,11 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
                         <!--register full name-->
-                        <TextBlock Text="Full Name" Margin="16 16 16 0"/>
-                        <TextBox Text="{Binding ResFullName}" Margin="16 16 16 0"
+                        <TextBlock Text="Email" Margin="16 16 16 0"/>
+                        <TextBox Text="{Binding ResEmail}" Margin="16 16 16 0"
                                 materialDesign:TextFieldAssist.HasLeadingIcon="True"
                                 materialDesign:TextFieldAssist.LeadingIcon="User"
-                                materialDesign:HintAssist.Hint="Enter User Name" 
+                                materialDesign:HintAssist.Hint="Enter Email" 
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
                         <!--register Password name-->
@@ -131,6 +131,12 @@
                                 materialDesign:TextFieldAssist.LeadingIcon="key"
                                 materialDesign:HintAssist.Hint="Enter Password" 
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                        <TextBlock Text="TelNo" Margin="16,16,15.2,0"/>
+                        <TextBox Text="{Binding ResTelNo}" Margin="16,16,15.2,0"
+                            materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                            materialDesign:TextFieldAssist.LeadingIcon="key"
+                            materialDesign:HintAssist.Hint="Enter Password" 
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
                     </StackPanel>
                     <StackPanel Grid.Column="1"
 >
@@ -169,24 +175,22 @@
                             CellStyle="{StaticResource DataGridCellStyle1}"
                           materialDesign:DataGridAssist.CornerRadius="10" SelectedItem="{Binding SelectedUser}"
                           materialDesign:ScrollViewerAssist.SupportHorizontalScroll="False"
-                        CanUserAddRows="False" ItemsSource="{Binding Users}" Margin="16 0" Background="Transparent" LostFocus="DataGrid_LostFocus" >
+                        CanUserAddRows="False" ItemsSource="{Binding Users, UpdateSourceTrigger=LostFocus}" Margin="16 0" Background="Transparent" LostFocus="DataGrid_LostFocus" >
                 <DataGrid.Columns>
                         <DataGridTextColumn Header="#" IsReadOnly="false" CanUserResize="False" Width="auto" Binding="{Binding Path =Id}"/>
-                        <DataGridTextColumn Header="Login Name" Binding="{Binding Path =UserName}" IsReadOnly="True" Width="Auto" />
+                        <DataGridTextColumn Header="Login Name" Binding="{Binding Path =UserName, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="Auto" />
                     <DataGridTemplateColumn Header="Password"  Width="Auto" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                    <PasswordBox IsEnabled="{Binding Path = IsEnable}" VerticalAlignment="Center" BorderBrush="Transparent" 
+                                    <PasswordBox IsEnabled="{Binding Path = IsEnable, UpdateSourceTrigger=LostFocus}" VerticalAlignment="Center" BorderBrush="Transparent" 
                                                  Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}"
-                                                 materialDesign:PasswordBoxAssist.Password="{Binding Password, Mode=TwoWay}">
+                                                 materialDesign:PasswordBoxAssist.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
                                 </PasswordBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="TelNo" Binding="{Binding Path =EmailAddress}" Width="Auto">
-
-                    </DataGridTextColumn>
-                        <DataGridTextColumn Header="Code" Binding="{Binding Path =UserCode}" Width="100"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Path =EmailAddress, UpdateSourceTrigger=LostFocus}" Width="Auto"/>
+                        <DataGridTextColumn Header="Code" Binding="{Binding Path =UserCode, UpdateSourceTrigger=LostFocus}" Width="100"/>
                     <DataGridTemplateColumn Header="Operations" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
