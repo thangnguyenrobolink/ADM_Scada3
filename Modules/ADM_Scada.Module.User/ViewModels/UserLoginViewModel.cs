@@ -1,4 +1,5 @@
 ﻿using ADM_Scada.Core.Models;
+using ADM_Scada.Core.PlcService;
 using ADM_Scada.Core.Respo;
 using ADM_Scada.Cores.PubEvent;
 using Prism.Commands;
@@ -15,24 +16,34 @@ namespace ADM_Scada.Modules.User.ViewModels
 {
     public class UserLoginViewModel : BindableBase
     {
-        private readonly IEventAggregator eventAggregator;
-        private string password;
-        private string resCode;
-        private string loginname;
-        private string imagePath;
-        private UserModel selectedUser;
-        private UserModel currentUser;
+        private webappdemoHttpClient api = new webappdemoHttpClient();
+        //database
+        #region
+        private readonly UserRepository userRepository;
         private ObservableCollection<UserModel> users;
-        private string resLoginName;
-        private int resLevel;
-        private string resPassword;
-        private string resFullName;
-
         public ObservableCollection<UserModel> Users
         {
             get => users;
             set => SetProperty(ref users, value);
         }
+        #endregion
+        private readonly IEventAggregator eventAggregator;
+
+        // UI variable
+        #region
+        private string password;
+        private string resCode;
+        private string loginname;
+        private string imagePath;
+        private UserModel selectedUser;
+        public static UserModel currentUser = new UserModel();
+
+        private string resLoginName;
+        private int resLevel;
+        private string resPassword;
+        private string resFullName;
+
+
         public UserModel CurrentUser { get => currentUser ?? new UserModel(); set => SetProperty(ref currentUser, value); }
         public UserModel SelectedUser { get => selectedUser; set => SetProperty(ref selectedUser, value); }
         public string Password { get => password; set => SetProperty(ref password, value); }
@@ -43,14 +54,17 @@ namespace ADM_Scada.Modules.User.ViewModels
         public string ResPassword { get => resPassword; set => SetProperty(ref resPassword, value); }
         public string ResFullName { get => resFullName; set => SetProperty(ref resFullName, value); }
         public string ImagePath { get => imagePath ?? "Avatar.jpeg"; set => SetProperty(ref imagePath, value); }
-
-        private readonly UserRepository userRepository;
-
+        #endregion
+        // button Command
+        #region
         public DelegateCommand<UserModel> EditCommand { get; private set; }
         public DelegateCommand<UserModel> DeleteCommand { get; private set; }
         public DelegateCommand ImageBrowseCommand { get; private set; }
         public DelegateCommand LoginCommand { get; private set; }
         public DelegateCommand AddUserCommand { get; set; }
+        #endregion
+        //Execute  void
+        #region
         private void Edit(UserModel selectedModel)
         {
             // Handle the Edit button click
@@ -166,12 +180,16 @@ namespace ADM_Scada.Modules.User.ViewModels
                 _ = MessageBox.Show("Invalid login credentials. Please try again.");
             }
         }
-        public UserLoginViewModel(IEventAggregator ea)
+        #endregion
+        public UserLoginViewModel(IEventAggregator ea, UserRepository userRepository)
         {
+            _ = api.MakeApiRequestAsync();
             eventAggregator = ea;
-            userRepository = new UserRepository();
+            this.userRepository = userRepository;
+
             Users = new ObservableCollection<UserModel>();
             _ = Task.Run(async () => Users = new ObservableCollection<UserModel>((IEnumerable<UserModel>)await userRepository.GetAll()));
+
             EditCommand = new DelegateCommand<UserModel>(Edit);
             DeleteCommand = new DelegateCommand<UserModel>(Delete, CanDelete)
                 .ObservesProperty(() => Users.Count);

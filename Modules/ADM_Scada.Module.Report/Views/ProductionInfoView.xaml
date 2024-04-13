@@ -235,13 +235,13 @@
                     <!--#region NewRegion -->
 
                     <Button Content="Start"  Grid.Row="3" Width="150" HorizontalAlignment="Left"
-                        Command="{Binding ChangeShiftInfoCommand}" Height="50" FontSize="20"
+                        Command="{Binding StartSessionCommand}" Height="50" FontSize="20"
                        Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"  
                              Foreground="DarkOrange" materialDesign:ButtonAssist.CornerRadius="20"
                         Margin="10" IsEnabled="{Binding IsSessionEnded, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         Grid.ColumnSpan="2" BorderBrush="#00000000" Background="#FFFFE5B7" VerticalAlignment="Center"/>
                     <Button Content="End" FontSize="20" Grid.Row="3" Width="150" HorizontalAlignment="Right"
-                        Command="{Binding ChangeShiftInfoCommand}"  materialDesign:ButtonAssist.CornerRadius="20"
+                        Command="{Binding EndSessionCommand}"  materialDesign:ButtonAssist.CornerRadius="20"
                         Style="{StaticResource MaterialDesignFlatDarkBgButton}" Height="50"
                         Margin="10" IsEnabled="{Binding IsSessionWorking, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                         Grid.ColumnSpan="2" Background="#FFF1CDCD" BorderBrush="#00000000" Foreground="Red"/>

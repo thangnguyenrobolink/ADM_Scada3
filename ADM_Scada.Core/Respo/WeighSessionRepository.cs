@@ -75,9 +75,9 @@ namespace ADM_Scada.Core.Respo
                     { "@UserId", weighSession.UserId },
                     { "@DeviceCode", weighSession.DeviceCode },
                     { "@StatusCode", weighSession.StatusCode },
-                    { "@CreatedDate", weighSession.CreatedDate },
+                    { "@CreatedDate", DateTime.Now },
                     { "@CreatedBy", weighSession.CreatedBy },
-                    { "@UpdatedDate", weighSession.UpdatedDate },
+                    { "@UpdatedDate", DateTime.Now },
                     { "@UpdatedBy", weighSession.UpdatedBy }
                 };
                 return await ExecuteNonQueryAsync(query, parameters);
@@ -123,9 +123,9 @@ namespace ADM_Scada.Core.Respo
                     { "@UserId", weighSession.UserId },
                     { "@DeviceCode", weighSession.DeviceCode },
                     { "@StatusCode", weighSession.StatusCode },
-                    { "@CreatedDate", weighSession.CreatedDate },
+                    { "@CreatedDate", DateTime.Now },
                     { "@CreatedBy", weighSession.CreatedBy },
-                    { "@UpdatedDate", weighSession.UpdatedDate },
+                    { "@UpdatedDate", DateTime.Now },
                     { "@UpdatedBy", weighSession.UpdatedBy }
                 };
                 return await ExecuteNonQueryAsync(query, parameters) > 0;

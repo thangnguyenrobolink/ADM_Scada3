@@ -6,10 +6,10 @@ namespace ADM_Scada.Core.PlcService
 {
     public class webappdemoHttpClient
     {
-        private string apiUrl = "http://localhost:8000/webapp";
+        private string apiUrl = "http://139.180.190.185/";
         private readonly HttpClient _httpClient = new HttpClient();
 
-        private async Task<HttpResponseMessage> MakeApiRequestAsync()
+        public async Task<HttpResponseMessage> MakeApiRequestAsync()
         {
             try
             {
@@ -21,7 +21,7 @@ namespace ADM_Scada.Core.PlcService
                 }
                 else
                 {
-                    // Handle error (see step 6)
+                    //// Handle error (see step 6)
                 }
 
                 return response;

@@ -68,9 +68,9 @@ namespace ADM_Scada.Core.Respo
                     { "@PackSize", product.PackSize },
                     { "@LooseUom", product.LooseUom },
                     { "@WholeUom", product.WholeUom },
-                    { "@CreatedDate", product.CreatedDate },
+                    { "@CreatedDate", DateTime.Now},
                     { "@CreatedBy", product.CreatedBy },
-                    { "@UpdatedDate", product.UpdatedDate },
+                    { "@UpdatedDate", DateTime.Now },
                     { "@UpdatedBy", product.UpdatedBy }
                 };
                 return await ExecuteNonQueryAsync(query, parameters);
@@ -114,7 +114,7 @@ namespace ADM_Scada.Core.Respo
                     { "@WholeUom", product.WholeUom },
                     { "@CreatedDate", product.CreatedDate },
                     { "@CreatedBy", product.CreatedBy },
-                    { "@UpdatedDate", product.UpdatedDate },
+                    { "@UpdatedDate", DateTime.Now},
                     { "@UpdatedBy", product.UpdatedBy }
                 };
                 return await ExecuteNonQueryAsync(query, parameters) > 0;

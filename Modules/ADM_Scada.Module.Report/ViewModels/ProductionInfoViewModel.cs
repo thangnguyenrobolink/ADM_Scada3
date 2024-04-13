@@ -70,7 +70,10 @@ namespace ADM_Scada.Modules.Report.ViewModels
             {
                 _ = SetProperty(ref currentCust, value);
                 eventAggregator?.GetEvent<CustomerChangeEvent>().Publish(currentCust);
-                UpdateCurrentSession();
+                CurrentSession.CustId = CurrentCustomer.Id;
+                CurrentSession.CustName = CurrentCustomer.CustName;
+                CurrentSession.CustAddress = CurrentCustomer.CustAdd;
+                RaisePropertyChanged(nameof(CurrentSession));
             }
         }
         //current product
@@ -82,7 +85,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
             { 
                 _ = SetProperty(ref currentProduct, value); 
                 eventAggregator?.GetEvent<ProductChangeEvent>().Publish(currentProduct);
-                UpdateCurrentShift();
+                CurrentShift.ProdCode = CurrentProduct.ProdCode;
             }
         }
         // current So
@@ -94,7 +97,13 @@ namespace ADM_Scada.Modules.Report.ViewModels
             {
                 _ = SetProperty(ref currentShift, value);
                 eventAggregator?.GetEvent<ShiftInfoChangeEvent>().Publish(currentShift);
-                UpdateCurrentSession();
+                CurrentSession.SoNumber = CurrentShift.WorkOrderNo;
+                CurrentSession.QtyTareWeigh = CurrentShift.QtyTareWeigh;
+                CurrentSession.QtyOrderWeigh = CurrentShift.QtyOrderWeigh;
+                CurrentSession.ShiftDataId = CurrentShift.Id;
+                CurrentSession.UserId = UserLoginViewModel.currentUser.Id;
+                CurrentShift.UpdatedBy = UserLoginViewModel.currentUser.UserName;
+                RaisePropertyChanged(nameof(CurrentSession));
             }
         }
         //Current session
@@ -110,25 +119,6 @@ namespace ADM_Scada.Modules.Report.ViewModels
                 RaisePropertyChanged(nameof(CurrentSession));
             }
         }
-        private void UpdateCurrentSession()
-        {
-            // Customer
-            CurrentSession.CustId = CurrentCustomer.Id;
-            CurrentSession.CustName = CurrentCustomer.CustName;
-            CurrentSession.CustAddress = CurrentCustomer.CustAdd;
-            // Stock order
-            CurrentSession.SoNumber = CurrentShift.WorkOrderNo;
-            CurrentSession.QtyTareWeigh = CurrentShift.QtyTareWeigh;
-            CurrentSession.QtyOrderWeigh = CurrentShift.QtyOrderWeigh;
-            CurrentSession.ShiftDataId = CurrentShift.Id;
-            CurrentSession.UserId = UserStatusRegionViewModel.currentUser.Id;
-            //
-            RaisePropertyChanged(nameof(CurrentSession));
-        } 
-        private void UpdateCurrentShift()
-        {
-            CurrentShift.ProdCode = CurrentProduct.ProdCode;
-        }
         private async void UpdateSessionPropertiesAsync()
         {
             IsSessionWorking = CurrentSession.StatusCode == "S";
@@ -136,6 +126,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
             CurrentCustomer = FullCustomers.FirstOrDefault(c => c.Id == CurrentSession.CustId);
             CurrentShift = await prodShiftDataRepository.GetByName(CurrentSession.SoNumber);
             CurrentProduct = FullProducts.FirstOrDefault(p => p.ProdCode == CurrentShift.ProdCode);
+           
         }
         private bool isSessionWorking;
         private bool isSessionEnded;
@@ -164,12 +155,15 @@ namespace ADM_Scada.Modules.Report.ViewModels
 
                 if (existingProdShiftData == null)
                 {
+                    CurrentShift.UpdatedBy = UserLoginViewModel.currentUser.UserName;
+                    CurrentShift.CreatedBy = UserLoginViewModel.currentUser.UserName;
                     // Record does not exist, create a new one
                     await prodShiftDataRepository.Create(prodShiftData);
                 }
                 else
                 {
                     // Record exists, update it
+                    CurrentShift.UpdatedBy = UserLoginViewModel.currentUser.UserName;
                     await prodShiftDataRepository.Update(prodShiftData);
                 }
 
@@ -191,13 +185,30 @@ namespace ADM_Scada.Modules.Report.ViewModels
                 return;
             }
             // Check if a user with the provided login name and password exists
+            _ = CheckAndSaveOrUpdateProdShiftDataAsync(CurrentShift);
             _ = MessageBox.Show("Change Infomation successful!");
             // You can add additional logic here, such as navigation to the main application screen
             eventAggregator.GetEvent<ShiftInfoChangeEvent>().Publish(CurrentShift);
         }
-        private void EndCurrentSession()
+        private async void EndCurrentSession()
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Create a new instance of WeighSessionModel with initial values
+                CurrentSession.EndTime = DateTime.Now;
+                CurrentSession.UpdatedBy = UserLoginViewModel.currentUser.UserName; // Set the created by to the current user
+                CurrentSession.StatusCode = "E";
+                bool b = await weighSessionRepository.Update(CurrentSession);
+                if (b )
+                {
+                    await FetchLastSessionAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "An error occurred while starting a new session");
+               
+            }
         }
         private async void StartNewSession()
         {
@@ -218,18 +229,15 @@ namespace ADM_Scada.Modules.Report.ViewModels
                 newSession.StartTime = DateTime.Now; // Set the start time to the current time
                 newSession.StatusCode = "S"; // Assuming "S" represents the status for a started session
                 newSession.UpdatedDate = DateTime.Now; // Set the created date to the current time
-                newSession.UpdatedBy = UserStatusRegionViewModel.currentUser.UserName; // Set the created by to the current user
+                newSession.UpdatedBy = UserLoginViewModel.currentUser.UserName; // Set the created by to the current user
                 newSession.CreatedDate = DateTime.Now; // Set the created date to the current time
-                newSession.CreatedBy = UserStatusRegionViewModel.currentUser.UserName; // Set the created by to the current user
-                                                                                       // You may need to set other properties based on your requirements
-
-
+                newSession.CreatedBy = UserLoginViewModel.currentUser.UserName; // Set the created by to the current user
+                                                                                // You may need to set other properties based on your requirements
                 // Save the new session to the database
                 int b = await weighSessionRepository.Create(newSession);
                 if (b != -1)
                 {
                     CurrentSession.Id = b;
-                    CurrentSession.SessionCode = $"ADMD{CurrentSession.BoatId}{CurrentSession.Id % 10000000:D7}";
                     await FetchLastSessionAsync();
                     return true; // Indicate success
                 }

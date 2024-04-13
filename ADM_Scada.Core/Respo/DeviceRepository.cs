@@ -97,9 +97,9 @@ namespace ADM_Scada.Core.Respo
                     { "@DeviceName", entity.DeviceName },
                     { "@IPAddress", entity.IpAddress },
                     { "@Port", entity.Port },
-                    { "@CreatedDate", entity.CreatedDate },
+                    { "@CreatedDate", DateTime.Now },
                     { "@CreatedBy", entity.CreatedBy },
-                    { "@UpdatedDate", entity.UpdatedDate },
+                    { "@UpdatedDate", DateTime.Now },
                     { "@UpdatedBy", entity.UpdatedBy }
                 };
 
@@ -130,7 +130,7 @@ namespace ADM_Scada.Core.Respo
                     { "@Port", entity.Port },
                     { "@CreatedDate", entity.CreatedDate },
                     { "@CreatedBy", entity.CreatedBy },
-                    { "@UpdatedDate", entity.UpdatedDate },
+                    { "@UpdatedDate", DateTime.Now },
                     { "@UpdatedBy", entity.UpdatedBy }
                 };
 

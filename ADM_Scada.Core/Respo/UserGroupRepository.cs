@@ -58,7 +58,7 @@ namespace ADM_Scada.Core.Respo
                     { "@GroupDescription", userGroup.GroupDescription },
                     { "@CreatedDate", userGroup.CreatedDate },
                     { "@CreatedBy", userGroup.CreatedBy },
-                    { "@UpdatedDate", userGroup.UpdatedDate },
+                    { "@UpdatedDate", DateTime.Now},
                     { "@UpdatedBy", userGroup.UpdatedBy }
                 };
                 return await ExecuteNonQueryAsync(query, parameters);

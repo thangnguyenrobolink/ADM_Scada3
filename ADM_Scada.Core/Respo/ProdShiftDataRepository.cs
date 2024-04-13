@@ -100,11 +100,11 @@ namespace ADM_Scada.Core.Respo
                                      user_name = @UserName, shift_no = @ShiftNo, cust_code = @CustCode, device_code = @DeviceCode, 
                                      qty_tare_weigh = @QtyTareWeigh, qty_order_weigh = @QtyOrderWeigh, loose_uom = @LooseUom, 
                                      created_by = @CreatedBy, created_date = @CreatedDate, updated_by = @UpdatedBy, updated_date = @UpdatedDate 
-                                 WHERE id = @Id";
+                                 WHERE work_order_no = @WorkOrderNo";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
-                    { "@Id", prodShiftData.Id },
+                    { "@WorkOrderNo", prodShiftData.WorkOrderNo },
                     { "@ProdCode", prodShiftData.ProdCode },
                     { "@LotNo", prodShiftData.LotNo },
                     { "@ProductionDate", prodShiftData.ProductionDate },

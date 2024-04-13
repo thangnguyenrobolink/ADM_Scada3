@@ -195,7 +195,7 @@
                         <TextBlock Text="New Product" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <TextBox Text="{Binding ResProduct.Name}" Margin="16 8 16 0"
+                <TextBox Text="{Binding ResProduct.ProdName}" Margin="16 8 16 0"
                                  materialDesign:TextFieldAssist.HasLeadingIcon="True"
                                  materialDesign:TextFieldAssist.LeadingIcon="Login"
                                  materialDesign:HintAssist.Hint="Enter Name" 
@@ -235,7 +235,7 @@
 >
                     <!--register full name-->
                     <TextBlock Text="Product Code" Margin="16 16 16 0"/>
-                    <TextBox Text="{Binding ResProduct.Code}" Margin="16 16 16 0"
+                    <TextBox Text="{Binding ResProduct.ProdCode}" Margin="16 16 16 0"
                                  materialDesign:TextFieldAssist.HasLeadingIcon="True"
                                  materialDesign:TextFieldAssist.LeadingIcon="Code"
                                  materialDesign:HintAssist.Hint="Enter Product Code" 
@@ -251,7 +251,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
                     <TextBlock Text="Description" Margin="16 4 16 0"/>
-                    <TextBox Text="{Binding ResProduct.Description}" Margin="16,16,16 8"
+                    <TextBox Text="{Binding ResProduct.ProdFullName}" Margin="16,16,16 8"
                                 materialDesign:TextFieldAssist.HasLeadingIcon="True"  BorderBrush="gray"
                                 materialDesign:TextFieldAssist.LeadingIcon="ImageDescription"
                                 materialDesign:HintAssist.Hint="Enter Description" 

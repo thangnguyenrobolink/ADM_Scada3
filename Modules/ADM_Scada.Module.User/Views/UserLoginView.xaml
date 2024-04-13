@@ -50,7 +50,7 @@
                                Margin="0,16,0,8"/>
 
                     <TextBox Grid.Row="1" Width="200"
-                                x:Name="NameTextBox" Text="{Binding LoginName}"
+                                x:Name="NameTextBox" Text="{Binding UserName}"
                                 materialDesign:HintAssist.Hint="Enter Login Name" 
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 TextWrapping="Wrap"
@@ -172,7 +172,7 @@
                         CanUserAddRows="False" ItemsSource="{Binding Users}" Margin="16 0" Background="Transparent" LostFocus="DataGrid_LostFocus" >
                 <DataGrid.Columns>
                         <DataGridTextColumn Header="#" IsReadOnly="false" CanUserResize="False" Width="auto" Binding="{Binding Path =Id}"/>
-                        <DataGridTextColumn Header="Login Name" Binding="{Binding Path =LoginName}" IsReadOnly="True" Width="Auto" />
+                        <DataGridTextColumn Header="Login Name" Binding="{Binding Path =UserName}" IsReadOnly="True" Width="Auto" />
                     <DataGridTemplateColumn Header="Password"  Width="Auto" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -183,10 +183,10 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Full Name" Binding="{Binding Path =FullName}" Width="Auto">
+                        <DataGridTextColumn Header="TelNo" Binding="{Binding Path =EmailAddress}" Width="Auto">
 
                     </DataGridTextColumn>
-                        <DataGridTextColumn Header="Code" Binding="{Binding Path =Code}" Width="100"/>
+                        <DataGridTextColumn Header="Code" Binding="{Binding Path =UserCode}" Width="100"/>
                     <DataGridTemplateColumn Header="Operations" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

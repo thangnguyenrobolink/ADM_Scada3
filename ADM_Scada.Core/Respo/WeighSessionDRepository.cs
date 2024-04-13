@@ -61,7 +61,7 @@ namespace ADM_Scada.Core.Respo
             try
             {
                 string query = @"INSERT INTO [dbo].[weigh_session_d] (session_code, current_weigh, barcode, prod_code, prod_fullname, prod_d365_code, production_date, start_time, end_time, qty_counted, qty_weighed, gap, shift_data_id, created_date, created_by, updated_date, updated_by) 
-                         VALUES (@SessionCode, @CurrentWeigh, @Barcode, @ProdCode, @ProdFullName, @ProdD365Code, @ProductionDate, @StartTime, @EndTime, @QtyCounted, @QtyWeighed, @Gap, @ShiftDataId, GETDATE(), @CreatedBy, NULL, NULL)";
+                         VALUES (@SessionCode, @CurrentWeigh, @Barcode, @ProdCode, @ProdFullName, @ProdD365Code, @ProductionDate, @StartTime, @EndTime, @QtyCounted, @QtyWeighed, @Gap, @ShiftDataId, @CreatedDate, @CreatedBy, @UpdatedDate, @UpdatedBy)";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
         {
@@ -78,7 +78,10 @@ namespace ADM_Scada.Core.Respo
             { "@QtyWeighed", entity.QtyWeighed },
             { "@Gap", entity.Gap },
             { "@ShiftDataId", entity.ShiftDataId },
-            { "@CreatedBy", entity.CreatedBy }
+            { "@CreatedDate", entity.CreatedDate },
+            { "@CreatedBy", entity.CreatedBy },
+            { "@UpdatedDate", entity.UpdatedDate },
+            { "@UpdatedBy", entity.UpdatedBy }
         };
                 return await ExecuteNonQueryAsync(query, parameters);
             }

@@ -63,9 +63,9 @@ namespace ADM_Scada.Core.Respo
                     { "@FaxNo", customer.FaxNo },
                     { "@TelNo", customer.TelNo },
                     { "@MobileNo", customer.MobileNo },
-                    { "@CreatedDate", customer.CreatedDate },
+                    { "@CreatedDate", DateTime.Now },
                     { "@CreatedBy", customer.CreatedBy },
-                    { "@UpdatedDate", customer.UpdatedDate },
+                    { "@UpdatedDate", DateTime.Now },
                     { "@UpdatedBy", customer.UpdatedBy }
                 };
                 return await ExecuteNonQueryAsync(query, parameters);
@@ -103,7 +103,7 @@ namespace ADM_Scada.Core.Respo
                     { "@MobileNo", customer.MobileNo },
                     { "@CreatedDate", customer.CreatedDate },
                     { "@CreatedBy", customer.CreatedBy },
-                    { "@UpdatedDate", customer.UpdatedDate },
+                    { "@UpdatedDate", DateTime.Now },
                     { "@UpdatedBy", customer.UpdatedBy }
                 };
                 return await ExecuteNonQueryAsync(query, parameters) > 0;

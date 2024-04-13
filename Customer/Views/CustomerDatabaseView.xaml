@@ -114,7 +114,7 @@
                         <TextBlock Text="New Customer" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <TextBox Text="{Binding ResCustomer.Company}" Margin="16 8 16 0"
+                <TextBox Text="{Binding ResCustomer.CustCompany}" Margin="16 8 16 0"
                                  materialDesign:TextFieldAssist.HasLeadingIcon="True"
                                  materialDesign:TextFieldAssist.LeadingIcon="Login"
                                  materialDesign:HintAssist.Hint="Enter Company" 
@@ -122,7 +122,7 @@
                 <Button Width="160" Height="160" Padding="3" Margin="8"  materialDesign:ElevationAssist.Elevation="Dp5"
                           Style="{StaticResource MaterialDesignRaisedButton}"  Background="Transparent"
                             Command="{Binding ImageBrowseCommand}" materialDesign:ButtonAssist.CornerRadius="20" BorderBrush="White">
-                    <Image  Source="{Binding ResCustomer.Avatar, NotifyOnSourceUpdated = True}"/>
+                    <Image  Source="{Binding ResCustomer.CustAvatar, NotifyOnSourceUpdated = True}"/>
 
                 </Button>
             </StackPanel>
@@ -141,7 +141,7 @@
                 <StackPanel Grid.Column="0">
                     <!--register full name-->
                     <TextBlock Text="Full Name" Margin="16 16 16 0"/>
-                    <TextBox Text="{Binding ResCustomer.Name}" Margin="16 16 16 0"
+                    <TextBox Text="{Binding ResCustomer.CustName}" Margin="16 16 16 0"
                                  materialDesign:TextFieldAssist.HasLeadingIcon="True"  BorderBrush="gray"
                                  materialDesign:TextFieldAssist.LeadingIcon="User"
                                  materialDesign:HintAssist.Hint="Enter Name" 
@@ -149,7 +149,7 @@
 
                     <!--register Password name-->
                     <TextBlock Text="Phone" Margin="16 16 16 0"/>
-                    <TextBox Text="{Binding ResCustomer.Phone}" Margin="16 16 16 0"
+                    <TextBox Text="{Binding ResCustomer.TelNo}" Margin="16 16 16 0"
                                  materialDesign:TextFieldAssist.HasLeadingIcon="True"
                                  materialDesign:TextFieldAssist.LeadingIcon="key"
                                  materialDesign:HintAssist.Hint="Enter Phone number"  BorderBrush="gray"
@@ -160,7 +160,7 @@
 >
                     <!--register full name-->
                     <TextBlock Text="Customer Code" Margin="16 16 16 0"/>
-                    <TextBox Text="{Binding ResCustomer.Code}" Margin="16 16 16 0"
+                    <TextBox Text="{Binding ResCustomer.CustCode}" Margin="16 16 16 0"
                                  materialDesign:TextFieldAssist.HasLeadingIcon="True"
                                  materialDesign:TextFieldAssist.LeadingIcon="Code"
                                  materialDesign:HintAssist.Hint="Enter Customer Code" 
@@ -168,7 +168,7 @@
 
                     <!--register Password name-->
                     <TextBlock Text="Mail" Margin="16 16 16 0"/>
-                    <TextBox Text="{Binding ResCustomer.Email}" Margin="16 16 16 0"
+                    <TextBox Text="{Binding ResCustomer.EmailAddress}" Margin="16 16 16 0"
                                  materialDesign:TextFieldAssist.HasLeadingIcon="True"
                                  materialDesign:TextFieldAssist.LeadingIcon="Code"
                                  materialDesign:HintAssist.Hint="Enter Mail" 
@@ -176,7 +176,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
                     <TextBlock Text="Address" Margin="16 4 16 0"/>
-                    <TextBox Text="{Binding ResCustomer.Address}" Margin="16,16,16 8"
+                    <TextBox Text="{Binding ResCustomer.CustAdd}" Margin="16,16,16 8"
                                 materialDesign:TextFieldAssist.HasLeadingIcon="True"  BorderBrush="gray"
                                 materialDesign:TextFieldAssist.LeadingIcon="key"
                                 materialDesign:HintAssist.Hint="Enter Address" 
