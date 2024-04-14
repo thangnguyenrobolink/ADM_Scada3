@@ -72,7 +72,6 @@ D:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 D:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\MySql.Data.xml
 D:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\System.Diagnostics.DiagnosticSource.xml
 D:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\System.IO.Pipelines.xml
-E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.csproj.AssemblyReference.cache
 E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.Properties.Resources.resources
 E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.csproj.GenerateResource.cache
 E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.csproj.CoreCompileInputs.cache

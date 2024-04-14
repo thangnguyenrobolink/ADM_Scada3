@@ -53,36 +53,6 @@ namespace ADM_Scada.Cores.PlcService
         private List<int[]> Errors;
         private Timer updateTimer;
 
-        #region
-        private string apiUrl = "http://localhost:8000/webapp";
-        private readonly HttpClient _httpClient = new HttpClient();
-
-        private async Task<HttpResponseMessage> MakeApiRequestAsync()
-        {
-            try
-            {
-                HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    // Process successful response (see step 5)
-                }
-                else
-                {
-                    // Handle error (see step 6)
-                }
-
-                return response;
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions (see step 6)
-                return null;
-            }
-        }
-        #endregion
-
-
         private readonly VariableRepository variableRepository;
         //Event
         public event EventHandler<DeviceChangedEventArgs> DeviceStatusChanged;
@@ -181,7 +151,6 @@ namespace ADM_Scada.Cores.PlcService
         private async void UpdatePlcData(object state)
         {
             //Update plc status
-            await MakeApiRequestAsync();
             foreach (DeviceModel device in devices)
             {
                 var newStatus = GetPlcStatusById(device.Id);
@@ -199,19 +168,19 @@ namespace ADM_Scada.Cores.PlcService
                 try
                 {
                     if (statusVars[i].DeviceId >= plcs.Count) return;
-                    byte[] byteArray = await plcs[(int)statusVars[i].DeviceId].ReadBytesAsync(DataType.DataBlock, (int)statusVars[i].Area, (int)statusVars[i].Address, count * 4);
+                    //byte[] byteArray = await plcs[(int)statusVars[i].DeviceId].ReadAsync(DataType.DataBlock, (int)statusVars[i].Area, (int)statusVars[i].Address, count * 4);
                     // Assuming each real is 4 bytes
                     // Convert the byte array to an array of floats
-                    float[] floatArray = new float[count];
-                    for (int j = 0; j < count; j++)
-                    {
-                        floatArray[j] = BitConverter.ToSingle(byteArray, j * 4);
-                        if (floatArray[j] != variables[Status[i][j]].Value)
-                        {
-                            variables[Status[i][j]].Value = floatArray[j];
-                            OnVariableValueChanged(new VariableChangedEventArgs(variables[Status[i][j]]));
-                        }
-                    }
+                    //string[] floatArray = new string[count];
+                    //for (int j = 0; j < count; j++)
+                   // {
+                    //    floatArray[j] = BitConverter.ToSingle(byteArray, j * 4);
+                    //    if (floatArray[j] != variables[Status[i][j]].Value)
+                    //    {
+                    //        variables[Status[i][j]].Value = floatArray[j];
+                    //        OnVariableValueChanged(new VariableChangedEventArgs(variables[Status[i][j]]));
+                    //    }
+                   // }
                 }
                 catch (PlcException b)
                 {
@@ -223,28 +192,28 @@ namespace ADM_Scada.Cores.PlcService
             for (int i = 0; i < errorVars?.Count; i++)
             {
                 int count = 300;
-                try
-                {
-                    if (statusVars[i].DeviceId >= plcs.Count) return;
-                    byte[] byteArray = await plcs[(int)errorVars[i].DeviceId].ReadBytesAsync(DataType.DataBlock, (int)errorVars[i].Area, (int)errorVars[i].Address, count * 4);
-                    // Assuming each real is 4 bytes
-                    // Convert the byte array to an array of floats
-                    float[] floatArray = new float[count];
-                    for (int j = 0; j < count; j++)
-                    {
-                        floatArray[j] = BitConverter.ToSingle(byteArray, j * 4);
-                        if (floatArray[j] != variables[Status[i][j]].Value)
-                        {
-                            variables[Status[i][j]].Value = floatArray[j];
-                            OnVariableValueChanged(new VariableChangedEventArgs(variables[Status[i][j]]));
-                        }
-                    }
-                }
-                catch (PlcException b)
-                {
-                    Random random = new Random();
-                    _ = MessageBox.Show($"Read Error Variables from PLC {errorVars[i].DeviceId} fail! Error {b.ErrorCode}");
-                }
+                //try
+                //{
+                //    if (statusVars[i].DeviceId >= plcs.Count) return;
+                //    byte[] byteArray = await plcs[(int)errorVars[i].DeviceId].ReadBytesAsync(DataType.DataBlock, (int)errorVars[i].Area, (int)errorVars[i].Address, count * 4);
+                //    // Assuming each real is 4 bytes
+                //    // Convert the byte array to an array of floats
+                //    float[] floatArray = new float[count];
+                //    for (int j = 0; j < count; j++)
+                //    {
+                //        floatArray[j] = BitConverter.ToSingle(byteArray, j * 4);
+                //        if (floatArray[j] != variables[Status[i][j]].Value)
+                //        {
+                //            variables[Status[i][j]].Value = floatArray[j];
+                //            OnVariableValueChanged(new VariableChangedEventArgs(variables[Status[i][j]]));
+                //        }
+                //    }
+                //}
+                //catch (PlcException b)
+                //{
+                //    Random random = new Random();
+                //    _ = MessageBox.Show($"Read Error Variables from PLC {errorVars[i].DeviceId} fail! Error {b.ErrorCode}");
+                //}
             }
         }
 
@@ -344,16 +313,16 @@ namespace ADM_Scada.Cores.PlcService
         public async Task<VariableModel> GetPLCValue(VariableModel a)
         {
             DeviceModel device = devices.Find(x => x.Id == a.DeviceId);
-            try
-            {
-                a.Value = (float?)(double)await plcs[(int)a.DeviceId].ReadAsync(DataType.DataBlock, (int)a.Area, (int)a.Address, VarType.DWord, 1, 0);
-            }
-            catch (PlcException b)
-            {
-                Random random = new Random();
-                _ = MessageBox.Show($"Read Variable {a.Name} from PLC {device.DeviceName} fail! Error {b.ErrorCode}");
-                a.Value = (float?)random.NextDouble();
-            }
+            //try
+            //{
+            //    a.Value = (float?)(double)await plcs[(int)a.DeviceId].ReadAsync(DataType.DataBlock, (int)a.Area, (int)a.Address, VarType.DWord, 1, 0);
+            //}
+            //catch (PlcException b)
+            //{
+            //    Random random = new Random();
+            //    _ = MessageBox.Show($"Read Variable {a.Name} from PLC {device.DeviceName} fail! Error {b.ErrorCode}");
+            //    a.Value = (float?)random.NextDouble();
+            //}
             return a;
         }
 

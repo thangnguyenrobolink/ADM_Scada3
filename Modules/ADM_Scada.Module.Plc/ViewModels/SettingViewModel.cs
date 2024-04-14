@@ -42,7 +42,7 @@ namespace ADM_Scada.Modules.Plc.ViewModels
         private bool CanSetValue(VariableModel selectedVar)
         {
             // CanExecute condition for DeleteCommand
-            return selectedVar.Value != -1;
+            return true;//selectedVar.Value != -1;
         }
         private void ConnectDevice(DeviceModel deviceModel)
         {

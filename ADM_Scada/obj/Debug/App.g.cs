@@ -21,6 +21,7 @@ using Prism.Regions;
 using Prism.Regions.Behaviors;
 using Prism.Services.Dialogs;
 using Prism.Unity;
+using RootLibrary.WPF.Localization;
 using System;
 using System.Diagnostics;
 using System.Windows;

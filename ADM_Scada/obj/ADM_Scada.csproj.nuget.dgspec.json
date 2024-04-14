@@ -456,6 +456,26 @@
       "frameworks": {
         "net472": {
           "dependencies": {
+            "CrystalReports.Engine": {
+              "target": "Package",
+              "version": "[13.0.4003, )"
+            },
+            "CrystalReports.ReportSource": {
+              "target": "Package",
+              "version": "[13.0.4003, )"
+            },
+            "CrystalReports.Shared": {
+              "target": "Package",
+              "version": "[13.0.4003, )"
+            },
+            "CrystalReports.WPF.Viewer": {
+              "target": "Package",
+              "version": "[13.0.4003, )"
+            },
+            "CrystalReports.WPF.ViewerShared": {
+              "target": "Package",
+              "version": "[13.0.4003, )"
+            },
             "LiveCharts.Wpf": {
               "target": "Package",
               "version": "[0.9.7, )"

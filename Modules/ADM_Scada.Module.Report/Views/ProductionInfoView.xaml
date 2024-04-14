@@ -3,6 +3,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
              xmlns:core="clr-namespace:ADM_Scada.Core;assembly=ADM_Scada.Core"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="ADM_Scada.Modules.Report.Views.ProductionInfoView"
              Background="#FFF4F4F9"
@@ -315,8 +316,9 @@
                                 Text="Report" />
                     </StackPanel>
                 </TabItem.Header>
-                <TextBlock><Run
-                          Text="tab 4 content. Default look and behaviors." /><LineBreak /><LineBreak /></TextBlock>
+                <Grid>
+                    <Viewer:CrystalReportsViewer Name="ReportViewer"/>
+                </Grid>
             </TabItem>
         </TabControl>
         <Grid Grid.Column="1">

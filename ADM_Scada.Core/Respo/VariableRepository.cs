@@ -229,21 +229,21 @@ namespace ADM_Scada.Core.Respo
         {
             return new VariableModel
             {
-                Id = Convert.ToInt32(row["Id"]),
-                DeviceId = Convert.IsDBNull(row["DeviceId"]) ? (int?)null : Convert.ToInt32(row["DeviceId"]),
-                Type = Convert.IsDBNull(row["Type"]) ? (int?)null : Convert.ToInt32(row["Type"]),
-                Area = Convert.IsDBNull(row["Area"]) ? (int?)null : Convert.ToInt32(row["Area"]),
-                Address = Convert.IsDBNull(row["Address"]) ? (int?)null : Convert.ToInt32(row["Address"]),
-                Name = Convert.ToString(row["Name"]),
-                Module = Convert.ToString(row["Module"]),
-                Unit = Convert.ToString(row["Unit"]),
-                Message = Convert.ToString(row["Message"]),
-                Value = Convert.IsDBNull(row["Value"]) ? (float?)null : (float)Convert.ToDecimal(row["Value"]),
-                Purpose = Convert.ToString(row["Purpose"]),
-                CreatedDate = Convert.IsDBNull(row["CreatedDate"]) ? (DateTime?)null : Convert.ToDateTime(row["CreatedDate"]),
-                CreatedBy = Convert.ToString(row["CreatedBy"]),
-                UpdatedDate = Convert.IsDBNull(row["UpdatedDate"]) ? (DateTime?)null : Convert.ToDateTime(row["UpdatedDate"]),
-                UpdatedBy = Convert.ToString(row["UpdatedBy"])
+                Id = Convert.ToInt32(row["id"]),
+                DeviceId = Convert.ToInt32(row["device_id"]),
+                Type = Convert.ToInt32(row["type"]),
+                Area = Convert.ToInt32(row["area"]),
+                Address = Convert.ToInt32(row["address"]),
+                Name = Convert.ToString(row["name"]),
+                Module = row["module"] != DBNull.Value ? Convert.ToString(row["module"]) : null,
+                Unit = row["unit"] != DBNull.Value ? Convert.ToString(row["unit"]) : null,
+                Message = row["message"] != DBNull.Value ? Convert.ToString(row["message"]) : null,
+                Value = row["value"] != DBNull.Value ? Convert.ToString(row["value"]) : null,
+                Purpose = row["purpose"] != DBNull.Value ? Convert.ToString(row["purpose"]) : null,
+                CreatedDate = row["created_date"] != DBNull.Value ? Convert.ToDateTime(row["created_date"]) : (DateTime?)null,
+                CreatedBy = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : null,
+                UpdatedDate = row["updated_date"] != DBNull.Value ? Convert.ToDateTime(row["updated_date"]) : (DateTime?)null,
+                UpdatedBy = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : null
             };
         }
 

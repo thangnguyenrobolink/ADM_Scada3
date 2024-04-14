@@ -7,7 +7,7 @@ namespace ADM_Scada.Core.Models
     public class VariableModel
     {
         
-        private float _value;
+        private string _value;
         public int Id { get; set; }
         public int? DeviceId { get; set; }
         public int? Type { get; set; }
@@ -17,7 +17,7 @@ namespace ADM_Scada.Core.Models
         public string Module { get; set; }
         public string Unit { get; set; }
         public string Message { get; set; }
-        public float? Value { get => _value; set { _value = (float)value; OnPropertyChanged(nameof(Value)); } }
+        public string Value { get => _value; set { _value = value; OnPropertyChanged(nameof(Value)); } }
         public string Purpose { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }
