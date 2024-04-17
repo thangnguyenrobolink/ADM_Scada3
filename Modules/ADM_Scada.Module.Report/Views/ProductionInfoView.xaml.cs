@@ -1,5 +1,9 @@
-﻿using CrystalDecisions.CrystalReports.Engine;
+﻿
+using ADM_Scada.Module.Report.Views;
+using CrystalDecisions.CrystalReports.Engine;
+using MaterialDesignThemes.Wpf;
 using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace ADM_Scada.Modules.Report.Views
@@ -9,39 +13,29 @@ namespace ADM_Scada.Modules.Report.Views
     /// </summary>
     public partial class ProductionInfoView : UserControl
     {
-        private const string Filename = "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Report\\CrystalReport1.rpt";
-
         public ProductionInfoView()
         {
             InitializeComponent();
-            LoadReport();
+            
         }
-
-        private void LoadReport()
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                // Load your Crystal Report file
-                ReportDocument reportDocument = new ReportDocument();
-                reportDocument.Load(Filename);
+            // Get the parent window of the UserControl
+            Window parentWindow = Window.GetWindow(this);
 
-                // Ensure ReportViewer and ViewerCore are not null before setting the ReportSource
-                if (ReportViewer != null && ReportViewer.ViewerCore != null)
-                {
-                    ReportViewer.ViewerCore.ReportSource = reportDocument;
-                }
-                else
-                {
-                    // Handle the case where ReportViewer or ViewerCore is null
-                    // You can log an error, display a message to the user, or take other appropriate action
-                }
-            }
-            catch (Exception ex)
+            if (parentWindow != null)
             {
-                Console.Write(ex);
-                // Handle any exceptions that occur during report loading
-                // You can log the exception, display an error message, or take other appropriate action
+                // Instantiate the window from the other project
+                CrystalReportWindow otherWindow = new CrystalReportWindow();
+
+                // Show the window as a dialog from the parent window
+                otherWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Unable to find parent window.");
             }
         }
+
     }
 }

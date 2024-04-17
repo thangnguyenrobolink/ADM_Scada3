@@ -11,6 +11,7 @@
         public static string ProductRegion2 = "ProductRegion2";
         public static string ShiftRegion = "ShiftRegion";
         public static string ShiftRegion2 = "ShiftRegion2";
+        public static string ReportRegion = "ReportRegion";
         public static string ProductDatabaseRegion = "ProductDatabaseRegion";
         public static string DataBase = "DataBase";
 

@@ -74,11 +74,11 @@ VALUES
 ('WO12349', '28016F3000', 'LOT127', '2024-04-05', '2024-04-10', 'David Wilson', 'Shift B', 'CUST005', 'DEV005', 180.00, 180.00, 'bag', 'Admin', '2024-04-05', 'Admin', '2024-04-05');
 INSERT INTO [dbo].[device] ([device_name], [ip_address], [port], [created_date], [created_by], [updated_date], [updated_by]) 
 VALUES 
-('Device1', '192.168.1.101', '8080', '2024-04-07', 'Admin', '2024-04-07', 'Admin'),
-('Device2', '192.168.1.102', '8080', '2024-04-07', 'Admin', '2024-04-07', 'Admin'),
-('Device3', '192.168.1.103', '8080', '2024-04-07', 'Admin', '2024-04-07', 'Admin'),
-('Device4', '192.168.1.104', '8080', '2024-04-07', 'Admin', '2024-04-07', 'Admin'),
-('Device5', '192.168.1.105', '8080', '2024-04-07', 'Admin', '2024-04-07', 'Admin');
+('D1', '192.168.1.31', '9100', '2024-04-07', 'Admin', '2024-04-07', 'Admin'),
+('D2', '127.0.0.1', '9100', '2024-04-07', 'Admin', '2024-04-07', 'Admin'),
+('D3', '192.168.1.103', '8080', '2024-04-07', 'Admin', '2024-04-07', 'Admin'),
+('D4', '192.168.1.104', '8080', '2024-04-07', 'Admin', '2024-04-07', 'Admin'),
+('D5', '192.168.1.105', '8080', '2024-04-07', 'Admin', '2024-04-07', 'Admin');
 INSERT INTO [dbo].[user] ([user_code], [user_name], [password], [user_avatar], [user_group], [email_address], [tel_no], [mobile_no], [created_date], [created_by], [updated_date], [updated_by]) 
 VALUES 
 ('USR001', 'JohnDoe', 'password123', NULL, 1, 'john.doe@example.com', '123456789', '987654321', '2024-04-07', 'Admin', '2024-04-07', 'Admin'),
@@ -225,15 +225,15 @@ WHERE
     w.[id] = @ParentSessionID
 
 INSERT INTO [dbo].[variable] 
-([device_id], [type], [area], [address], [name], [module], [unit], [message], [value], [purpose], [created_date], [created_by], [updated_date], [updated_by])
+([device_id], [type], [area], [bit_address], [byte_address], [name], [module], [unit], [message], [value], [purpose], [created_date], [created_by], [updated_date], [updated_by])
 VALUES
-(1, 1, 100, 1000, 'Temperature Sensor', 'Module A', 'Celsius', 'Temperature reading from sensor','0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
-(1, 2, 200, 2000, 'Pressure Sensor', 'Module B', 'PSI', 'Pressure reading from sensor', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
-(2, 1, 150, 1500, 'Flow Meter', 'Module C', 'Liters/min', 'Flow rate measurement', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
-(2, 2, 250, 2500, 'Level Sensor', 'Module D', 'Meters', 'Liquid level measurement', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
-(3, 1, 120, 1200, 'Speed Sensor', 'Module E', 'RPM', 'Rotational speed measurement', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
-(3, 2, 220, 2200, 'Voltage Sensor', 'Module F', 'Volts', 'Voltage measurement', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
-(4, 1, 130, 1300, 'Humidity Sensor', 'Module G', 'Percentage', 'Humidity reading from sensor', 0, 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
-(4, 2, 230, 2300, 'Current Sensor', 'Module H', 'Amps', 'Current measurement', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
-(5, 1, 140, 1400, 'Distance Sensor', 'Module I', 'Meters', 'Distance measurement', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
-(5, 2, 240, 2400, 'Force Sensor', 'Module J', 'Newtons', 'Force measurement', '0', 'Read', GETDATE(), 'Admin',  GETDATE(), 'Admin');
+(1, 0, 5, 0, 0, 'bJogNeg_Rewinder', 'General', 'Celsius', 'Temperature reading from sensor','0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
+(1, 0, 5, 1, 0, 'bJogPos_Rewinder', 'General', 'PSI', 'Pressure reading from sensor', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
+(1, 0, 5, 2, 0, 'bJogNeg_StampServo', 'Infeed', 'Liters/min', 'Flow rate measurement', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
+(1, 0, 5, 3, 0, 'bJogPos_StampServo', 'Infeed', 'Meters', 'Liquid level measurement', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
+(1, 0, 5, 4, 0, 'bEnable_StampServo', 'Infeed', 'RPM', 'Rotational speed measurement', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
+(1, 0, 5, 5, 0, 'bHome_StampServo', 'Outfeed', 'Volts', 'Voltage measurement', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
+(1, 6, 5, 0, 2, 'Servo_CurPos', 'Outfeed', 'Percentage', 'Humidity reading from sensor', 0, 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
+(1, 4, 5, 0, 6, 'nCounter', 'Scale', 'Amps', 'Current measurement', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
+(1, 6, 4, 0, 0, 'Distance Sensor', 'Scale', 'Meters', 'Distance measurement', '0', 'Read', GETDATE(), 'Admin', GETDATE(), 'Admin'),
+(1, 6, 4, 0, 4, 'Force Sensor', 'Scale', 'Newtons', 'Force measurement', '0', 'Read', GETDATE(), 'Admin',  GETDATE(), 'Admin');

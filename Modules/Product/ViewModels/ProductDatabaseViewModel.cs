@@ -147,6 +147,7 @@ namespace ADM_Scada.Modules.Product.ViewModels
         public ProductDatabaseViewModel(IEventAggregator ed)
         {
             eventAggregator = ed;
+           
             ProductRepository = new ProductRepository();
             Products = new ObservableCollection<ProductModel>();
             ResProduct = new ProductModel();

@@ -7,10 +7,11 @@ namespace ADM_Scada.Cores.PlcService
 {
     public interface IPLCCommunicationService
     {
-        List<DeviceModel> Devices { get; }
-        Task<VariableModel> GetPLCValue(VariableModel a);
+        ObservableCollection<DeviceModel> Devices { get; }
+        VariableModel GetPLCValue(VariableModel a);
         Task<bool> SetPLCValue(VariableModel a);
         Task<bool> ConnectDevice(DeviceModel a);
+        bool DisConnectDevice(DeviceModel a);
         DeviceStatus GetPlcStatusById(int plcid);
         ObservableCollection<VariableModel> GetAllVariables();
         ObservableCollection<DeviceModel> GetAllDevices();

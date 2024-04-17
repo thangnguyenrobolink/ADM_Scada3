@@ -72,11 +72,6 @@ D:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 D:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\MySql.Data.xml
 D:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\System.Diagnostics.DiagnosticSource.xml
 D:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\System.IO.Pipelines.xml
-E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.Properties.Resources.resources
-E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.csproj.GenerateResource.cache
-E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.csproj.CoreCompileInputs.cache
-E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.dll
-E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.pdb
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\ADM_Scada.Core.dll.config
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\ADM_Scada.Core.dll
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\ADM_Scada.Core.pdb
@@ -97,6 +92,7 @@ E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Prism.dll
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Prism.Unity.Wpf.dll
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Prism.Wpf.dll
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\S7.Net.dll
+E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Serilog.dll
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\SixLabors.Fonts.dll
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\System.Buffers.dll
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\System.ComponentModel.Annotations.dll
@@ -133,6 +129,7 @@ E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Prism.Unity.Wpf.xml
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Prism.Wpf.pdb
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Prism.Wpf.xml
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\S7.Net.xml
+E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Serilog.xml
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\SixLabors.Fonts.xml
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\System.Buffers.xml
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\System.Diagnostics.DiagnosticSource.xml
@@ -144,6 +141,10 @@ E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\System.Runtime.CompilerServices.Unsaf
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\System.Threading.Tasks.Extensions.xml
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Unity.Abstractions.pdb
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Unity.Container.pdb
+E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.csproj.AssemblyReference.cache
+E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.Properties.Resources.resources
+E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.csproj.GenerateResource.cache
+E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.csproj.CoreCompileInputs.cache
 E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.csproj.CopyComplete
-E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Serilog.dll
-E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Serilog.xml
+E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.dll
+E:\work\ADM_Scada\ADM_Scada.Core\obj\Debug\ADM_Scada.Core.pdb

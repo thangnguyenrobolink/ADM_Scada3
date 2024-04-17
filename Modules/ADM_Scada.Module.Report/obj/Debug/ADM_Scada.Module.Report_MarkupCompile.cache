@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-22063339355
+4164239347
 
-9561229181
-64-893514420
-Views\ProductionInfoView.xaml;Views\ShiftInfoView.xaml;
+131147655209
+61-1561644938
+Views\CrystalReportWindow.xaml;Views\ProductionInfoView.xaml;Views\SessionInfoView.xaml;Views\ShiftInfoView.xaml;
 
 False
 

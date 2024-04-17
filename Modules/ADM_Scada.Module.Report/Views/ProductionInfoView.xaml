@@ -3,17 +3,14 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
+             xmlns:cr="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
              xmlns:core="clr-namespace:ADM_Scada.Core;assembly=ADM_Scada.Core"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="ADM_Scada.Modules.Report.Views.ProductionInfoView"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="ADM_Scada.Modules.Report.Views.ProductionInfoView"
              Background="#FFF4F4F9"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="160"/>
-        </Grid.ColumnDefinitions>
-        <TabControl Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+        <TabControl Grid.Column="0" VerticalAlignment="Stretch" Background="Transparent"
                     HorizontalContentAlignment="Center"
                     materialDesign:ColorZoneAssist.Mode="PrimaryLight"
                     TabStripPlacement="Top" >
@@ -37,9 +34,9 @@
                         <!-- Header -->
                         <RowDefinition Height="Auto"/>
                         <!-- Customer Info -->
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
                         <!-- Stock delivery order Info -->
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
                         <!-- Session Info -->
                         <RowDefinition Height="Auto"/>
 
@@ -117,7 +114,7 @@
                                       SelectedItem ="{Binding CurrentSession.DeviceCode, UpdateSourceTrigger=LostFocus}"
                                       IsEnabled="{Binding IsSessionEnded, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                       Style="{StaticResource MaterialDesignOutlinedComboBox}"  Margin="8">
-                                    
+
                             </ComboBox>
                             <ContentControl Grid.Row="0" Grid.Column="2"  Grid.RowSpan="6" HorizontalAlignment="Center" Margin="8 8 0 8 " VerticalAlignment="Center" 
                             prism:RegionManager.RegionName="{x:Static core:RegionNames.CustomerRegion}"/>
@@ -298,8 +295,297 @@
                                 Text="History" />
                     </StackPanel>
                 </TabItem.Header>
-                <TextBlock><Run
-                          Text="tab 4 content. Default look and behaviors." /><LineBreak /><LineBreak /></TextBlock>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Grid.Row="0">
+
+                        <TextBox Text="{Binding FilSSCode}" Margin="8" HorizontalAlignment="Center"
+                                materialDesign:TextFieldAssist.HasLeadingIcon="True" BorderBrush="gray"
+                                materialDesign:TextFieldAssist.LeadingIcon="Filter"
+                                materialDesign:HintAssist.Hint="Filter by Code" 
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="200" />
+                        <TextBox Text="{Binding FilSCusName}" Margin="8" HorizontalAlignment="Right"  BorderBrush="gray"
+                                materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                materialDesign:TextFieldAssist.LeadingIcon="Filter"
+                                materialDesign:HintAssist.Hint="Filter by Customer name" 
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="200" />
+                        <TextBox Text="{Binding FilSSSONo}" Margin="8" HorizontalAlignment="Right"  BorderBrush="gray"
+                                materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                materialDesign:TextFieldAssist.LeadingIcon="Filter"
+                                materialDesign:HintAssist.Hint="Filter by SO Number" 
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="200" />
+                        <TextBox Text="{Binding FilSSNoDoc}" Margin="8" HorizontalAlignment="Left"
+                                materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                materialDesign:TextFieldAssist.LeadingIcon="Filter"  BorderBrush="gray"
+                                materialDesign:HintAssist.Hint="Find No Document" 
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="200" />
+                    </StackPanel>
+                    <DataGrid Grid.Row="1" AutoGenerateColumns="False" RowStyle="{StaticResource DataGridRowStyle1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  MaxHeight="600"
+                              SelectionMode="Extended" GridLinesVisibility="None" CellStyle="{StaticResource DataGridCellStyle1}"
+                              materialDesign:DataGridAssist.CornerRadius="10"
+                              materialDesign:ScrollViewerAssist.SupportHorizontalScroll="False"
+                              CanUserAddRows="False" ItemsSource="{Binding FilterSessions}" Margin="16 0" Background="Transparent">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="#" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Id, UpdateSourceTrigger=LostFocus}" BorderThickness="0" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Code" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding SessionCode, UpdateSourceTrigger=LostFocus}"  BorderThickness="0" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Start Time" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding StartTime}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="End Time" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding EndTime}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Cus Id" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding CustId}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Cus Name" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding CustName}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Cus Address" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding CustAddress}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Boat Number" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding BoatId}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="SO Number" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding SoNumber}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Counted Quanity" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding QtyCounted}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Weighted Quanity" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding QtyWeighed}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Tare Quanity" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding QtyTareWeigh}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Good Quanity" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding QtyGoodWeigh}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Invoice Tare" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding QtyOrderWeigh}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Gap" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Gap}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="No Document" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding DocumentNo}"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Operations" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Command="{Binding DataContext.CheckSessionCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                Style="{StaticResource MaterialDesignIconForegroundButton}" Foreground="LightSeaGreen"
+                                CommandParameter="{Binding}">
+                                                <materialDesign:PackIcon Kind="BriefcaseArrowLeftRightOutline" />
+                                            </Button>
+                                            <Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                Style="{StaticResource MaterialDesignIconForegroundButton}" 
+                                CommandParameter="{Binding}">
+                                                <materialDesign:PackIcon Kind="PencilOutline"  Foreground="Orange"/>
+                                            </Button>
+                                            <Button Margin="5 0 0 0"
+                                Style="{StaticResource MaterialDesignIconButton}" 
+                                Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                CommandParameter="{Binding}">
+                                                <materialDesign:PackIcon Kind="DeleteOutline" Foreground="IndianRed" />
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Grid.Row="2">
+
+                        <TextBox Text="{Binding FilPCode}" Margin="8" HorizontalAlignment="Center"
+                                materialDesign:TextFieldAssist.HasLeadingIcon="True" BorderBrush="gray"
+                                materialDesign:TextFieldAssist.LeadingIcon="Filter"
+                                materialDesign:HintAssist.Hint="Filter by Session Code" 
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="200" />
+                        <TextBox Text="{Binding FilBarCode}" Margin="8" HorizontalAlignment="Right"  BorderBrush="gray"
+                                materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                materialDesign:TextFieldAssist.LeadingIcon="Filter"
+                                materialDesign:HintAssist.Hint="Filter by BarCode" 
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="200" />
+                        <TextBox Text="{Binding FilDetailPro}" Margin="8" HorizontalAlignment="Right"  BorderBrush="gray"
+                                materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                                materialDesign:TextFieldAssist.LeadingIcon="Filter"
+                                materialDesign:HintAssist.Hint="Filter by Product" 
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="200" />
+                    </StackPanel>
+                    <DataGrid Grid.Row="3" AutoGenerateColumns="False" RowStyle="{StaticResource DataGridRowStyle1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  MaxHeight="600"
+                              SelectionMode="Extended" GridLinesVisibility="None" CellStyle="{StaticResource DataGridCellStyle1}"
+                              materialDesign:DataGridAssist.CornerRadius="10"
+                              materialDesign:ScrollViewerAssist.SupportHorizontalScroll="False"
+                              CanUserAddRows="False" ItemsSource="{Binding FilterWeighSessionD}" Margin="16 0" Background="Transparent">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="#" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Id, UpdateSourceTrigger=LostFocus}" BorderThickness="0" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Code" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding SessionCode, UpdateSourceTrigger=LostFocus}"  BorderThickness="0" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Date Time" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding CreatedDate}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Quanity" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding CurrentWeigh}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Barcode" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Barcode}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Product Code" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding ProCode}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Product" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding ProdFullName}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Code D365BC" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding ProdD365Code}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Date Product" Width="Auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding ProductionDate}" IsReadOnly="True"  BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Operations" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Command="{Binding DataContext.ChangeProductCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                Style="{StaticResource MaterialDesignIconForegroundButton}" Foreground="LightSeaGreen"
+                                CommandParameter="{Binding}">
+                                                <materialDesign:PackIcon Kind="BriefcaseArrowLeftRightOutline" />
+                                            </Button>
+                                            <Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                Style="{StaticResource MaterialDesignIconForegroundButton}" 
+                                CommandParameter="{Binding}">
+                                                <materialDesign:PackIcon Kind="PencilOutline"  Foreground="Orange"/>
+                                            </Button>
+                                            <Button Margin="5 0 0 0"
+                                Style="{StaticResource MaterialDesignIconButton}" 
+                                Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                CommandParameter="{Binding}">
+                                                <materialDesign:PackIcon Kind="DeleteOutline" Foreground="IndianRed" />
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Grid>
             </TabItem>
             <TabItem HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="70">
                 <TabItem.Header>
@@ -316,19 +602,17 @@
                                 Text="Report" />
                     </StackPanel>
                 </TabItem.Header>
-                <Grid>
-                    <Viewer:CrystalReportsViewer Name="ReportViewer"/>
-                </Grid>
+                <Button Content="Start" Width="150"
+                   Height="50" FontSize="20"
+                    Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"  
+                    Foreground="DarkOrange" materialDesign:ButtonAssist.CornerRadius="20"
+                    Margin="10,0" 
+                    BorderBrush="#00000000" Background="#FFFFE5B7" VerticalAlignment="Center"
+                        Click="Button_Click"/>
+
+
+
             </TabItem>
         </TabControl>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-
-               </Grid>
     </Grid>
 </UserControl>

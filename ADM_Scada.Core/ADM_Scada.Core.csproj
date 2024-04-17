@@ -212,11 +212,13 @@
     <Compile Include="PlcService\IPLCCommunicationService.cs" />
     <Compile Include="PlcService\PlcCommunicateService.cs" />
     <Compile Include="PubEvent\CurrentSessionChangeEvent.cs" />
+    <Compile Include="PubEvent\PlcStatusChangeEvent.cs" />
     <Compile Include="PubEvent\ShiftInfoChangeEvent.cs" />
     <Compile Include="PubEvent\ProductChangeEvent.cs" />
     <Compile Include="PubEvent\CustomerChangeEvent.cs" />
     <Compile Include="PubEvent\PlcErrorEvent.cs" />
     <Compile Include="PubEvent\UserLoginEvent.cs" />
+    <Compile Include="PubEvent\VariableValueChangeEvent.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="Respo\CustomerRepository.cs" />
     <Compile Include="Respo\DeviceRepository.cs" />

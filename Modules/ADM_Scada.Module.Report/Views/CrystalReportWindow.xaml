@@ -1,0 +1,11 @@
+﻿<Window x:Class="ADM_Scada.Module.Report.Views.CrystalReportWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/" 
+        xmlns:cr="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
+        WindowStyle="ToolWindow"
+        prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <cr:CrystalReportsViewer Name="reportViewer" />
+    </Grid>
+</Window>

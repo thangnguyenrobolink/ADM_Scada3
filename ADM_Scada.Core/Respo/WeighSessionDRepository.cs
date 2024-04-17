@@ -26,14 +26,14 @@ namespace ADM_Scada.Core.Respo
                 throw new RepositoryException("An error occurred while retrieving all weigh sessions. Please try again later.", ex);
             }
         }
-        public async Task<WeighSessionDModel> GetBySessionCode(string sessionCode)
+        public async Task<List<WeighSessionDModel>> GetBySessionCode(string sessionCode)
         {
             try
             {
                 string query = "SELECT * FROM [dbo].[weigh_session_d] WHERE session_code = @SessionCode";
                 Dictionary<string, object> parameters = new Dictionary<string, object> { { "@SessionCode", sessionCode } };
                 DataTable dataTable = await ExecuteQueryAsync(query, parameters);
-                return ConvertDataTableToSingleObject(dataTable);
+                return ConvertDataTableToList(dataTable);
             }
             catch (Exception ex)
             {
@@ -223,27 +223,27 @@ namespace ADM_Scada.Core.Respo
 
         private WeighSessionDModel ConvertDataRowToWeighSessionModel(DataRow row)
         {
-            return new WeighSessionDModel
-            {
-                Id = Convert.ToInt32(row["id"]),
-                SessionCode = row["session_code"] != DBNull.Value ? Convert.ToString(row["session_code"]) : null,
-                CurrentWeigh = row["current_weigh"] != DBNull.Value ? Convert.ToDecimal(row["current_weigh"]) : (decimal?)null,
-                Barcode = row["barcode"] != DBNull.Value ? Convert.ToString(row["barcode"]) : null,
-                ProdCode = row["prod_code"] != DBNull.Value ? Convert.ToString(row["prod_code"]) : null,
-                ProdFullName = row["prod_fullname"] != DBNull.Value ? Convert.ToString(row["prod_fullname"]) : null,
-                ProdD365Code = row["prod_d365_code"] != DBNull.Value ? Convert.ToString(row["prod_d365_code"]) : null,
-                ProductionDate = row["production_date"] != DBNull.Value ? Convert.ToDateTime(row["production_date"]) : (DateTime?)null,
-                StartTime = row["start_time"] != DBNull.Value ? Convert.ToDateTime(row["start_time"]) : (DateTime?)null,
-                EndTime = row["end_time"] != DBNull.Value ? Convert.ToDateTime(row["end_time"]) : (DateTime?)null,
-                QtyCounted = row["qty_counted"] != DBNull.Value ? Convert.ToInt32(row["qty_counted"]) : (int?)null,
-                QtyWeighed = row["qty_weighed"] != DBNull.Value ? Convert.ToDecimal(row["qty_weighed"]) : (decimal?)null,
-                Gap = row["gap"] != DBNull.Value ? Convert.ToDecimal(row["gap"]) : (decimal?)null,
-                ShiftDataId = row["shift_data_id"] != DBNull.Value ? Convert.ToInt32(row["shift_data_id"]) : (int?)null,
-                CreatedDate = row["created_date"] != DBNull.Value ? Convert.ToDateTime(row["created_date"]) : (DateTime?)null,
-                CreatedBy = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : null,
-                UpdatedDate = row["updated_date"] != DBNull.Value ? Convert.ToDateTime(row["updated_date"]) : (DateTime?)null,
-                UpdatedBy = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : null
-            };
+            WeighSessionDModel a = new WeighSessionDModel();
+
+            a.Id = Convert.ToInt32(row["id"]);
+            a.SessionCode = row["session_code"] != DBNull.Value ? Convert.ToString(row["session_code"]) : null;
+            a.CurrentWeigh = row["current_weigh"] != DBNull.Value ? Convert.ToDecimal(row["current_weigh"]) : (decimal?)null;
+            a.Barcode = row["barcode"] != DBNull.Value ? Convert.ToString(row["barcode"]) : null;
+            a.ProdCode = row["prod_code"] != DBNull.Value ? Convert.ToString(row["prod_code"]) : null;
+            a.ProdFullName = row["prod_fullname"] != DBNull.Value ? Convert.ToString(row["prod_fullname"]) : null;
+            a.ProdD365Code = row["prod_d365_code"] != DBNull.Value ? Convert.ToString(row["prod_d365_code"]) : null;
+            a.ProductionDate = row["production_date"] != DBNull.Value ? Convert.ToDateTime(row["production_date"]) : (DateTime?)null;
+            a.StartTime = row["start_time"] != DBNull.Value ? Convert.ToDateTime(row["start_time"]) : (DateTime?)null;
+            a.EndTime = row["end_time"] != DBNull.Value ? Convert.ToDateTime(row["end_time"]) : (DateTime?)null;
+            a.QtyCounted = row["qty_counted"] != DBNull.Value ? Convert.ToInt32(row["qty_counted"]) : (int?)null;
+            a.QtyWeighed = row["qty_weighed"] != DBNull.Value ? Convert.ToDecimal(row["qty_weighed"]) : (decimal?)null;
+            a.Gap = row["gap"] != DBNull.Value ? Convert.ToDecimal(row["gap"]) : (decimal?)null;
+            a.ShiftDataId = row["shift_data_id"] != DBNull.Value ? Convert.ToInt32(row["shift_data_id"]) : (int?)null;
+            a.CreatedDate = row["created_date"] != DBNull.Value ? Convert.ToDateTime(row["created_date"]) : (DateTime?)null;
+            a.CreatedBy = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : null;
+            a.UpdatedDate = row["updated_date"] != DBNull.Value ? Convert.ToDateTime(row["updated_date"]) : (DateTime?)null;
+            a.UpdatedBy = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : null;
+            return a;
         }
 
 

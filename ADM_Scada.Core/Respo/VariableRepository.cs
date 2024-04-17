@@ -35,7 +35,7 @@ namespace ADM_Scada.Core.Respo
         {
             try
             {
-                string query = "SELECT * FROM [dbo].[Variable] WHERE Name = @VariableName";
+                string query = "SELECT * FROM [dbo].[variable] WHERE name = @VariableName";
                 Dictionary<string, object> parameters = new Dictionary<string, object> { { "@VariableName", variableName } };
                 DataTable dataTable = await ExecuteQueryAsync(query, parameters);
                 return ConvertDataTableToSingleObject(dataTable);
@@ -52,7 +52,7 @@ namespace ADM_Scada.Core.Respo
         {
             try
             {
-                string query = "SELECT * FROM [dbo].[Variable] WHERE Id = @Id";
+                string query = "SELECT * FROM [dbo].[variable] WHERE id = @Id";
                 Dictionary<string, object> parameters = new Dictionary<string, object> { { "@Id", id } };
                 DataTable dataTable = await ExecuteQueryAsync(query, parameters);
                 return ConvertDataTableToSingleObject(dataTable);
@@ -69,8 +69,8 @@ namespace ADM_Scada.Core.Respo
         {
             try
             {
-                string query = @"INSERT INTO [dbo].[Variable] (DeviceId, Type, Area, Address, Name, Module, Unit, Message, Value, Purpose, CreatedDate, CreatedBy, UpdatedDate, UpdatedBy) 
-                                 VALUES (@DeviceId, @Type, @Area, @Address, @Name, @Module, @Unit, @Message, @Value, @Purpose, @CreatedDate, @CreatedBy, @UpdatedDate, @UpdatedBy)";
+                string query = @"INSERT INTO [dbo].[variable] (device_id, type, area, bit_address, byte_address,name, module, unit, message, value, purpose, created_date, created_by, updated_date, updated_by) 
+                                 VALUES (@DeviceId, @Type, @Area, @BitAddress, @Byteddress, @Name, @Module, @Unit, @Message, @Value, @Purpose, @CreatedDate, @CreatedBy, @UpdatedDate, @UpdatedBy)";
 
                 // Set CreatedDate and UpdatedDate
                 variable.CreatedDate = DateTime.Now;
@@ -81,7 +81,8 @@ namespace ADM_Scada.Core.Respo
                     { "@DeviceId", variable.DeviceId },
                     { "@Type", variable.Type },
                     { "@Area", variable.Area },
-                    { "@Address", variable.Address },
+                    { "@BitAddress", variable.ByteAddress },
+                    { "@ByteAddress", variable.BitAddress },
                     { "@Name", variable.Name },
                     { "@Module", variable.Module },
                     { "@Unit", variable.Unit },
@@ -107,12 +108,12 @@ namespace ADM_Scada.Core.Respo
         {
             try
             {
-                string query = @"UPDATE [dbo].[Variable] 
-                         SET DeviceId = @DeviceId, Type = @Type, Area = @Area, Address = @Address, 
-                             Name = @Name, Module = @Module, Unit = @Unit, Message = @Message, 
-                             Value = @Value, Purpose = @Purpose, 
-                             CreatedDate = @CreatedDate, CreatedBy = @CreatedBy, 
-                             UpdatedDate = @UpdatedDate, UpdatedBy = @UpdatedBy 
+                string query = @"UPDATE [dbo].[variable] 
+                         SET device_id = @DeviceId, type = @Type, area = @Area, bit_address = @BitAddress, byte_address = @ByteAddress, 
+                             name = @Name, module = @Module, unit = @Unit, message = @Message, 
+                             value = @Value, purpose = @Purpose, 
+                             created_date = @CreatedDate, created_by = @CreatedBy, 
+                             updated_date = @UpdatedDate, UpdatedBy = @updated_by 
                          WHERE Id = @Id";
 
                 // Set UpdatedDate
@@ -120,11 +121,11 @@ namespace ADM_Scada.Core.Respo
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
-                    { "@Id", variable.Id },
                     { "@DeviceId", variable.DeviceId },
                     { "@Type", variable.Type },
                     { "@Area", variable.Area },
-                    { "@Address", variable.Address },
+                    { "@BitAddress", variable.ByteAddress },
+                    { "@ByteAddress", variable.BitAddress },
                     { "@Name", variable.Name },
                     { "@Module", variable.Module },
                     { "@Unit", variable.Unit },
@@ -150,7 +151,7 @@ namespace ADM_Scada.Core.Respo
         {
             try
             {
-                string query = "DELETE FROM [dbo].[Variable] WHERE Id = @Id";
+                string query = "DELETE FROM [dbo].[variable] WHERE id = @Id";
                 Dictionary<string, object> parameters = new Dictionary<string, object> { { "@Id", id } };
                 return await ExecuteNonQueryAsync(query, parameters) > 0;
             }
@@ -167,7 +168,7 @@ namespace ADM_Scada.Core.Respo
             try
             {
                 string whereClause = string.Join(" AND ", filters.Select(filter => $"({filter})"));
-                string query = $"SELECT * FROM [dbo].[Variable] WHERE {whereClause}";
+                string query = $"SELECT * FROM [dbo].[variable] WHERE {whereClause}";
                 DataTable dataTable = await ExecuteQueryAsync(query);
                 return ConvertDataTableToList(dataTable);
             }
@@ -183,7 +184,7 @@ namespace ADM_Scada.Core.Respo
         {
             try
             {
-                string query = "SELECT COUNT(*) FROM [dbo].[Variable]";
+                string query = "SELECT COUNT(*) FROM [dbo].[variable]";
                 object result = await ExecuteScalarAsync(query);
                 return Convert.ToInt32(result);
             }
@@ -199,7 +200,7 @@ namespace ADM_Scada.Core.Respo
         {
             try
             {
-                string query = "SELECT COUNT(*) FROM [dbo].[Variable] WHERE Id = @Id";
+                string query = "SELECT COUNT(*) FROM [dbo].[variable] WHERE id = @Id";
                 Dictionary<string, object> parameters = new Dictionary<string, object> { { "@Id", id } };
                 int count = Convert.ToInt32(await ExecuteScalarAsync(query, parameters));
                 return count > 0;
@@ -233,7 +234,8 @@ namespace ADM_Scada.Core.Respo
                 DeviceId = Convert.ToInt32(row["device_id"]),
                 Type = Convert.ToInt32(row["type"]),
                 Area = Convert.ToInt32(row["area"]),
-                Address = Convert.ToInt32(row["address"]),
+                BitAddress = Convert.ToInt32(row["bit_address"]),
+                ByteAddress = Convert.ToInt32(row["byte_address"]),
                 Name = Convert.ToString(row["name"]),
                 Module = row["module"] != DBNull.Value ? Convert.ToString(row["module"]) : null,
                 Unit = row["unit"] != DBNull.Value ? Convert.ToString(row["unit"]) : null,

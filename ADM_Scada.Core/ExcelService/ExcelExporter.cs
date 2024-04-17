@@ -1,7 +1,9 @@
 ﻿
 using ClosedXML.Excel;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Forms;
 
 namespace ADM_Scada.Core.ExcelService
 {
@@ -37,9 +39,15 @@ namespace ADM_Scada.Core.ExcelService
                     }
                     row++;
                 }
-
-                workbook.SaveAs(fileName);
-                _ = MessageBox.Show("Exported successfully!");
+                try
+                {
+                    workbook.SaveAs(fileName);
+                    _ = System.Windows.Forms.MessageBox.Show("Exported successfully!");
+                }
+                catch (Exception ex)
+                {                    System.Windows.Forms.MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
         }
 

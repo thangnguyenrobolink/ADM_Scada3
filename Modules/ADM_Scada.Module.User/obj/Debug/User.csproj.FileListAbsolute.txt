@@ -122,6 +122,7 @@ E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\Unity.Container.pdb
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\ADM_Scada.Core.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\S7.Net.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\ClosedXML.dll
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\Serilog.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\System.Memory.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\DocumentFormat.OpenXml.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\SixLabors.Fonts.dll
@@ -129,16 +130,19 @@ E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\ExcelNumberFormat.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\System.IO.Packaging.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\Irony.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\XLParser.dll
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\System.Diagnostics.DiagnosticSource.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\System.Numerics.Vectors.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\ADM_Scada.Core.pdb
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\ADM_Scada.Core.dll.config
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\S7.Net.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\ClosedXML.xml
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\Serilog.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\System.Memory.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\DocumentFormat.OpenXml.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\SixLabors.Fonts.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\ExcelNumberFormat.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\System.IO.Packaging.xml
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\System.Diagnostics.DiagnosticSource.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\System.Numerics.Vectors.xml
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\obj\Debug\User.csproj.AssemblyReference.cache
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\obj\Debug\Views\UserLoginView.g.cs
@@ -154,7 +158,3 @@ E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\obj\Debug\User.csproj.CoreCompil
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\obj\Debug\User.csproj.CopyComplete
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\obj\Debug\ADM_Scada.Module.User.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\obj\Debug\ADM_Scada.Module.User.pdb
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\Serilog.dll
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\System.Diagnostics.DiagnosticSource.dll
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\Serilog.xml
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.User\bin\Debug\System.Diagnostics.DiagnosticSource.xml

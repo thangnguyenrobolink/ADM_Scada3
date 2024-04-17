@@ -7,7 +7,9 @@
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              TextElement.FontWeight="Normal"
              TextElement.FontSize="14"
-             xmlns:local="clr-namespace:ADM_Scada.Modules.Plc.Views"
+             xmlns:local="clr-namespace:ADM_Scada.Modules.Plc.Views" 
+             xmlns:viewmodels="clr-namespace:ADM_Scada.Modules.Plc.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              FontFamily="{materialDesign:MaterialDesignFont}"
              IsTabStop="False"
              prism:ViewModelLocator.AutoWireViewModel="True">
@@ -23,7 +25,7 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Text="All Setting Parameter" Margin="16,0,0,0"  FontSize="18" FontWeight="SemiBold" 
                            Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Button Command="{Binding  ReadComamnd}" 
+            <Button Command="{Binding ReadComamnd}" 
               Width="180"    
               HorizontalAlignment="Right" VerticalAlignment="Center"
               Style="{StaticResource MaterialDesignFlatSecondaryDarkButton}" Height="40" Margin="0,0,0,0">
@@ -54,7 +56,8 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" MinWidth="450"/>
-                            <ColumnDefinition Width="500"/>
+                            <ColumnDefinition Width="380"/>
+                            <ColumnDefinition Width="120"/>
                         </Grid.ColumnDefinitions>
                         <DataGrid x:Name="RowStyle"  RowStyle="{StaticResource DataGridRowStyle1}"  VerticalAlignment="Top" HorizontalAlignment="Stretch" 
                                 SelectionMode="Extended" AutoGenerateColumns="False"
@@ -91,7 +94,7 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Image Source="Untitled Project.png" Grid.Column="1" HorizontalAlignment="Left" Height="500" />
+                        <Image Source="Untitled Project.png" Grid.Column="1" HorizontalAlignment="Left" Height="500" Grid.ColumnSpan="2" />
                     </Grid>
                 </TabItem>
                 <TabItem Height="60" Padding="1" VerticalAlignment="Stretch">
@@ -154,6 +157,10 @@
                 <TabItem Height="60" Padding="1" VerticalAlignment="Stretch">
                     <TabItem.Header>
                         <Grid VerticalAlignment="Stretch" Width="150">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="23*"/>
+                                <RowDefinition Height="17*"/>
+                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="35"/>
                                 <ColumnDefinition Width="*"/>
@@ -161,14 +168,15 @@
                             <materialDesign:PackIcon VerticalAlignment="Stretch"
                                                  Grid.Column="0" Kind="Scale"
                                                  Height="32" Width="32" HorizontalAlignment="Left" 
-                                                 Margin="4"/>
-                            <TextBlock  Grid.Column="1" Text="Scale" VerticalAlignment="Center" TextAlignment="Center"/>
+                                                 Margin="4,4,-1,4" Grid.RowSpan="2"/>
+                            <TextBlock  Grid.Column="1" Text="Scale" VerticalAlignment="Center" TextAlignment="Center" Margin="0,12,0,-6"/>
                         </Grid>
                     </TabItem.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" MinWidth="450"/>
-                            <ColumnDefinition Width="500"/>
+                            <ColumnDefinition Width="432.4"/>
+                            <ColumnDefinition Width="67.6"/>
                         </Grid.ColumnDefinitions>
                         <DataGrid  RowStyle="{StaticResource DataGridRowStyle1}"  VerticalAlignment="Top" HorizontalAlignment="Stretch" 
                                     SelectionMode="Extended" AutoGenerateColumns="False"
@@ -205,7 +213,7 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Image Source="Untitled Project.png" Grid.Column="1" HorizontalAlignment="Left" Height="500" />
+                        <Image Source="Untitled Project.png" Grid.Column="1" HorizontalAlignment="Left" Height="500" Grid.ColumnSpan="2" />
                     </Grid>
                 </TabItem>
                 <TabItem Height="60" Padding="1" VerticalAlignment="Stretch">
@@ -234,37 +242,37 @@
                                 materialDesign:DataGridAssist.CornerRadius="10" SelectedItem="{Binding SelectedVariable}"
                                 materialDesign:ScrollViewerAssist.SupportHorizontalScroll="False"
                                 CanUserAddRows="False" ItemsSource="{Binding OutfeedVariables}" Margin="16 0" Background="Transparent" LostFocus="DataGrid_LostFocus_2">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="#" IsReadOnly="false" CanUserResize="False" Width="auto" Binding="{Binding Path=Id}"/>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" IsReadOnly="True" Width="Auto" />
-                            <DataGridTextColumn Header="Unit"  IsReadOnly="True" Binding="{Binding Path=Unit}"/>
-                            <DataGridTextColumn Header="Value" Binding="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
-                            <DataGridTextColumn Header="Comment" Binding="{Binding Path=Message, UpdateSourceTrigger=PropertyChanged}" />
-                            <DataGridTemplateColumn Header="Operations" Width="auto">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button Command="{Binding DataContext.SetValueCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="#" IsReadOnly="false" CanUserResize="False" Width="auto" Binding="{Binding Path=Id}"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" IsReadOnly="True" Width="Auto" />
+                                <DataGridTextColumn Header="Unit"  IsReadOnly="True" Binding="{Binding Path=Unit}"/>
+                                <DataGridTextColumn Header="Value" Binding="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                                <DataGridTextColumn Header="Comment" Binding="{Binding Path=Message, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTemplateColumn Header="Operations" Width="auto">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Command="{Binding DataContext.SetValueCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                     Style="{StaticResource MaterialDesignIconForegroundButton}"
                                                     CommandParameter="{Binding}" Margin="8 0">
-                                                <materialDesign:PackIcon Kind="PencilOutline" />
-                                            </Button>
-                                            <Button Margin="8 0" 
+                                                    <materialDesign:PackIcon Kind="PencilOutline" />
+                                                </Button>
+                                                <Button Margin="8 0" 
                                                 Style="{StaticResource MaterialDesignIconButton}" 
                                                 Command="{Binding DataContext.CommentCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                 CommandParameter="{Binding}">
-                                                <materialDesign:PackIcon Kind="CommentAddOutline" Foreground="Orange" />
-                                            </Button>
+                                                    <materialDesign:PackIcon Kind="CommentAddOutline" Foreground="Orange" />
+                                                </Button>
 
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                         <Image Source="Untitled Project.png" Grid.Column="1" HorizontalAlignment="Left" Height="500" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Image Source="Untitled Project.png" Grid.Column="1" HorizontalAlignment="Left" Height="500" />
                     </Grid>
-                    </TabItem>
+                </TabItem>
                 <TabItem Height="60" Padding="1" VerticalAlignment="Stretch">
                     <TabItem.Header>
                         <Grid VerticalAlignment="Stretch" Width="150">
@@ -279,56 +287,87 @@
                             <TextBlock  Grid.Column="1" Text="Plc List" VerticalAlignment="Center" TextAlignment="Center"/>
                         </Grid>
                     </TabItem.Header>
-                    <ListView HorizontalAlignment="Stretch" Grid.Row="1"
+                    <StackPanel Grid.Row="1" HorizontalAlignment="Left">
+                        <ListView HorizontalAlignment="Stretch" 
                                materialDesign:ScrollBarAssist.ButtonsVisibility="Visible"
-                              ItemsSource="{Binding Devices}" SelectedItem="{Binding SelectedDevice}" VerticalAlignment="Top">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <materialDesign:Card Margin="8" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                                    <Grid HorizontalAlignment="Stretch" Width="280">
+                              ItemsSource="{Binding Devices}" VerticalAlignment="Top">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1" HorizontalAlignment="Stretch" Width="1500" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width ="Auto"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width ="100"/>
+                                            <ColumnDefinition Width="120"/>
                                             <ColumnDefinition Width="80"/>
                                         </Grid.ColumnDefinitions>
-                                        <materialDesign:PackIcon Kind="{Binding Status, Converter={StaticResource DeviceStatusToIconConverter}}"  Foreground="#FF31596C"
+                                        <Grid Grid.Row =" 0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Button
+                                                Command="{Binding DataContext.UpdateDeviceCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}"
+                                                  Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                                  ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                                                <materialDesign:PackIcon
+                                                    Width="30"
+                                                    Height="30"
+                                                    Kind="DownloadOutline" />
+                                            </Button>
+                                            <materialDesign:PackIcon Grid.Row="1" Kind="{Binding Path = Status, Converter={StaticResource DeviceStatusToIconConverter}}"  Foreground="#FF31596C"
                                                              VerticalAlignment="Center" Width="50" Height="50"  Margin="16,8" Grid.Column="0"/>
-                                        <StackPanel Margin ="8,0,0,0" Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center" >
-                                            <TextBox Text="{Binding Path = Name}"  VerticalAlignment="Center" Width="80" TextAlignment="Left" Margin="8,16,0,4" TextWrapping="Wrap" BorderBrush="Transparent"/>
-                                            <Separator Style="{StaticResource MaterialDesignDarkSeparator}" />
-                                            <TextBox Text="{Binding Path = IpAddress}" Margin="4"  VerticalAlignment="Bottom" Width="80" TextAlignment="Left" TextWrapping="Wrap" BorderBrush="Transparent" />
-                                            <TextBox Text="{Binding Path = Port}" Margin="4"  VerticalAlignment="Bottom" Width="80" TextAlignment="Left" TextWrapping="Wrap" BorderBrush="Transparent"/>
-                                            <TextBlock Text="{Binding Path =  Status}" Margin="4"  VerticalAlignment="Bottom" Width="80" TextAlignment="Left" TextWrapping="Wrap" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Vertical" Grid.Column="2" Margin="16 8">
-                                            <Button Style="{StaticResource MaterialDesignFloatingActionLightButton}"
-                                                    Command="{Binding ConnectDeviceCommand}" CommandParameter="{Binding}"
-                                                    Height="34" Width="34" VerticalAlignment="Top">
-                                                <materialDesign:PackIcon
-                                                    Width="30"
-                                                    Height="30"
-                                                    Kind="Connection" />
-                                            </Button>
-                                            <Button Style="{StaticResource MaterialDesignFloatingActionLightButton}"
-                                                    Height="34" Width="34" VerticalAlignment="Bottom"
-                                                    Command="{Binding UpdateDeviceCommand}" CommandParameter="{Binding}">
-                                                <materialDesign:PackIcon
-                                                    Width="30"
-                                                    Height="30"
-                                                    Kind="Connection" />
-                                            </Button>
-                                        </StackPanel>
-                                    </Grid>
-                                </materialDesign:Card>
 
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                        </Grid>
+                                        <StackPanel Margin ="8,0,0,0" Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                            <TextBox Text="{Binding Path = DeviceName, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Width="80" TextAlignment="Left" Margin="8,16,0,4" TextWrapping="Wrap" BorderBrush="Transparent"/>
+                                            <Separator Style="{StaticResource MaterialDesignDarkSeparator}" />
+                                            <TextBox Text="{Binding Path = IpAddress, UpdateSourceTrigger=PropertyChanged}" Margin="4" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="120" TextAlignment="Left" TextWrapping="Wrap" BorderBrush="Transparent" />
+                                            <TextBox Text="{Binding Path = Port, UpdateSourceTrigger=PropertyChanged}" Margin="4"  HorizontalAlignment="Left"  VerticalAlignment="Center"  Width="80" TextAlignment="Left" TextWrapping="Wrap" BorderBrush="Transparent"/>
+                                        </StackPanel>
+                                        <Grid Grid.Column="2" Margin="16 8">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Button Style="{StaticResource MaterialDesignFloatingActionLightButton}" 
+                                                    Background="LightGray" BorderBrush="Transparent"
+                                                    Command="{Binding DataContext.ConnectCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}"
+                                                    Height="40" Width="40" VerticalAlignment="Top">
+                                                <Grid>
+
+                                                    <materialDesign:PackIcon
+                                                        Foreground="LightSeaGreen"
+                                                    Width="30"
+                                                    Height="30"
+                                                    Kind="Connection" />
+                                                </Grid>
+                                            </Button>
+                                            <Button  Grid.Row="1"
+                                                Style="{StaticResource MaterialDesignIconButton}" Foreground="OrangeRed"
+                                                    Height="34" Width="34" VerticalAlignment="Bottom"
+                                                    Command="{Binding DataContext.DisConnectCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" HorizontalAlignment="Center">
+                                                <materialDesign:PackIcon
+                                                    Width="30"
+                                                    Height="30"
+                                                    Kind="PowerPlugOffOutline" />
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <ListBox ItemTemplate="{Binding Devices}" ItemsSource="{Binding Path = Status}" HorizontalContentAlignment="Left" HorizontalAlignment="Left">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1" HorizontalAlignment="Stretch" Width="1500" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ListBox>
+                    </StackPanel>
                 </TabItem>
 
             </TabControl>

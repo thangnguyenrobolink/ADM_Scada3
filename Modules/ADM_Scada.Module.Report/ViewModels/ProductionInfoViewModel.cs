@@ -12,8 +12,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
 
 namespace ADM_Scada.Modules.Report.ViewModels
 {
@@ -21,8 +19,8 @@ namespace ADM_Scada.Modules.Report.ViewModels
     {
         // Database
         #region
-
         private ObservableCollection<WeighSessionModel> sessions;
+        private ObservableCollection<WeighSessionModel> filtersessions;
         private readonly ProdShiftDataRepository prodShiftDataRepository = new ProdShiftDataRepository();
         private readonly ProductRepository productRepository = new ProductRepository();
         private readonly CustomerRepository customerRepository = new CustomerRepository();
@@ -30,12 +28,13 @@ namespace ADM_Scada.Modules.Report.ViewModels
         private readonly WeighSessionDRepository weighSessionDRepository = new WeighSessionDRepository();
         private readonly DeviceRepository deviceRepository = new DeviceRepository();
 
-        public ObservableCollection<ProductModel> WeighSession { get => weighSession; set => SetProperty(ref weighSession, value); }
-        public ObservableCollection<CustomerModel> WeighSessionD { get => weighSessionD; set => SetProperty(ref weighSessionD, value); }
+        public ObservableCollection<WeighSessionDModel> WeighSessionD { get => weighSessionD; set { SetProperty(ref weighSessionD, value); FilterWeighSessionD = value; } }
+        public ObservableCollection<WeighSessionDModel> FilterWeighSessionD { get => filterweighSessionD; set { SetProperty(ref filterweighSessionD, value); } }
 
-        private ObservableCollection<ProductModel> weighSession;
-        private ObservableCollection<CustomerModel> weighSessionD;
-        public ObservableCollection<WeighSessionModel> Sessions { get => sessions; private set => SetProperty(ref sessions, value); }
+        private ObservableCollection<WeighSessionDModel> weighSessionD;
+        private ObservableCollection<WeighSessionDModel> filterweighSessionD;
+        public ObservableCollection<WeighSessionModel> Sessions { get => sessions; private set { SetProperty(ref sessions, value); FilterSessions = value; } }
+        public ObservableCollection<WeighSessionModel> FilterSessions { get => filtersessions; private set => SetProperty(ref filtersessions, value); }
         public ObservableCollection<DeviceModel> Devices { get => devices; set => SetProperty(ref devices, value); }
         public ObservableCollection<ProductModel> FullProducts { get => fullProducts; set => SetProperty(ref fullProducts, value); }
         public ObservableCollection<CustomerModel> FullCustomers { get => fullCustomers; set => SetProperty(ref fullCustomers, value); }
@@ -43,7 +42,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
         private ObservableCollection<ProductModel> fullProducts;
         private ObservableCollection<DeviceModel> devices;
         private ObservableCollection<CustomerModel> fullCustomers;
-        public List<string> DeviceNames { get => deviceNames; set => SetProperty(ref deviceNames , value); }
+        public List<string> DeviceNames { get => deviceNames; set => SetProperty(ref deviceNames, value); }
         #endregion
 
         // Event aggr
@@ -51,9 +50,9 @@ namespace ADM_Scada.Modules.Report.ViewModels
         private readonly IEventAggregator eventAggregator;
         private void UpdateCustomer(CustomerModel curUser)
         {
-           
+
             if (CurrentCustomer != curUser)
-            { 
+            {
                 CurrentCustomer = curUser;
                 RaisePropertyChanged(nameof(CurrentCustomer));
             }
@@ -83,29 +82,32 @@ namespace ADM_Scada.Modules.Report.ViewModels
         public ProductModel CurrentProduct
         {
             get => currentProduct ?? new ProductModel();
-            set 
-            { 
-                _ = SetProperty(ref currentProduct, value); 
+            set
+            {
+                _ = SetProperty(ref currentProduct, value);
                 eventAggregator?.GetEvent<ProductChangeEvent>().Publish(currentProduct);
                 CurrentShift.ProdCode = CurrentProduct.ProdCode;
             }
         }
         // current So
-        public static ProdShiftDataModel currentShift = new ProdShiftDataModel();
+        public static ProdShiftDataModel currentShift;
         public ProdShiftDataModel CurrentShift
         {
             get => currentShift ?? new ProdShiftDataModel();
             set
             {
-                _ = SetProperty(ref currentShift, value);
-                eventAggregator?.GetEvent<ShiftInfoChangeEvent>().Publish(currentShift);
-                CurrentSession.SoNumber = CurrentShift.WorkOrderNo;
-                CurrentSession.QtyTareWeigh = CurrentShift.QtyTareWeigh;
-                CurrentSession.QtyOrderWeigh = CurrentShift.QtyOrderWeigh;
-                CurrentSession.ShiftDataId = CurrentShift.Id;
-                CurrentSession.UserId = UserLoginViewModel.currentUser.Id;
-                CurrentShift.UpdatedBy = UserLoginViewModel.currentUser.UserName;
-                RaisePropertyChanged(nameof(CurrentSession));
+                if (value != null)
+                {
+                    _ = SetProperty(ref currentShift, value);
+                    eventAggregator?.GetEvent<ShiftInfoChangeEvent>().Publish(currentShift);
+                    CurrentSession.SoNumber = CurrentShift.WorkOrderNo;
+                    CurrentSession.QtyTareWeigh = CurrentShift.QtyTareWeigh;
+                    CurrentSession.QtyOrderWeigh = CurrentShift.QtyOrderWeigh;
+                    CurrentSession.ShiftDataId = CurrentShift.Id;
+                    CurrentSession.UserId = UserLoginViewModel.currentUser.Id;
+                    CurrentShift.UpdatedBy = UserLoginViewModel.currentUser.UserName;
+                    RaisePropertyChanged(nameof(CurrentSession));
+                }
             }
         }
         //Current session
@@ -128,7 +130,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
             CurrentCustomer = FullCustomers.FirstOrDefault(c => c.Id == CurrentSession.CustId);
             CurrentShift = await prodShiftDataRepository.GetByName(CurrentSession.SoNumber);
             CurrentProduct = FullProducts.FirstOrDefault(p => p.ProdCode == CurrentShift.ProdCode);
-           
+
         }
         private bool isSessionWorking;
         private bool isSessionEnded;
@@ -136,6 +138,63 @@ namespace ADM_Scada.Modules.Report.ViewModels
 
         public bool IsSessionWorking { get => CurrentSession.StatusCode == "S"; set { SetProperty(ref isSessionWorking, value); RaisePropertyChanged(nameof(IsSessionWorking)); } }
         public bool IsSessionEnded { get => CurrentSession.StatusCode != "S"; set { SetProperty(ref isSessionEnded, value); RaisePropertyChanged(nameof(IsSessionEnded)); } }
+
+        //Filter vareiables
+        private string filSSCode;
+        public string FilSSCode { get => filSSCode; set { SetProperty(ref filSSCode, value); FilterData(); } }
+        private string filSCusName;
+        public string FilSCusName { get => filSCusName; set { SetProperty(ref filSCusName, value); FilterData(); } }
+        private string filSSSONo;
+        public string FilSSSONo { get => filSSSONo; set { SetProperty(ref filSSSONo, value); FilterData(); } }
+        private string filSSNoDoc;
+        public string FilSSNoDoc { get => filSSNoDoc; set { SetProperty(ref filSSNoDoc, value); FilterData(); } }
+        private void FilterData()
+        {
+            // Perform filtering based on your criteria
+            IEnumerable<WeighSessionModel> _FilterWeighSession = Sessions;
+
+            // Apply filters based on the provided properties
+            if (!string.IsNullOrEmpty(FilSSCode))
+                _FilterWeighSession = _FilterWeighSession.Where(x => x.SessionCode.Contains(FilSSCode));
+            if (!string.IsNullOrEmpty(FilSCusName))
+                _FilterWeighSession = _FilterWeighSession.Where(x => x.CustName.Contains(FilSCusName));
+            if (!string.IsNullOrEmpty(FilSSSONo))
+                _FilterWeighSession = _FilterWeighSession.Where(x => x.SoNumber.Contains(FilSSSONo));
+            if (!string.IsNullOrEmpty(FilSSNoDoc))
+                _FilterWeighSession =_FilterWeighSession.Where(x => x.DocumentNo.Contains(FilSSNoDoc));
+
+            // Update the Products collection with the filtered results
+            FilterSessions = new ObservableCollection<WeighSessionModel>(_FilterWeighSession);
+            RaisePropertyChanged(nameof(FilterSessions));
+        }
+        private string filDetailName;
+        public string FilPCode { get => filDetailName; set { SetProperty(ref filDetailName, value); FilterDData(); } }
+        private string filDetailCode;
+        public string FilBarCode { get => filDetailCode; set { SetProperty(ref filDetailCode, value); FilterDData(); } }
+        private string filDetailPro;
+        public string FilDetailPro { get => filDetailPro; set { SetProperty(ref filDetailPro, value); FilterDData(); } }
+
+        private void FilterDData()
+        {
+            // Perform filtering based on your criteria
+            IEnumerable<WeighSessionDModel> _FilterWeighSessionD = WeighSessionD;
+
+            // Apply filters based on the provided properties
+            if (!string.IsNullOrEmpty(FilPCode))
+                _FilterWeighSessionD = _FilterWeighSessionD.Where(WeighSessionD => WeighSessionD.SessionCode.Contains(FilPCode));
+            if (!string.IsNullOrEmpty(FilBarCode))
+                _FilterWeighSessionD = _FilterWeighSessionD.Where(WeighSessionD => WeighSessionD.Barcode.Contains(FilBarCode));
+            if (!string.IsNullOrEmpty(FilDetailPro))
+                _FilterWeighSessionD = _FilterWeighSessionD.Where(WeighSessionD => WeighSessionD.ProdFullName.Contains(FilDetailPro));
+
+            // Update the Products collection with the filtered results
+            FilterWeighSessionD = (ObservableCollection<WeighSessionDModel>)_FilterWeighSessionD;
+            RaisePropertyChanged(nameof(FilterWeighSessionD));
+        }
+
+        private string filDetailDate;
+        public string FilDetailDate { get => filDetailDate; set { SetProperty(ref filDetailDate, value); FilterDData(); } }
+
         #endregion
 
         // Command config
@@ -144,6 +203,9 @@ namespace ADM_Scada.Modules.Report.ViewModels
         public DelegateCommand EndSessionCommand { get; private set; }
         public DelegateCommand StartSessionCommand { get; private set; }
         public DelegateCommand UpdateSessionCommand { get; private set; }
+        public DelegateCommand<WeighSessionModel> CheckSessionCommand { get; private set; }
+        public DelegateCommand UpdateSessionDetailCommand { get; private set; }
+
         #endregion
 
         //Command Execute
@@ -201,7 +263,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
                 CurrentSession.UpdatedBy = UserLoginViewModel.currentUser.UserName; // Set the created by to the current user
                 CurrentSession.StatusCode = "E";
                 bool b = await weighSessionRepository.Update(CurrentSession);
-                if (b )
+                if (b)
                 {
                     await FetchLastSessionAsync();
                 }
@@ -209,13 +271,40 @@ namespace ADM_Scada.Modules.Report.ViewModels
             catch (Exception ex)
             {
                 Log.Error(ex, "An error occurred while starting a new session");
-               
+
+            }
+            try
+            {
+                Sessions = new ObservableCollection<WeighSessionModel>(await weighSessionRepository.GetAll());
+            }
+            catch (Exception ex)
+            {
+                HandleDataFetchError("All Session ", ex);
             }
         }
         private async void StartNewSession()
         {
 
             bool b = await AddNewSession();
+            try
+            {
+                Sessions = new ObservableCollection<WeighSessionModel>(await weighSessionRepository.GetAll());
+            }
+            catch (Exception ex)
+            {
+                HandleDataFetchError("All Session ", ex);
+            }
+        } 
+        private async void CheckSession(WeighSessionModel a)
+        {
+            try
+            {
+                WeighSessionD = new ObservableCollection<WeighSessionDModel>((IEnumerable<WeighSessionDModel>)await weighSessionDRepository.GetBySessionCode(a.SessionCode)) ?? new ObservableCollection<WeighSessionDModel>();
+            }
+            catch (Exception ex)
+            {
+                HandleDataFetchError("All Session Detail ", ex);
+            }
         }
         #endregion
 
@@ -235,7 +324,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
                 newSession.CreatedDate = DateTime.Now; // Set the created date to the current time
                 newSession.CreatedBy = UserLoginViewModel.currentUser.UserName; // Set the created by to the current user
                                                                                 // You may need to set other properties based on your requirements
-                // Save the new session to the database
+                                                                                // Save the new session to the database
                 int b = await weighSessionRepository.Create(newSession);
                 if (b != -1)
                 {
@@ -275,6 +364,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
             ChangeShiftInfoCommand = new DelegateCommand(ChangeShiftInfo);
             EndSessionCommand = new DelegateCommand(EndCurrentSession);
             StartSessionCommand = new DelegateCommand(StartNewSession);
+            CheckSessionCommand = new DelegateCommand<WeighSessionModel>(CheckSession);
         }
         private async Task FetchInitialDataAsync()
         {

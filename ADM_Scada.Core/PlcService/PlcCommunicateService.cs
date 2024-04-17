@@ -1,6 +1,10 @@
 ﻿using ADM_Scada.Core.Models;
 using ADM_Scada.Core.Respo;
+using ADM_Scada.Cores.PubEvent;
+using Prism.Events;
 using S7.Net;
+using S7.Net.Types;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +12,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Threading;
 
 namespace ADM_Scada.Cores.PlcService
@@ -20,273 +24,247 @@ namespace ADM_Scada.Cores.PlcService
         Connecting = 2,
         Connected = 3
     }
-    public class DeviceChangedEventArgs : EventArgs
-    {
-        public DeviceModel Device { get; }
+    //public class DeviceChangedEventArgs : EventArgs
+    //{
+    //    public DeviceModel Device { get; }
 
-        public DeviceChangedEventArgs(DeviceModel device)
-        {
-            Device = device;
-        }
-    }
+    //    public DeviceChangedEventArgs(DeviceModel device)
+    //    {
+    //        Device = device;
+    //    }
+    //}
 
-    public class VariableChangedEventArgs : EventArgs
-    {
-        public VariableModel Variable { get; }
+    //public class VariableChangedEventArgs : EventArgs
+    //{
+    //    public VariableModel Variable { get; }
 
-        public VariableChangedEventArgs(VariableModel variable)
-        {
-            Variable = variable;
-        }
-    }
+    //    public VariableChangedEventArgs(VariableModel variable)
+    //    {
+    //        Variable = variable;
+    //    }
+    //}
     public class PlcCommunicateService : IPLCCommunicationService
     {
         // device variable
-        private static List<Plc> plcs;
+        #region
         private readonly DeviceRepository deviceRepository;
-        private static List<DeviceModel> devices;
+        private static ObservableCollection<DeviceModel> devices;
+        #endregion
         /// Plc variable 
-        private List<VariableModel> variables;
-        private List<VariableModel> statusVars;
-        private List<VariableModel> errorVars;
-        private List<int[]> Status;
-        private List<int[]> Errors;
-        private Timer updateTimer;
-
+         #region
         private readonly VariableRepository variableRepository;
-        //Event
-        public event EventHandler<DeviceChangedEventArgs> DeviceStatusChanged;
-        public event EventHandler<VariableChangedEventArgs> VariableValueChanged;
+        private ObservableCollection<VariableModel> variables;
+        #endregion
 
-        private void OnDeviceStatusChanged(DeviceChangedEventArgs e)
-        {
-            DeviceStatusChanged?.Invoke(this, e);
-        }
-        private void OnVariableValueChanged(VariableChangedEventArgs e)
-        {
-            VariableValueChanged?.Invoke(this, e);
-        }
-        /// </summary>
-        public List<DeviceModel> Devices => devices;
+        #region
         private readonly DispatcherTimer timer;
+        private readonly DispatcherTimer updateTimer;
+        private IEventAggregator ea;
+
+        public ObservableCollection<DeviceModel> Devices { get => devices; set => devices = value; }
+        #endregion
         /// ///Init 
-        public PlcCommunicateService()
+        public PlcCommunicateService(IEventAggregator ea, VariableRepository variableRepository, DeviceRepository deviceRepository)
         {
-            variableRepository = new VariableRepository();
-            deviceRepository = new DeviceRepository();
-            devices = new List<DeviceModel>();
-            plcs = new List<Plc>();
-            _ = Task.Run(async () =>
-            {
-                variables = new List<VariableModel>(await variableRepository.GetAll());
-                statusVars = new List<VariableModel>(variables.FindAll(x => x.Purpose == "StatusArray"));
-                Status = new List<int[]>();
-                errorVars = new List<VariableModel>(variables.FindAll(x => x.Purpose == "ErrorArray"));
-                Errors = new List<int[]>();
-                foreach (VariableModel aStatusVar in statusVars)
-                {
-                    int[] _status = new int[300];
-                    for (int i = 0; i < 300; i++)
-                    {
-                        try
-                        {
-                            _status[i] = variables.FindIndex(x => x.Address == i && x.Purpose == "Status" && x.DeviceId == aStatusVar.DeviceId);
-                        }
-                        catch (Exception ex)
-                        {
-                            _ = MessageBox.Show(ex.Message);
-                        }
-                        Status.Add(_status);
-                    }
-                }
-                foreach (VariableModel aErrorVar in errorVars)
-                {
-                    int[] _errors = new int[300];
-                    for (int i = 0; i < 300; i++)
-                    {
-                        _errors[i] = variables.FindIndex(x => x.Address == i && x.Purpose == "Error" && x.DeviceId == aErrorVar.DeviceId);
-                        Errors.Add(_errors);
-                    }
-                }
-            });
-            _ = Task.Run(async () =>
-            {
-                devices = new List<DeviceModel>(await deviceRepository.GetAll());
-                foreach (DeviceModel device in devices)
-                {
-                    Plc plc = new Plc(CpuType.S71200, device.IpAddress, 0, 1);
-                    device.Status = DeviceStatus.Connecting;
-                    try
-                    {
-                        plc.Open();
-                        device.Status = DeviceStatus.Connected;
-                    }
-                    catch (PlcException a)
-                    {
-                        switch (a.ErrorCode)
-                        {
-                            case ErrorCode.ConnectionError:
-                                device.Status = DeviceStatus.DisConnect;
-                                break;
-                            default:
-                                device.Status = DeviceStatus.NotPresent;
-                                break;
-                        }
-                        plcs.Add(plc);
-                    }
-                }
-            });
+            this.variableRepository = variableRepository;
+            this.deviceRepository = deviceRepository;
+            this.ea = ea;
+            _ = FetchInitialDataAsync();
+
             //updateTimer = new Timer(null, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+
+            //Update device connection Status
             #region
-            UpdatePlcData(null);
+            UpdatePlcStatus(null);
             timer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromSeconds(3)
+                Interval = TimeSpan.FromSeconds(5)
             };
-            timer.Tick += (sender, e) => UpdatePlcData(null);
+            timer.Tick += (sender, e) => UpdatePlcStatus(null);
             timer.Start();
             #endregion
-        }
 
-        private async void UpdatePlcData(object state)
-        {
-            //Update plc status
-            foreach (DeviceModel device in devices)
+            //Update Variable by time
+            #region
+            updateTimer = new DispatcherTimer
             {
-                var newStatus = GetPlcStatusById(device.Id);
-                if (device.Status != newStatus)
-                {
-                    device.Status = newStatus;
-                    OnDeviceStatusChanged(new DeviceChangedEventArgs(device));
-                }
-            }
-            // Example: Update status and error for plcs
-            // Get list array variable
-            for (int i = 0; i < statusVars?.Count; i++)
-            {
-                int count = 300;
-                try
-                {
-                    if (statusVars[i].DeviceId >= plcs.Count) return;
-                    //byte[] byteArray = await plcs[(int)statusVars[i].DeviceId].ReadAsync(DataType.DataBlock, (int)statusVars[i].Area, (int)statusVars[i].Address, count * 4);
-                    // Assuming each real is 4 bytes
-                    // Convert the byte array to an array of floats
-                    //string[] floatArray = new string[count];
-                    //for (int j = 0; j < count; j++)
-                   // {
-                    //    floatArray[j] = BitConverter.ToSingle(byteArray, j * 4);
-                    //    if (floatArray[j] != variables[Status[i][j]].Value)
-                    //    {
-                    //        variables[Status[i][j]].Value = floatArray[j];
-                    //        OnVariableValueChanged(new VariableChangedEventArgs(variables[Status[i][j]]));
-                    //    }
-                   // }
-                }
-                catch (PlcException b)
-                {
-                    Random random = new Random();
-                    _ = MessageBox.Show($"Read Status Variables from PLC {errorVars[i].DeviceId} fail! Error {b.ErrorCode}");
-                }
-            }
-            ///
-            for (int i = 0; i < errorVars?.Count; i++)
-            {
-                int count = 300;
-                //try
-                //{
-                //    if (statusVars[i].DeviceId >= plcs.Count) return;
-                //    byte[] byteArray = await plcs[(int)errorVars[i].DeviceId].ReadBytesAsync(DataType.DataBlock, (int)errorVars[i].Area, (int)errorVars[i].Address, count * 4);
-                //    // Assuming each real is 4 bytes
-                //    // Convert the byte array to an array of floats
-                //    float[] floatArray = new float[count];
-                //    for (int j = 0; j < count; j++)
-                //    {
-                //        floatArray[j] = BitConverter.ToSingle(byteArray, j * 4);
-                //        if (floatArray[j] != variables[Status[i][j]].Value)
-                //        {
-                //            variables[Status[i][j]].Value = floatArray[j];
-                //            OnVariableValueChanged(new VariableChangedEventArgs(variables[Status[i][j]]));
-                //        }
-                //    }
-                //}
-                //catch (PlcException b)
-                //{
-                //    Random random = new Random();
-                //    _ = MessageBox.Show($"Read Error Variables from PLC {errorVars[i].DeviceId} fail! Error {b.ErrorCode}");
-                //}
-            }
+                Interval = TimeSpan.FromSeconds(0.5)
+            };
+            updateTimer.Tick += (sender, e) => UpdatePlcStatus(null);
+            //updateTimer.Start();
+            #endregion
         }
-
-        // Use to re connect Plc 
-        public async Task<bool> UpdatePlcDevice(DeviceModel plcdevice)
+        // Init data
+        #region
+        private void HandlePlcError(int index, PlcException ex)
         {
-            // Update to database
+            switch (ex.ErrorCode)
+            {
+                case ErrorCode.ConnectionError:
+                    devices[index].Status = DeviceStatus.DisConnect;
+                    break;
+                case ErrorCode.NoError:
+                    devices[index].Status = DeviceStatus.Connected;
+                    break;
+                case ErrorCode.WrongCPU_Type:
+                    devices[index].Status = DeviceStatus.NotPresent;
+                    break;
+                case ErrorCode.IPAddressNotAvailable:
+                    devices[index].Status = DeviceStatus.NotPresent;
+                    break;
+                case ErrorCode.WrongVarFormat:
+                    devices[index].Status = DeviceStatus.NotPresent;
+                    break;
+                case ErrorCode.WrongNumberReceivedBytes:
+                    break;
+                case ErrorCode.SendData:
+                    break;
+                case ErrorCode.ReadData:
+                    break;
+                case ErrorCode.WriteData:
+                    break;
+                default:
+                    devices[index].Status = DeviceStatus.NotPresent;
+                    break;
+            }
+            ea.GetEvent<PlcStatusChangeEvent>().Publish(Devices[index]);
+            Log.Error(ex, $"PLC {devices[index].DeviceName} error");
+            ShowErrorMessage($"An error occurred while working with plc {devices[index].DeviceName} . Please try again later.");
+        }
+        private void HandleDataFetchError(string dataType, Exception ex)
+        {
+            Log.Error(ex, $"An error occurred while loading {dataType}");
+            ShowErrorMessage($"An error occurred while loading {dataType}. Please try again later.");
+        }
+        private void ShowErrorMessage(string message)
+        {
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        private async Task FetchVariableAsync()
+        {
             try
             {
-                _ = await deviceRepository.Update(plcdevice);
+                variables = new ObservableCollection<VariableModel>(await variableRepository.GetAll());
             }
             catch (Exception ex)
             {
-                _ = MessageBox.Show(ex.Message);
-                return false;
+                HandleDataFetchError("All Variables", ex);
             }
-            // Update in plcs list
-            int index = devices.FindIndex(x => x.Id == plcdevice.Id);
-            plcs[index] = new Plc(CpuType.S71200, plcdevice.IpAddress, 0, 1);
-            _ = await ConnectDevice(plcdevice);
-            return true;
         }
+        private async Task FetchDeviceAsync()
+        {
+            ///// Get database
+            try
+            {
+                Devices = new ObservableCollection<DeviceModel>(await deviceRepository.GetAll());
+                UpdateDataItemsByPlc();
+            }
+            catch (Exception ex)
+            {
+                HandleDataFetchError("All Devices", ex);
+            }
+            ////
+            for (int i = 0; i<Devices.Count; i++)
+            {
+                Devices[i].plc = new Plc(CpuType.S71200, Devices[i].IpAddress, 0, 1);
+                Devices[i].Status = DeviceStatus.Connecting;
+                try
+                {
+                    await Devices[i].plc.OpenAsync();
+                    Devices[i].Status = GetPlcStatusById(Devices[i].Id);
+                }
+                catch (PlcException a)
+                {
+                    switch (a.ErrorCode)
+                    {
+                        case ErrorCode.ConnectionError:
+                            Devices[i].Status = DeviceStatus.DisConnect;
+                            break;
+                        default:
+                            Devices[i].Status = DeviceStatus.NotPresent;
+                            break;
+                    }
+                }
+            }
+        }
+
+        private async Task FetchInitialDataAsync()
+        {
+            try
+            {
+                await FetchVariableAsync();
+            }
+            catch
+            { }
+            try
+            {
+                await FetchDeviceAsync();
+            }
+            catch { }
+           
+        }
+        #endregion
+
+        // Device Connect and status
+        #region
         public async Task<bool> ConnectDevice(DeviceModel plcdevice)
         {
-            int index = devices.FindIndex(x => x == plcdevice);
+            int index = Devices.IndexOf(Devices.FirstOrDefault(x => x.Id == plcdevice.Id));
             if (index == -1) return false;
             try
             {
-                await plcs[index].OpenAsync();
+
+                Devices[index].Status = DeviceStatus.Connecting;
+                ea.GetEvent<PlcStatusChangeEvent>().Publish(Devices[index]);
+                await Devices[index].plc.OpenAsync();
+                Devices[index].Status = DeviceStatus.Connected;
+                ea.GetEvent<PlcStatusChangeEvent>().Publish(Devices[index]);
             }
             catch (PlcException a)
             {
-                switch (a.ErrorCode)
-                {
-                    case ErrorCode.ConnectionError:
-                        devices[index].Status = DeviceStatus.DisConnect;
-                        break;
-                    case ErrorCode.NoError:
-                        break;
-                    case ErrorCode.WrongCPU_Type:
-                        devices[index].Status = DeviceStatus.NotPresent;
-                        break;
-                    case ErrorCode.IPAddressNotAvailable:
-                        devices[index].Status = DeviceStatus.NotPresent;
-                        break;
-                    case ErrorCode.WrongVarFormat:
-                        devices[index].Status = DeviceStatus.NotPresent;
-                        break;
-                    case ErrorCode.WrongNumberReceivedBytes:
-                        break;
-                    case ErrorCode.SendData:
-                        break;
-                    case ErrorCode.ReadData:
-                        break;
-                    case ErrorCode.WriteData:
-                        break;
-                    default:
-                        devices[index].Status = DeviceStatus.NotPresent;
-                        break;
-                }
-                _ = MessageBox.Show($"Fail to connect PLC {devices[index].DeviceName}");
+                HandlePlcError(index, a);
                 return false;
             }
             return true;
         }
-
-        public DeviceStatus GetPlcStatusById(int id)
+        public bool DisConnectDevice(DeviceModel plcdevice)
         {
-            int index = devices.FindIndex(x => x.Id == id);
-            if (index == -1 || index >= plcs.Count) return DeviceStatus.NotPresent;
+            int index = devices.IndexOf(devices.FirstOrDefault(x => x.Id == plcdevice.Id));
+            if (index == -1) return false;
             try
             {
-                if (plcs[index].IsConnected)
+                devices[index].plc.Close();
+                devices[index].Status = DeviceStatus.DisConnect;
+            }
+            catch (PlcException a)
+            {
+                HandlePlcError(index, a);
+                return false;
+            }
+            return true;
+        }
+        private void UpdatePlcStatus(object state)
+        {
+            if (devices != null)
+            {
+                //Update plc status
+                for (int index = 0 ; index < Devices.Count(); index++)
+                { 
+                    var newStatus = GetPlcStatusById(Devices[index].Id);
+                    if (Devices[index].Status != newStatus)
+                    {
+                        Devices[index].Status = newStatus;
+                        ea.GetEvent<PlcStatusChangeEvent>().Publish(Devices[index]);
+                    }
+                }
+            }
+        }
+        public DeviceStatus GetPlcStatusById(int id)
+        {
+            int index = devices.IndexOf(devices.FirstOrDefault(x => x.Id == id));
+            try
+            {
+                if (devices[index].plc.IsConnected)
                 {
                     return DeviceStatus.Connected;
                 }
@@ -301,47 +279,55 @@ namespace ADM_Scada.Cores.PlcService
                 switch (a.ErrorCode)
                 {
                     case ErrorCode.ConnectionError:
-                        devices[index].Status = DeviceStatus.DisConnect;
                         return DeviceStatus.DisConnect;
                     default:
-                        devices[index].Status = DeviceStatus.NotPresent;
                         return DeviceStatus.NotPresent;
                 }
             }
         }
+        #endregion
 
-        public async Task<VariableModel> GetPLCValue(VariableModel a)
+        /// Get Devices database
+        #region        
+        public ObservableCollection<DeviceModel> GetAllDevices()
         {
-            DeviceModel device = devices.Find(x => x.Id == a.DeviceId);
-            //try
-            //{
-            //    a.Value = (float?)(double)await plcs[(int)a.DeviceId].ReadAsync(DataType.DataBlock, (int)a.Area, (int)a.Address, VarType.DWord, 1, 0);
-            //}
-            //catch (PlcException b)
-            //{
-            //    Random random = new Random();
-            //    _ = MessageBox.Show($"Read Variable {a.Name} from PLC {device.DeviceName} fail! Error {b.ErrorCode}");
-            //    a.Value = (float?)random.NextDouble();
-            //}
-            return a;
-        }
-
-        public async Task<bool> SetPLCValue(VariableModel a)
-        {
-            DeviceModel device = devices.Find(x => x.Id == a.DeviceId);
-
             try
             {
-                await plcs[(int)a.DeviceId].WriteAsync(DataType.DataBlock, (int)a.Area, (int)a.Address, a.Value);
+                return devices ?? new ObservableCollection<DeviceModel>(Devices);
             }
-            catch (PlcException b)
+            catch (Exception ex)
             {
-                _ = MessageBox.Show($"Set Variable {a.Name} from PLC {device.DeviceName} fail! Error {b.ErrorCode}");
+                _ = MessageBox.Show($"Error while getting all Devices: {ex.Message}");
+                return null;
+            }
+        }
+        public async Task<bool> UpdatePlcDevice(DeviceModel plcdevice)
+        {
+            // Update to database
+            try
+            {
+                int index = Devices.IndexOf(Devices.FirstOrDefault(x => x.Id == plcdevice.Id));
+                if (index == -1) return false;
+                _ = await deviceRepository.Update(plcdevice);
+                Devices[index].plc.Close();
+                Devices[index] = plcdevice;
+                Devices[index].Status = DeviceStatus.NotPresent;
+                ea.GetEvent<PlcStatusChangeEvent>().Publish(Devices[index]);
+                Devices[index].plc = new Plc(CpuType.S71200, Devices[index].IpAddress, 0, 1);
+            }
+            catch (Exception ex)
+            {
+                _ = MessageBox.Show(ex.Message);
                 return false;
             }
+
+            //_ = await ConnectDevice(plcdevice);
             return true;
         }
+        #endregion
 
+        /// Variables Database
+        #region
         public ObservableCollection<VariableModel> GetAllVariables()
         {
             try
@@ -354,19 +340,10 @@ namespace ADM_Scada.Cores.PlcService
                 return null;
             }
         }
-        public ObservableCollection<DeviceModel> GetAllDevices()
+        public VariableModel GetPLCValue(VariableModel a)
         {
-            try
-            {
-                return new ObservableCollection<DeviceModel>(Devices);
-            }
-            catch (Exception ex)
-            {
-                _ = MessageBox.Show($"Error while getting all Devices: {ex.Message}");
-                return null;
-            }
+            return variables.FirstOrDefault(x => x.Id == a.Id) ?? a;
         }
-
         public VariableModel GetVariableById(int id)
         {
             VariableModel variable;
@@ -381,7 +358,6 @@ namespace ADM_Scada.Cores.PlcService
             }
             return variable;
         }
-
         public VariableModel GetVariableByName(string name)
         {
             try
@@ -394,7 +370,6 @@ namespace ADM_Scada.Cores.PlcService
                 return null;
             }
         }
-
         public ObservableCollection<VariableModel> GetVariablesByModule(string module)
         {
             try
@@ -411,7 +386,22 @@ namespace ADM_Scada.Cores.PlcService
                 return null;
             }
         }
+        public ObservableCollection<VariableModel> GetVariablesByPlc(DeviceModel device)
+        {
+            try
+            {
+                var variablesInPlc = new ObservableCollection<VariableModel>(
+                    variables.Where(v => v.DeviceId == device.Id)
+                );
 
+                return variablesInPlc;
+            }
+            catch (Exception ex)
+            {
+                _ = MessageBox.Show($"Error while getting variables by Plc: {ex.Message}");
+                return null;
+            }
+        }
         public ObservableCollection<VariableModel> GetVariablesByPurpose(string purpose)
         {
             try
@@ -428,7 +418,6 @@ namespace ADM_Scada.Cores.PlcService
                 return null;
             }
         }
-
         public async Task<bool> UpdateVariable(VariableModel variable)
         {
             try
@@ -441,5 +430,68 @@ namespace ADM_Scada.Cores.PlcService
                 return false;
             }
         }
+        public void UpdateDataItemsByPlc()
+        {
+            for (int i =0; i < Devices.Count(); i++)
+            {
+                // get variable by plc
+                ObservableCollection<VariableModel> vars = GetVariablesByPlc(Devices[i]);
+                Devices[i].DataItems = new List<DataItem>();
+                foreach (VariableModel var in vars)
+                {
+                    DataItem dataItem = new DataItem
+                    {
+                        DataType = DataType.DataBlock, // Update with appropriate data type
+                        VarType = (VarType)var.Type, // Update with appropriate variable type
+                        DB = var.Area ?? 0, // Update with appropriate data block number
+                        BitAdr = (byte)var.BitAddress, // Update with appropriate address
+                        Count = 1, // Update with appropriate count
+                        StartByteAdr = (int)var.ByteAddress // Update with appropriate start byte address
+                    };
+
+                    Devices[i].DataItems.Add(dataItem);
+                }
+            }
+        }
+        #endregion
+
+        // Variable connect PLC
+        #region
+        public async Task<bool> SetPLCValue(VariableModel a)
+        {
+            int index = devices.IndexOf(devices.FirstOrDefault(x => x.Id == a.DeviceId));
+            if (devices[index].Status == DeviceStatus.Connected)
+            {
+                try
+                {
+                    await devices[index].plc.WriteAsync(DataType.DataBlock, (int)a.Area, (int)a.ByteAddress, a.Value);
+                }
+                catch (PlcException b)
+                {
+                    _ = MessageBox.Show($"Set Variable {a.Name} from PLC { devices[index].DeviceName} fail! Error {b.ErrorCode}");
+                    HandlePlcError(index, b);
+                    return false;
+                }
+            }
+            else return false;
+            return true;
+        }
+        public async Task<bool> ReadVariablesByPlc(DeviceModel device)
+        {
+            try
+            {
+                await device.plc.ReadMultipleVarsAsync(device.DataItems); // Read multiple variables in one command
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Handle read error
+                // For example: Log the error or show a message to the user
+                Log.Error(ex, "Error reading variables from PLC");
+                return false;
+            }
+        }
+        #endregion
+
     }
 }

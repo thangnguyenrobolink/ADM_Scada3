@@ -167,7 +167,8 @@ CREATE TABLE [dbo].[variable] (
     [device_id] INT  NOT NULL,
     [type] INT NOT NULL,
     [area] INT NOT NULL,
-    [address] INT NOT NULL,
+	[bit_address] INT NOT NULL,
+    [byte_address] INT NOT NULL,
     [name] NVARCHAR(255) NOT NULL,
     [module] NVARCHAR(50),
     [unit] NVARCHAR(50),
@@ -178,5 +179,12 @@ CREATE TABLE [dbo].[variable] (
 	[created_by] [nvarchar](50) NULL,
 	[updated_date] [datetime] NULL,
 	[updated_by] [nvarchar](50) NULL
+) ON [PRIMARY]
+go
+DROP TABLE  [dbo].[tmp_printreport]
+GO
+CREATE TABLE [dbo].[tmp_printreport] (
+    [id] INT IDENTITY(1,1) PRIMARY KEY,
+	[session_code] NVARCHAR(50),
 ) ON [PRIMARY]
 go

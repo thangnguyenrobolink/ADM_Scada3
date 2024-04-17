@@ -12,7 +12,8 @@ namespace ADM_Scada.Core.Models
         public int? DeviceId { get; set; }
         public int? Type { get; set; }
         public int? Area { get; set; }
-        public int? Address { get; set; }
+        public int? ByteAddress { get; set; }
+        public int? BitAddress { get; set; }
         public string Name { get; set; }
         public string Module { get; set; }
         public string Unit { get; set; }

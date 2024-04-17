@@ -28,6 +28,7 @@ namespace ADM_Scada.Core.PlcService
             }
             catch (Exception ex)
             {
+                Console.Write(ex);
                 // Handle exceptions (see step 6)
                 return null;
             }

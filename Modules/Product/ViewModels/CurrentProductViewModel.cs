@@ -22,9 +22,12 @@ namespace ADM_Scada.Modules.Product.ViewModels
 
         private void UpdateProduct(ProductModel curProduct)
         {
-            CurrentProduct = curProduct;
-            CurrentProduct.UpdatedDate = DateTime.Now;
-            RaisePropertyChanged(nameof(CurrentProduct));
+            if (curProduct != null)
+            {
+                CurrentProduct = curProduct;
+                CurrentProduct.UpdatedDate = DateTime.Now;
+                RaisePropertyChanged(nameof(CurrentProduct));
+            }
         }
     }
 }
