@@ -152,6 +152,10 @@
       "frameworks": {
         "net472": {
           "dependencies": {
+            "BarcodeLib": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
             "LiveCharts.Wpf": {
               "target": "Package",
               "version": "[0.9.7, )"

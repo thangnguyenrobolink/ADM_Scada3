@@ -163,5 +163,7 @@ E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\System.IO.Packaging.
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\Report.csproj.CopyComplete
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\ADM_Scada.Module.Report.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\ADM_Scada.Module.Report.pdb
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\Views\SessionInfoView.baml
-E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\Views\SessionInfoView.g.cs
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\Views\CurrentSessionView.baml
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\Views\CurrentSessionView.g.cs
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\BarcodeStandard.dll
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\System.Drawing.Common.dll

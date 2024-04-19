@@ -171,3 +171,5 @@ E:\work\ADM_Scada\Modules\Product\bin\Debug\System.IO.Packaging.xml
 E:\work\ADM_Scada\Modules\Product\obj\Debug\Product.csproj.CopyComplete
 E:\work\ADM_Scada\Modules\Product\obj\Debug\Product.dll
 E:\work\ADM_Scada\Modules\Product\obj\Debug\Product.pdb
+E:\work\ADM_Scada\Modules\Product\bin\Debug\BarcodeStandard.dll
+E:\work\ADM_Scada\Modules\Product\bin\Debug\System.Drawing.Common.dll

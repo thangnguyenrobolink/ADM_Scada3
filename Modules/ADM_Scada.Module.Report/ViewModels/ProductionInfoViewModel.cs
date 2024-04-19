@@ -161,7 +161,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
             if (!string.IsNullOrEmpty(FilSSSONo))
                 _FilterWeighSession = _FilterWeighSession.Where(x => x.SoNumber.Contains(FilSSSONo));
             if (!string.IsNullOrEmpty(FilSSNoDoc))
-                _FilterWeighSession =_FilterWeighSession.Where(x => x.DocumentNo.Contains(FilSSNoDoc));
+                _FilterWeighSession = _FilterWeighSession.Where(x => x.DocumentNo.Contains(FilSSNoDoc));
 
             // Update the Products collection with the filtered results
             FilterSessions = new ObservableCollection<WeighSessionModel>(_FilterWeighSession);
@@ -296,7 +296,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
             {
                 HandleDataFetchError("All Session ", ex);
             }
-        } 
+        }
         private async void CheckSession(WeighSessionModel a)
         {
             try
@@ -320,6 +320,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
                 // Create a new instance of WeighSessionModel with initial values
                 var newSession = CurrentSession;
                 newSession.SessionCode = $"ADMD{CurrentSession.BoatId}{(CurrentSession.Id + 1) % 10000000:D7}";
+                newSession.EndTime = DateTime.Now;
                 newSession.StartTime = DateTime.Now; // Set the start time to the current time
                 newSession.StatusCode = "S"; // Assuming "S" represents the status for a started session
                 newSession.UpdatedDate = DateTime.Now; // Set the created date to the current time
@@ -350,6 +351,8 @@ namespace ADM_Scada.Modules.Report.ViewModels
         {
             eventAggregator = ea;
             _ = eventAggregator.GetEvent<CustomerChangeEvent>().Subscribe(UpdateCustomer);
+            _ = eventAggregator.GetEvent<EndSessionCommandEvent>().Subscribe(EndCurrentSession);
+            _ = eventAggregator.GetEvent<NewBagEvent>().Subscribe(UpdateCurrentSession);
             try
             {
                 InitializeCommands();
@@ -358,6 +361,39 @@ namespace ADM_Scada.Modules.Report.ViewModels
             catch (Exception ex)
             {
                 HandleInitializationError(ex);
+            }
+        }
+
+        private void UpdateCurrentSession()
+        {
+            decimal currentweight = 10;
+            CurrentSession.QtyCounted = CurrentSession.QtyCounted + 1;
+            CurrentSession.QtyWeighed = CurrentSession.QtyWeighed + currentweight;
+            CurrentSession.QtyGoodWeigh = CurrentSession.QtyGoodWeigh + currentweight - CurrentSession.QtyTareWeigh;
+            CurrentSession.Gap = CurrentShift.QtyOrderWeigh - CurrentSession.QtyWeighed;
+            
+            CurrentSession.UpdatedDate = DateTime.Now;
+            CurrentSession.UpdatedBy = UserLoginViewModel.currentUser.UserName;
+            CurrentSession = CurrentSession;
+            EditSession(CurrentSession);
+        }
+        private async void EditSession(WeighSessionModel obj)
+        {
+            try
+            {
+                bool b = await weighSessionRepository.Update(CurrentSession);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "An error occurred while edit session");
+            }
+            try
+            {
+                Sessions = new ObservableCollection<WeighSessionModel>(await weighSessionRepository.GetAll());
+            }
+            catch (Exception ex)
+            {
+                HandleDataFetchError("All Session ", ex);
             }
         }
         //Init 
@@ -371,10 +407,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
             CheckSessionCommand = new DelegateCommand<WeighSessionModel>(CheckSession);
         }
 
-        private void EditSession(WeighSessionModel obj)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         private async Task FetchInitialDataAsync()
         {

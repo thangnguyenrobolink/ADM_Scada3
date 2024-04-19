@@ -171,3 +171,5 @@ E:\work\ADM_Scada\Customer\obj\Debug\Customer.csproj.AssemblyReference.cache
 E:\work\ADM_Scada\Customer\obj\Debug\Customer.csproj.CopyComplete
 E:\work\ADM_Scada\Customer\obj\Debug\Customer.dll
 E:\work\ADM_Scada\Customer\obj\Debug\Customer.pdb
+E:\work\ADM_Scada\Customer\bin\Debug\BarcodeStandard.dll
+E:\work\ADM_Scada\Customer\bin\Debug\System.Drawing.Common.dll

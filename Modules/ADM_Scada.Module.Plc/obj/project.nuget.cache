@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "wYy8am5IrVtnDj+PGSRYxazXuFCOsEXXz2nHmw8oQooaeAGhrhpT7bOhftOJOtBw6FvBcu3rmEyWKRfV5Y5p2w==",
+  "dgSpecHash": "wMah/dHus5Md1wflk/1zDtD4VjJ/4/rA9+S5QkdhCv6UsYS/A6CRzQZvvvBQ/XYD4DnIHUmoTbth9ZGJdXDfPA==",
   "success": true,
   "projectFilePath": "E:\\work\\ADM_Scada\\Modules\\ADM_Scada.Module.Plc\\Plc.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\thang\\.nuget\\packages\\barcodelib\\2.2.4\\barcodelib.2.2.4.nupkg.sha512",
     "C:\\Users\\thang\\.nuget\\packages\\controlzex\\4.3.0\\controlzex.4.3.0.nupkg.sha512",
     "C:\\Users\\thang\\.nuget\\packages\\livecharts\\0.9.7\\livecharts.0.9.7.nupkg.sha512",
     "C:\\Users\\thang\\.nuget\\packages\\livecharts.wpf\\0.9.7\\livecharts.wpf.0.9.7.nupkg.sha512",
@@ -19,6 +20,7 @@
     "C:\\Users\\thang\\.nuget\\packages\\serilog\\3.1.1\\serilog.3.1.1.nupkg.sha512",
     "C:\\Users\\thang\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\thang\\.nuget\\packages\\system.diagnostics.diagnosticsource\\7.0.2\\system.diagnostics.diagnosticsource.7.0.2.nupkg.sha512",
+    "C:\\Users\\thang\\.nuget\\packages\\system.drawing.common\\4.5.1\\system.drawing.common.4.5.1.nupkg.sha512",
     "C:\\Users\\thang\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
     "C:\\Users\\thang\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\thang\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",

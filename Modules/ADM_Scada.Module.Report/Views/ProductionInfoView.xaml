@@ -246,6 +246,10 @@
                         Grid.ColumnSpan="2" Background="#FFF1CDCD" BorderBrush="#00000000" Foreground="Red"/>
                     <!--#endregion-->
 
+                    <!--Sesion status-->
+                    <ContentControl Grid.Row="4" Grid.Column="0 " Margin="4" 
+                            prism:RegionManager.RegionName="{x:Static core:RegionNames.SessionStatus}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
                 </Grid>
 
             </TabItem>
@@ -325,6 +329,15 @@
                                 materialDesign:TextFieldAssist.LeadingIcon="Filter"  BorderBrush="gray"
                                 materialDesign:HintAssist.Hint="Find No Document" 
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="200" />
+                        <Button Width="155"
+                               Height="50" FontSize="20"
+                                Style="{StaticResource MaterialDesignOutlinedSecondaryDarkButton}"  
+                                 materialDesign:ButtonAssist.CornerRadius="20"
+                                Margin="10,10,10,10.4" 
+                                VerticalAlignment="Center"
+                                Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Printer" Height="40" Width="40"></materialDesign:PackIcon>
+                        </Button>
                     </StackPanel>
                     <DataGrid Grid.Row="1" AutoGenerateColumns="False" RowStyle="{StaticResource DataGridRowStyle1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  MaxHeight="600"
                               SelectionMode="Extended" GridLinesVisibility="None" CellStyle="{StaticResource DataGridCellStyle1}"
@@ -588,32 +601,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="70">
-                <TabItem.Header>
-                    <StackPanel
-                          Width="auto"
-                          Height="auto">
-                        <materialDesign:PackIcon
-                                Width="24"
-                                Height="24"
-                                HorizontalAlignment="Center"
-                                Kind="FileAccountOutline" />
-                        <TextBlock
-                                HorizontalAlignment="Center"
-                                Text="Report" />
-                    </StackPanel>
-                </TabItem.Header>
-                <Button Content="Start" Width="150"
-                   Height="50" FontSize="20"
-                    Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"  
-                    Foreground="DarkOrange" materialDesign:ButtonAssist.CornerRadius="20"
-                    Margin="10,0" 
-                    BorderBrush="#00000000" Background="#FFFFE5B7" VerticalAlignment="Center"
-                        Click="Button_Click"/>
 
-
-
-            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

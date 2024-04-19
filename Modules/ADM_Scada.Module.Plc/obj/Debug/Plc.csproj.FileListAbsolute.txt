@@ -182,3 +182,5 @@ E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\obj\Debug\Plc.csproj.CoreCompileI
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\obj\Debug\Plc.csproj.CopyComplete
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\obj\Debug\ADM_Scada.Module.Plc.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\obj\Debug\ADM_Scada.Module.Plc.pdb
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\BarcodeStandard.dll
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Plc\bin\Debug\System.Drawing.Common.dll

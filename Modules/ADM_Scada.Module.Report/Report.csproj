@@ -151,7 +151,6 @@
     <Compile Include="ViewModels\CrystalReportWindowViewModel.cs" />
     <Compile Include="ViewModels\CurrentSessionViewModel.cs" />
     <Compile Include="ViewModels\ProductionInfoViewModel.cs" />
-    <Compile Include="ViewModels\SessionInfoViewViewModel.cs" />
     <Compile Include="ViewModels\ShiftInfoViewModel.cs" />
     <Compile Include="Views\CrystalReportWindow.xaml.cs">
       <DependentUpon>CrystalReportWindow.xaml</DependentUpon>
@@ -161,9 +160,6 @@
     </Compile>
     <Compile Include="Views\ProductionInfoView.xaml.cs">
       <DependentUpon>ProductionInfoView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SessionInfoView.xaml.cs">
-      <DependentUpon>SessionInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShiftInfoView.xaml.cs">
       <DependentUpon>ShiftInfoView.xaml</DependentUpon>
@@ -186,6 +182,9 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="BarcodeLib">
+      <Version>2.2.4</Version>
+    </PackageReference>
     <PackageReference Include="LiveCharts.Wpf">
       <Version>0.9.7</Version>
     </PackageReference>
@@ -238,10 +237,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProductionInfoView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SessionInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

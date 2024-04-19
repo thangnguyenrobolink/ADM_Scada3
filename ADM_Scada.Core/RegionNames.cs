@@ -14,6 +14,7 @@
         public static string ReportRegion = "ReportRegion";
         public static string ProductDatabaseRegion = "ProductDatabaseRegion";
         public static string DataBase = "DataBase";
+        public static string SessionStatus = "SessionStatus";
 
     }
 }

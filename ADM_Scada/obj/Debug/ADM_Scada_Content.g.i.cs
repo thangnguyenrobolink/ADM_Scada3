@@ -8,6 +8,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("avatar.jpeg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.dylib")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.dylib")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.so")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.so")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.so")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libskiasharp.so")]
 
 

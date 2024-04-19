@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.7.2": {
+      "BarcodeLib/2.2.4": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "4.5.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/BarcodeStandard.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/BarcodeStandard.dll": {}
+        }
+      },
       "ControlzEx/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -232,6 +244,20 @@
         },
         "build": {
           "buildTransitive/net462/_._": {}
+        }
+      },
+      "System.Drawing.Common/4.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "System.Drawing",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Drawing.Common.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Drawing.Common.dll": {}
         }
       },
       "System.Memory/4.5.5": {
@@ -349,6 +375,18 @@
       }
     },
     ".NETFramework,Version=v4.7.2/win": {
+      "BarcodeLib/2.2.4": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "4.5.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/BarcodeStandard.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/BarcodeStandard.dll": {}
+        }
+      },
       "ControlzEx/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -579,6 +617,20 @@
         },
         "build": {
           "buildTransitive/net462/_._": {}
+        }
+      },
+      "System.Drawing.Common/4.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "System.Drawing",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Drawing.Common.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Drawing.Common.dll": {}
         }
       },
       "System.Memory/4.5.5": {
@@ -696,6 +748,18 @@
       }
     },
     ".NETFramework,Version=v4.7.2/win-x64": {
+      "BarcodeLib/2.2.4": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "4.5.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/BarcodeStandard.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/BarcodeStandard.dll": {}
+        }
+      },
       "ControlzEx/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -926,6 +990,20 @@
         },
         "build": {
           "buildTransitive/net462/_._": {}
+        }
+      },
+      "System.Drawing.Common/4.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "System.Drawing",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Drawing.Common.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Drawing.Common.dll": {}
         }
       },
       "System.Memory/4.5.5": {
@@ -1043,6 +1121,18 @@
       }
     },
     ".NETFramework,Version=v4.7.2/win-x86": {
+      "BarcodeLib/2.2.4": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "4.5.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/BarcodeStandard.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/BarcodeStandard.dll": {}
+        }
+      },
       "ControlzEx/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -1273,6 +1363,20 @@
         },
         "build": {
           "buildTransitive/net462/_._": {}
+        }
+      },
+      "System.Drawing.Common/4.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "System.Drawing",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Drawing.Common.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Drawing.Common.dll": {}
         }
       },
       "System.Memory/4.5.5": {
@@ -1391,6 +1495,19 @@
     }
   },
   "libraries": {
+    "BarcodeLib/2.2.4": {
+      "sha512": "rb5xqnR2jGdCutxzP92QZJaBkA/LlzsqF2EiUyp42ZzSarwIyAQ8zJCSsRJC0vvhnhXjGSFo/0Ss1OwQ2n1/PQ==",
+      "type": "package",
+      "path": "barcodelib/2.2.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "barcodelib.2.2.4.nupkg.sha512",
+        "barcodelib.nuspec",
+        "lib/netstandard2.0/BarcodeStandard.dll"
+      ]
+    },
     "ControlzEx/4.3.0": {
       "sha512": "I7PKmQNIMO9+s4s50WXOApotnyEKL9G8vvYrZY7CLe7nufXwRSv+vWPrd4BYwZDQiWHbBwnXsC8zUPgPnEWr6g==",
       "type": "package",
@@ -1792,6 +1909,39 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "System.Drawing.Common/4.5.1": {
+      "sha512": "GiyeGi/v4xYDz1vCNFwFvhz9k1XddOG7VD3jxRqzRBCbTHji+s3HxxbxtoymuK4OadEpgotI8zQ5+GEEH9sUEQ==",
+      "type": "package",
+      "path": "system.drawing.common/4.5.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.Drawing.Common.dll",
+        "lib/netstandard2.0/System.Drawing.Common.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net461/System.Drawing.Common.dll",
+        "ref/netstandard2.0/System.Drawing.Common.dll",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/unix/lib/netcoreapp2.0/System.Drawing.Common.dll",
+        "runtimes/win/lib/netcoreapp2.0/System.Drawing.Common.dll",
+        "system.drawing.common.4.5.1.nupkg.sha512",
+        "system.drawing.common.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Memory/4.5.5": {
       "sha512": "XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw==",
       "type": "package",
@@ -1998,6 +2148,7 @@
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
       "ADM_Scada.Core >= 1.0.0",
+      "BarcodeLib >= 2.2.4",
       "LiveCharts.Wpf >= 0.9.7",
       "MaterialDesignColors >= 2.1.4",
       "MaterialDesignExtensions >= 3.3.0",
@@ -2057,6 +2208,10 @@
     "frameworks": {
       "net472": {
         "dependencies": {
+          "BarcodeLib": {
+            "target": "Package",
+            "version": "[2.2.4, )"
+          },
           "LiveCharts.Wpf": {
             "target": "Package",
             "version": "[0.9.7, )"
