@@ -149,11 +149,15 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewModels\CrystalReportWindowViewModel.cs" />
+    <Compile Include="ViewModels\CurrentSessionDetailViewModel.cs" />
     <Compile Include="ViewModels\CurrentSessionViewModel.cs" />
     <Compile Include="ViewModels\ProductionInfoViewModel.cs" />
     <Compile Include="ViewModels\ShiftInfoViewModel.cs" />
     <Compile Include="Views\CrystalReportWindow.xaml.cs">
       <DependentUpon>CrystalReportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentSessionDetailView.xaml.cs">
+      <DependentUpon>CurrentSessionDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CurrentSessionView.xaml.cs">
       <DependentUpon>CurrentSessionView.xaml</DependentUpon>
@@ -229,6 +233,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\CrystalReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CurrentSessionDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

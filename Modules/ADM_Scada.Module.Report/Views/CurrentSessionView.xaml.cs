@@ -11,5 +11,10 @@ namespace ADM_Scada.Module.Report.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -217,6 +217,7 @@
     <Compile Include="PubEvent\ProductChangeEvent.cs" />
     <Compile Include="PubEvent\CustomerChangeEvent.cs" />
     <Compile Include="PubEvent\PlcErrorEvent.cs" />
+    <Compile Include="PubEvent\UpdateSessionDetailChangeEvent.cs" />
     <Compile Include="PubEvent\UserLoginEvent.cs" />
     <Compile Include="PubEvent\VariableValueChangeEvent.cs" />
     <Compile Include="RegionNames.cs" />

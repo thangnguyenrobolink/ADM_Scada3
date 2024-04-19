@@ -22,7 +22,6 @@ namespace ADM_Scada.Modules.User
         public void OnInitialized(IContainerProvider containerProvider)
         {
             _regionManager.RegisterViewWithRegion(RegionNames.UserRegion, typeof(UserStatusRegion));
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(UserLoginView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

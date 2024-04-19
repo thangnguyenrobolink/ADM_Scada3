@@ -147,7 +147,7 @@
                                     </StackPanel>
                                 </RadioButton>
 
-                                <RadioButton HorizontalAlignment ="Stretch"
+                                <!--<RadioButton HorizontalAlignment ="Stretch"
                                      Style="{StaticResource menuButton}"
                                 Tag="Orange"
                                 Command="{Binding NavigateCommand}"  CommandParameter="UserLoginView">
@@ -155,7 +155,7 @@
                                         <materialDesign:PackIcon Margin="20,0"  Width="32"  Height="24" Kind="Alarm" />
                                         <TextBlock VerticalAlignment="Center" Text="Alarm" />
                                     </StackPanel>
-                                </RadioButton>
+                                </RadioButton>-->
                                 <RadioButton HorizontalAlignment ="Stretch"
                                      Style="{StaticResource menuButton}"
                                 Tag="Orange" IsTabStop="False"
@@ -165,7 +165,7 @@
                                         <TextBlock VerticalAlignment="Center" Text="Production" />
                                     </StackPanel>
                                 </RadioButton>
-                                <RadioButton HorizontalAlignment ="Stretch"
+                                <!--<RadioButton HorizontalAlignment ="Stretch"
                                      Style="{StaticResource menuButton}"
                                 Tag="Orange" IsTabStop="False"
                                  Command="{Binding NavigateCommand}"  CommandParameter="UserLoginView">
@@ -173,15 +173,15 @@
                                         <materialDesign:PackIcon Margin="20,0"  Width="32"  Height="24" Kind="Database" />
                                         <TextBlock VerticalAlignment="Center" Text="Data Static" />
                                     </StackPanel>
-                                </RadioButton>
-                                <RadioButton HorizontalAlignment ="Stretch" 
+                                </RadioButton>-->
+                                <!--<RadioButton HorizontalAlignment ="Stretch" 
                                      Style="{StaticResource menuButton}"
                                 Tag="Orange" Command="{Binding NavigateCommand}"  CommandParameter="ProductDatabaseView" >
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                         <materialDesign:PackIcon Margin="20,0"  Width="32"  Height="24" Kind="FileChartOutline" />
                                         <TextBlock VerticalAlignment="Center" Text="Report" />
                                     </StackPanel>
-                                </RadioButton>
+                                </RadioButton>-->
                                 <RadioButton HorizontalAlignment ="Stretch" 
                                      Style="{StaticResource menuButton}"
                                 Tag="Orange" Command="{Binding NavigateCommand}"  CommandParameter="UserLoginView">

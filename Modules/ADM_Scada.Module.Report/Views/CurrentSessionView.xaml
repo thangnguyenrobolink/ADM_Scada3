@@ -71,7 +71,7 @@
                 </Button>
             </Grid>
         </materialDesign:Card>
-        <Button Grid.Row="1" Grid.Column="0" Margin="4"
+        <Button Grid.Row="1" Grid.Column="0" Margin="8"
                 materialDesign:ButtonAssist.CornerRadius="10"
                   Style="{StaticResource MaterialDesignRaisedLightButton}" Height="Auto" >
             <Grid>
@@ -85,7 +85,7 @@
                 <Image Source="{Binding BarCodeImage}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" />
             </Grid>
         </Button>
-        <Button Grid.Row="1" Grid.Column="1" Margin="4"
+        <Button Grid.Row="1" Grid.Column="1" Margin="8"
                 materialDesign:ButtonAssist.CornerRadius="10"
                   Style="{StaticResource MaterialDesignRaisedButton}" Height="Auto" >
             <Grid>
@@ -97,43 +97,43 @@
                 <TextBlock Text="{Binding CurrentDetailWeight.CurrentWeigh, StringFormat={}{0:N2}}" Style="{StaticResource MaterialDesignHeadline4TextBlock}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </Button>
-        <Button Grid.Row="2" Grid.Column="2" Margin="4"
-                materialDesign:ButtonAssist.CornerRadius="10"
-                  Style="{StaticResource MaterialDesignRaisedSecondaryDarkButton}" Height="Auto" >
+        <Button Grid.Row="2" Grid.Column="2" Margin="8"
+                materialDesign:ButtonAssist.CornerRadius="10"  BorderThickness="2"
+                  Style="{StaticResource MaterialDesignPaperSecondaryDarkButton}" Height="Auto" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Good Weight" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding Order}" Style="{StaticResource MaterialDesignHeadline4TextBlock}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="Order Weight" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding CurrentSession.QtyOrderWeigh}" Style="{StaticResource MaterialDesignHeadline4TextBlock}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </Button>
-        <Button Grid.Row="2" Grid.Column="0" Margin="4"
-                materialDesign:ButtonAssist.CornerRadius="10"
-                  Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Height="Auto" >
+        <Button Grid.Row="2" Grid.Column="0" Margin="8"
+                materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2"
+                  Style="{StaticResource MaterialDesignPaperSecondaryLightButton}" Height="Auto" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Total Weight" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding QtyCounted.QtyWeighed}" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding CurrentSession.QtyWeighed}" Style="{StaticResource MaterialDesignHeadline4TextBlock}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
          </Grid>
         </Button>
-        <Button Grid.Row="2" Grid.Column="1" Margin="4"
-                materialDesign:ButtonAssist.CornerRadius="10"
-                  Style="{StaticResource MaterialDesignRaisedSecondaryButton}" Height="Auto" >
+        <Button Grid.Row="2" Grid.Column="1" Margin="8"
+                materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2"
+                  Style="{StaticResource MaterialDesignPaperSecondaryButton}" Height="Auto" Click="Button_Click" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Gap Weight" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding CurrentSession.GapWeight}" Style="{StaticResource MaterialDesignHeadline4TextBlock}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding CurrentSession.Gap}" Style="{StaticResource MaterialDesignHeadline4TextBlock}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </Button>
-        <Button Grid.Row="1" Grid.Column="2" Margin="4"
+        <Button Grid.Row="1" Grid.Column="2" Margin="8"
                 materialDesign:ButtonAssist.CornerRadius="10"
                   Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="Auto" >
             <Grid>
@@ -145,10 +145,11 @@
                 <TextBlock Text="{Binding CurrentSession.QtyCounted}" Style="{StaticResource MaterialDesignHeadline4TextBlock}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </Button>
-        <TextBlock Text="Good Weight" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Grid.Row="1"  Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <lv:Gauge Uses360Mode="True" Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" 
-                From="0" To="{Binding CurrentSession.OrderWeight}" Value="{Binding CurrentSession.GoodWeight, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N1}}" Margin="4" Foreground="{StaticResource Pri_Color2_brush}"
-                LabelsVisibility="Hidden" Height="250" Width="250"  FontSize="30" InnerRadius="100" HorizontalAlignment="Center" VerticalAlignment="Top">
+        <TextBlock Text="Good Weight" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Grid.Row="1"  Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 30"/>
+        <TextBlock Text="{Binding CurrentShiftInfo.LooseUom}" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Grid.Row="2"  Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 50 0 0"/>
+        <lv:Gauge Uses360Mode="True" Grid.Row="1" Grid.RowSpan="2" Grid.Column="3"  VerticalAlignment="Center" 
+                From="0" To="{Binding CurrentSession.QtyOrderWeigh}" Value="{Binding CurrentSession.QtyGoodWeigh, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N1}}" Margin="4" Foreground="{StaticResource MaterialDesignDarkBackground}"
+                LabelsVisibility="Hidden" Height="250" Width="250"  FontSize="30" InnerRadius="100" HorizontalAlignment="Center">
             <lv:Gauge.GaugeActiveFill>
                 <LinearGradientBrush>
                     <GradientStop Color="#FF02FFE1" Offset="1.0" />

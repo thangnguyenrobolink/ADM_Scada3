@@ -25,6 +25,9 @@ namespace ADM_Scada.Modules.Report
             _regionManager.RegisterViewWithRegion(RegionNames.ShiftRegion, typeof(ShiftInfoView));
             _regionManager.RegisterViewWithRegion(RegionNames.ShiftRegion2, typeof(ShiftInfoView));
             _regionManager.RegisterViewWithRegion(RegionNames.SessionStatus, typeof(CurrentSessionView));
+            _regionManager.RegisterViewWithRegion(RegionNames.SessionStatus2, typeof(CurrentSessionView));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ProductionInfoView));
+            _regionManager.RegisterViewWithRegion(RegionNames.SessionDetail, typeof(CurrentSessionDetailView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

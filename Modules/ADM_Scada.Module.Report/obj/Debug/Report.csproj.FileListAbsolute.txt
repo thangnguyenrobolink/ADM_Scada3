@@ -167,3 +167,5 @@ E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\Views\CurrentSession
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\Views\CurrentSessionView.g.cs
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\BarcodeStandard.dll
 E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\bin\Debug\System.Drawing.Common.dll
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\Views\CurrentSessionDetailView.baml
+E:\work\ADM_Scada\Modules\ADM_Scada.Module.Report\obj\Debug\Views\CurrentSessionDetailView.g.cs

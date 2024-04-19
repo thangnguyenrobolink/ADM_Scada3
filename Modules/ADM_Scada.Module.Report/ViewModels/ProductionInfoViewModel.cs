@@ -123,15 +123,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
                 RaisePropertyChanged(nameof(CurrentSession));
             }
         }
-        private async void UpdateSessionPropertiesAsync()
-        {
-            IsSessionWorking = CurrentSession.StatusCode == "S";
-            IsSessionEnded = CurrentSession.StatusCode != "S";
-            CurrentCustomer = FullCustomers.FirstOrDefault(c => c.Id == CurrentSession.CustId);
-            CurrentShift = await prodShiftDataRepository.GetByName(CurrentSession.SoNumber);
-            CurrentProduct = FullProducts.FirstOrDefault(p => p.ProdCode == CurrentShift.ProdCode);
 
-        }
         private bool isSessionWorking;
         private bool isSessionEnded;
         private List<string> deviceNames;
@@ -345,7 +337,15 @@ namespace ADM_Scada.Modules.Report.ViewModels
             }
         }
         #endregion
+        private async void UpdateSessionPropertiesAsync()
+        {
+            IsSessionWorking = CurrentSession.StatusCode == "S";
+            IsSessionEnded = CurrentSession.StatusCode != "S";
+            CurrentCustomer = FullCustomers.FirstOrDefault(c => c.Id == CurrentSession.CustId);
+            CurrentShift = await prodShiftDataRepository.GetByName(CurrentSession.SoNumber);
+            CurrentProduct = FullProducts.FirstOrDefault(p => p.ProdCode == CurrentShift.ProdCode);
 
+        }
         ///
         public ProductionInfoViewModel(IEventAggregator ea)
         {
@@ -371,10 +371,10 @@ namespace ADM_Scada.Modules.Report.ViewModels
             CurrentSession.QtyWeighed = CurrentSession.QtyWeighed + currentweight;
             CurrentSession.QtyGoodWeigh = CurrentSession.QtyGoodWeigh + currentweight - CurrentSession.QtyTareWeigh;
             CurrentSession.Gap = CurrentShift.QtyOrderWeigh - CurrentSession.QtyWeighed;
-            
             CurrentSession.UpdatedDate = DateTime.Now;
             CurrentSession.UpdatedBy = UserLoginViewModel.currentUser.UserName;
             CurrentSession = CurrentSession;
+
             EditSession(CurrentSession);
         }
         private async void EditSession(WeighSessionModel obj)
@@ -407,7 +407,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
             CheckSessionCommand = new DelegateCommand<WeighSessionModel>(CheckSession);
         }
 
-        
+
 
         private async Task FetchInitialDataAsync()
         {

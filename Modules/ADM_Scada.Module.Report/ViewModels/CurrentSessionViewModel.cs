@@ -27,6 +27,7 @@ namespace ADM_Scada.Module.Report.ViewModels
 
         // Database 
         #region
+        private readonly WeighSessionDRepository weighSessionDRepository;
         #endregion
 
         //Config Command 
@@ -56,7 +57,7 @@ namespace ADM_Scada.Module.Report.ViewModels
         }
         private bool isSessionWorking;
         private bool isSessionEnded;
-        private ProdShiftDataModel currentShiftInfo;
+        private ProdShiftDataModel currentShiftInfo = ProductionInfoViewModel.currentShift;
         public ProdShiftDataModel CurrentShiftInfo { get => currentShiftInfo; set => SetProperty(ref currentShiftInfo, value); }
 
         public bool IsSessionWorking { get => CurrentSession.StatusCode == "S"; set => SetProperty(ref isSessionWorking, value); }
@@ -66,11 +67,13 @@ namespace ADM_Scada.Module.Report.ViewModels
         {
             get
             {
-                Barcode b = new Barcode
+                  Barcode b = new Barcode
                 {
                     IncludeLabel = false,
                     Height = 250
                 };
+                BitmapImage bitmap = new BitmapImage();
+                if (CurrentDetailWeight.Barcode == null) return bitmap;
                 Image img = b.Encode(TYPE.CODE128, CurrentDetailWeight.Barcode,
                                         System.Drawing.Color.Black,
                                         System.Drawing.Color.White, 10 * 10 * CurrentDetailWeight.Barcode.Length, 250);
@@ -81,7 +84,7 @@ namespace ADM_Scada.Module.Report.ViewModels
                 MemoryStream bufferPasser = new MemoryStream(buffer);
 
                 //I create a new BitmapImage to work with
-                BitmapImage bitmap = new BitmapImage();
+
                 bitmap.BeginInit();
                 bitmap.StreamSource = bufferPasser;
                 bitmap.EndInit();
@@ -93,10 +96,10 @@ namespace ADM_Scada.Module.Report.ViewModels
         // PLC Variable
         #region
         private WeighSessionDModel currentDetailWeight = new WeighSessionDModel();
-       
+
 
         public WeighSessionDModel CurrentDetailWeight { get => currentDetailWeight; set => SetProperty(ref currentDetailWeight, value); }
-        private readonly WeighSessionDRepository weighSessionDRepository;
+
         #endregion
 
         //
@@ -128,6 +131,7 @@ namespace ADM_Scada.Module.Report.ViewModels
         }
         private async void UpdateCurrentBag()
         {
+            if (IsSessionEnded) return;
             WeighSessionDModel newDetail = new WeighSessionDModel();
             try
             {
@@ -152,11 +156,13 @@ namespace ADM_Scada.Module.Report.ViewModels
                 newDetail.CreatedDate = DateTime.Now; // Set the created date to the current time
                 newDetail.CreatedBy = UserLoginViewModel.currentUser.UserName;
                 int b = await weighSessionDRepository.Create(newDetail);
+               
                 if (b != -1)
                 {
                     CurrentDetailWeight = newDetail;
                     CurrentDetailWeight.Id = b;
                 }
+                ea.GetEvent<UpdateSessionDetailChangeEvent>().Publish();
             }
             catch (Exception ex)
             {

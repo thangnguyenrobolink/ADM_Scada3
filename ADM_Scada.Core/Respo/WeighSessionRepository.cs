@@ -49,10 +49,10 @@ namespace ADM_Scada.Core.Respo
             {
                 string query = @"INSERT INTO [dbo].[weigh_session] (session_code, start_time, end_time, cust_id, 
                                 cust_name, cust_address, boat_id, so_number, qty_counted, qty_order_weigh, 
-                                qty_tare_weigh, qty_weighed, gap, document_no, shift_data_id, 
+                                qty_tare_weigh, qty_good_weigh, qty_weighed, gap, document_no, shift_data_id, 
                                 user_id, device_code, status_code, created_date, created_by, updated_date, updated_by) 
                                  VALUES (@SessionCode, @StartTime, @EndTime, @CustId, @CustName, @CustAddress, @BoatId, 
-                                @SoNumber, @QtyCounted, @QtyOrderWeigh, @QtyTareWeigh, @QtyWeighed, @Gap, @DocumentNo, 
+                                @SoNumber, @QtyCounted, @QtyOrderWeigh, @QtyTareWeigh, @QtyGoodWeigh, @QtyWeighed, @Gap, @DocumentNo, 
                                 @ShiftDataId, @UserId, @DeviceCode, @StatusCode, @CreatedDate, @CreatedBy, @UpdatedDate, @UpdatedBy)";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
@@ -67,7 +67,9 @@ namespace ADM_Scada.Core.Respo
                     { "@SoNumber", weighSession.SoNumber },
                     { "@QtyCounted", weighSession.QtyCounted },
                     { "@QtyOrderWeigh", weighSession.QtyOrderWeigh },
+                    { "@QtyGoodWeigh", weighSession.QtyGoodWeigh },
                     { "@QtyTareWeigh", weighSession.QtyTareWeigh },
+                    { "@QtyGoodWeigh", weighSession.QtyGoodWeigh },
                     { "@QtyWeighed", weighSession.QtyWeighed },
                     { "@Gap", weighSession.Gap },
                     { "@DocumentNo", weighSession.DocumentNo },
@@ -115,7 +117,7 @@ namespace ADM_Scada.Core.Respo
                 string query = @"UPDATE [dbo].[weigh_session] 
                          SET start_time = @StartTime, end_time = @EndTime, cust_id = @CustId, 
                              cust_name = @CustName, cust_address = @CustAddress, boat_id = @BoatId, 
-                             so_number = @SoNumber, qty_counted = @QtyCounted, qty_order_weigh = @QtyOrderWeigh, 
+                             so_number = @SoNumber, qty_counted = @QtyCounted, qty_order_weigh = @QtyOrderWeigh, qty_good_weigh = @QtyGoodWeigh, 
                              qty_tare_weigh = @QtyTareWeigh, qty_weighed = @QtyWeighed, gap = @Gap, 
                              document_no = @DocumentNo, shift_data_id = @ShiftDataId, user_id = @UserId, 
                              device_code = @DeviceCode, status_code = @StatusCode, created_date = @CreatedDate, 
@@ -134,6 +136,7 @@ namespace ADM_Scada.Core.Respo
                     { "@SoNumber", weighSession.SoNumber },
                     { "@QtyCounted", weighSession.QtyCounted },
                     { "@QtyOrderWeigh", weighSession.QtyOrderWeigh },
+                    { "@QtyGoodWeigh", weighSession.QtyGoodWeigh },
                     { "@QtyTareWeigh", weighSession.QtyTareWeigh },
                     { "@QtyWeighed", weighSession.QtyWeighed },
                     { "@Gap", weighSession.Gap },
@@ -281,6 +284,7 @@ namespace ADM_Scada.Core.Respo
                 SoNumber = Convert.ToString(row["so_number"]),
                 QtyCounted = Convert.IsDBNull(row["qty_counted"]) ? (int?)null : Convert.ToInt32(row["qty_counted"]),
                 QtyOrderWeigh = Convert.IsDBNull(row["qty_order_weigh"]) ? (decimal?)null : Convert.ToDecimal(row["qty_order_weigh"]),
+                QtyGoodWeigh = Convert.IsDBNull(row["qty_good_weigh"]) ? (decimal?)null : Convert.ToDecimal(row["qty_good_weigh"]),
                 QtyTareWeigh = Convert.IsDBNull(row["qty_tare_weigh"]) ? (decimal?)null : Convert.ToDecimal(row["qty_tare_weigh"]),
                 QtyWeighed = Convert.IsDBNull(row["qty_weighed"]) ? (decimal?)null : Convert.ToDecimal(row["qty_weighed"]),
                 Gap = Convert.IsDBNull(row["gap"]) ? (decimal?)null : Convert.ToDecimal(row["gap"]),
