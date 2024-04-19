@@ -195,6 +195,8 @@ namespace ADM_Scada.Modules.Report.ViewModels
         private string filDetailDate;
         public string FilDetailDate { get => filDetailDate; set { SetProperty(ref filDetailDate, value); FilterDData(); } }
 
+        public DelegateCommand<WeighSessionModel> EditCommand { get; private set; }
+
         #endregion
 
         // Command config
@@ -299,6 +301,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
         {
             try
             {
+                bool b = await weighSessionRepository.SelectToPrint(a.SessionCode);
                 WeighSessionD = new ObservableCollection<WeighSessionDModel>((IEnumerable<WeighSessionDModel>)await weighSessionDRepository.GetBySessionCode(a.SessionCode)) ?? new ObservableCollection<WeighSessionDModel>();
             }
             catch (Exception ex)
@@ -361,11 +364,18 @@ namespace ADM_Scada.Modules.Report.ViewModels
         #region
         private void InitializeCommands()
         {
+            EditCommand = new DelegateCommand<WeighSessionModel>(EditSession);
             ChangeShiftInfoCommand = new DelegateCommand(ChangeShiftInfo);
             EndSessionCommand = new DelegateCommand(EndCurrentSession);
             StartSessionCommand = new DelegateCommand(StartNewSession);
             CheckSessionCommand = new DelegateCommand<WeighSessionModel>(CheckSession);
         }
+
+        private void EditSession(WeighSessionModel obj)
+        {
+            throw new NotImplementedException();
+        }
+
         private async Task FetchInitialDataAsync()
         {
             await Task.WhenAll(

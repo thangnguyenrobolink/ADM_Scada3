@@ -18,7 +18,11 @@ namespace ADM_Scada.Module.Report.Views
             ReportDocument reportDocument = new ReportDocument();
             //string Filename = System.AppDomain.CurrentDomain.BaseDirectory + "\\CrystalReport1.rpt";
             reportDocument.Load(Filename);
+            reportDocument.Refresh();
             reportViewer.ViewerCore.ReportSource = reportDocument;
+
+            // Refresh the report
+            
         }
     }
 }

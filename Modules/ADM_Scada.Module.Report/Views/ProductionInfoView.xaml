@@ -6,7 +6,8 @@
              xmlns:cr="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
              xmlns:core="clr-namespace:ADM_Scada.Core;assembly=ADM_Scada.Core"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="ADM_Scada.Modules.Report.Views.ProductionInfoView"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+            x:Class="ADM_Scada.Modules.Report.Views.ProductionInfoView"
              Background="#FFF4F4F9"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <Grid>

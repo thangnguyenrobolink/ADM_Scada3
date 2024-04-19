@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="ADM_Scada.Module.Report.Views.CurrentSessionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"  
+             Background="AliceBlue"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:core="clr-namespace:ADM_Scada.Core;assembly=ADM_Scada.Core"  
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!--Title-->
+        <materialDesign:Card  Grid.Row="0" Grid.ColumnSpan="3" Margin="16 8 8 8" UniformCornerRadius="20"
+                                          BorderBrush="White" BorderThickness="1"
+                                          materialDesign:ElevationAssist.Elevation="Dp0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding CurrentSession.SessionCode}" />
+                <materialDesign:PackIcon Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                         Kind="TimerStart" Height="35" Width="35"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                           Text="{Binding CurrentSession.StartTime}" />
+                <materialDesign:PackIcon Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                         Kind="TimerEdit" Height="35" Width="35"/>
+                <TextBlock Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                           Text="{Binding CurrentSession.EndTime}" />
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>
+
+    

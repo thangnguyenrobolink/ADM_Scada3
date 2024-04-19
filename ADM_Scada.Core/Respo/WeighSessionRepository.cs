@@ -27,6 +27,7 @@ namespace ADM_Scada.Core.Respo
             }
         }
 
+        
         public async Task<WeighSessionModel> GetByName(string sessionCode)
         {
             try
@@ -42,7 +43,6 @@ namespace ADM_Scada.Core.Respo
                 throw new RepositoryException($"An error occurred while retrieving weigh session by session code '{sessionCode}'. Please try again later.", ex);
             }
         }
-
         public async Task<int> Create(WeighSessionModel weighSession)
         {
             try
@@ -88,7 +88,26 @@ namespace ADM_Scada.Core.Respo
                 throw new RepositoryException($"An error occurred while creating weigh session with session code '{weighSession.SessionCode}'. Please try again later.", ex);
             }
         }
+        public async Task<bool> SelectToPrint(string sessionCode)
+        {
+            try
+            {
+                string query = @"UPDATE [dbo].[tmp_printreport]
+                         SET session_code = @SessionCode
+                         WHERE id = 1";
 
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@SessionCode", sessionCode}
+                };
+                return await ExecuteNonQueryAsync(query, parameters) > 0;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error occurred while retrieving weigh session by session code: {SessionCode}", sessionCode);
+                throw new RepositoryException($"An error occurred while retrieving weigh session by session code '{sessionCode}'. Please try again later.", ex);
+            }
+        }
         public async Task<bool> Update(WeighSessionModel weighSession)
         {
             try
