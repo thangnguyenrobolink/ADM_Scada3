@@ -17,6 +17,7 @@ namespace ADM_Scada.Core.Respo
             try
             {
                 string query = "SELECT * FROM [dbo].[customer]";
+                
                 DataTable dataTable = await ExecuteQueryAsync(query);
                 return ConvertDataTableToList(dataTable);
             }

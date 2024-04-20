@@ -30,15 +30,16 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     </lvc:Axis>
                 </lvc:CartesianChart.AxisY>
                 <lvc:CartesianChart.Series>
-                    <lvc:LineSeries Title="CurrentWeight" Values="{Binding WeighSessionDetails, StringFormat={}{0:N2}}" ScalesYAt="0"/>
+                    <lvc:LineSeries Title="CurrentWeight" Values="{Binding WeighSessionDValue, StringFormat={}{0:N2}}" ScalesYAt="0"/>
                 </lvc:CartesianChart.Series>
+                
             </lvc:CartesianChart>
         </materialDesign:Card>
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" RowStyle="{StaticResource DataGridRowStyle1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  MaxHeight="600"
                               SelectionMode="Extended" GridLinesVisibility="None" CellStyle="{StaticResource DataGridCellStyle1}"
                               materialDesign:DataGridAssist.CornerRadius="10"
                               materialDesign:ScrollViewerAssist.SupportHorizontalScroll="False"
-                              CanUserAddRows="False" ItemsSource="{Binding WeighSessionDetails}" Margin="16 0" Background="Transparent">
+                              CanUserAddRows="False" ItemsSource="{Binding WeighSessionD}" Margin="16 0" Background="Transparent">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="#" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
@@ -61,7 +62,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Quanity" Width="Auto">
+                <DataGridTemplateColumn Header="Weight" Width="Auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding CurrentWeigh}" IsReadOnly="True"  BorderThickness="0"/>
