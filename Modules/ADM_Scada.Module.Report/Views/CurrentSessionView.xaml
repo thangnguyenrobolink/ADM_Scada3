@@ -81,7 +81,7 @@
                     <RowDefinition Height="80"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="BarCode" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding CurrentDetailWeight.BarCode}" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding CurrentDetailWeight.Barcode}" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Image Source="{Binding BarCodeImage}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" />
             </Grid>
         </Button>

@@ -313,6 +313,11 @@ namespace ADM_Scada.Modules.Report.ViewModels
                 var newSession = CurrentSession;
                 newSession.SessionCode = $"ADMD{CurrentSession.BoatId}{(CurrentSession.Id + 1) % 10000000:D7}";
                 newSession.EndTime = DateTime.Now;
+                newSession.Gap = CurrentShift.QtyOrderWeigh;
+                newSession.QtyGoodWeigh = 0;
+                newSession.QtyWeighed = 0;
+                newSession.QtyTareWeigh = CurrentShift.QtyTareWeigh;
+                newSession.QtyCounted = 0;
                 newSession.StartTime = DateTime.Now; // Set the start time to the current time
                 newSession.StatusCode = "S"; // Assuming "S" represents the status for a started session
                 newSession.UpdatedDate = DateTime.Now; // Set the created date to the current time
@@ -324,6 +329,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
                 int b = await weighSessionRepository.Create(newSession);
                 if (b != -1)
                 {
+                    CurrentSession = newSession;
                     CurrentSession.Id = b;
                     await FetchLastSessionAsync();
                     return true; // Indicate success
@@ -364,7 +370,7 @@ namespace ADM_Scada.Modules.Report.ViewModels
             }
         }
 
-        private void UpdateCurrentSession()
+        private async void UpdateCurrentSession()
         {
             decimal currentweight = 10;
             CurrentSession.QtyCounted = CurrentSession.QtyCounted + 1;
@@ -374,7 +380,35 @@ namespace ADM_Scada.Modules.Report.ViewModels
             CurrentSession.UpdatedDate = DateTime.Now;
             CurrentSession.UpdatedBy = UserLoginViewModel.currentUser.UserName;
             CurrentSession = CurrentSession;
+            WeighSessionDModel newDetail = new WeighSessionDModel();
+            try
+            {
+                // Create a new instance of WeighSessionModel with initial value
+                newDetail.Barcode = "123456";
+                newDetail.CurrentWeigh = (decimal?)10.0;
+                newDetail.ProdCode = CurrentShift.ProdCode;
+                newDetail.ProdD365Code = ProductionInfoViewModel.currentProduct.HashCode;
+                newDetail.ProdFullName = CurrentShift.ProdCode;
+                newDetail.ProductionDate = DateTime.Now;
+                newDetail.StartTime = CurrentSession.StartTime;
+                newDetail.EndTime = DateTime.Now;
 
+                newDetail.SessionCode = CurrentSession.SessionCode;
+                newDetail.ShiftDataId = CurrentShift.Id;
+
+                newDetail.QtyCounted = CurrentSession.QtyCounted;
+                newDetail.QtyWeighed = CurrentSession.QtyWeighed;
+
+                newDetail.UpdatedDate = DateTime.Now; // Set the created date to the current time
+                newDetail.UpdatedBy = UserLoginViewModel.currentUser.UserName; // Set the created by to the current user
+                newDetail.CreatedDate = DateTime.Now; // Set the created date to the current time
+                newDetail.CreatedBy = UserLoginViewModel.currentUser.UserName;
+                int b = await weighSessionDRepository.Create(newDetail);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "An error occurred while record a new detail weigh");
+            }
             EditSession(CurrentSession);
         }
         private async void EditSession(WeighSessionModel obj)
@@ -394,6 +428,14 @@ namespace ADM_Scada.Modules.Report.ViewModels
             catch (Exception ex)
             {
                 HandleDataFetchError("All Session ", ex);
+            }
+            try
+            {
+                CurrentSession = await weighSessionRepository.GetLast();
+            }
+            catch (Exception ex)
+            {
+                HandleDataFetchError("Current Session ", ex);
             }
         }
         //Init 

@@ -87,7 +87,6 @@ E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\K4os.Hash.xxHash.dll
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Microsoft.Xaml.Behaviors.dll
-E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\MySql.Data.dll
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Prism.dll
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Prism.Unity.Wpf.dll
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Prism.Wpf.dll
@@ -121,7 +120,6 @@ E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Microsoft.Xaml.Behaviors.pdb
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Microsoft.Xaml.Behaviors.xml
-E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\MySql.Data.xml
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Prism.pdb
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Prism.xml
 E:\work\ADM_Scada\ADM_Scada.Core\bin\Debug\Prism.Unity.Wpf.pdb

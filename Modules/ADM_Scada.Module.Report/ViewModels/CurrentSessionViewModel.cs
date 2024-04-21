@@ -14,6 +14,9 @@ using BarcodeLib;
 using ADM_Scada.Core.Respo;
 using ADM_Scada.Modules.User.ViewModels;
 using Serilog;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ADM_Scada.Module.Report.ViewModels
 {
@@ -27,7 +30,7 @@ namespace ADM_Scada.Module.Report.ViewModels
 
         // Database 
         #region
-        private readonly WeighSessionDRepository weighSessionDRepository;
+        private WeighSessionDRepository weighSessionDRepository;
         #endregion
 
         //Config Command 
@@ -42,6 +45,7 @@ namespace ADM_Scada.Module.Report.ViewModels
 
         //UI Vcariables
         #region
+
         private WeighSessionModel weighSession = ProductionInfoViewModel.currentSession ?? new WeighSessionModel();
         public WeighSessionModel CurrentSession
         {
@@ -51,8 +55,29 @@ namespace ADM_Scada.Module.Report.ViewModels
                 _ = SetProperty(ref weighSession, value);
                 IsSessionWorking = CurrentSession.StatusCode == "S";
                 IsSessionEnded = CurrentSession.StatusCode != "S";
+                UpdateSessionDetailChangeEvent();
+                
                 RaisePropertyChanged(nameof(IsSessionWorking));
                 RaisePropertyChanged(nameof(IsSessionEnded));
+            }
+        }
+
+        private async void UpdateSessionDetailChangeEvent()
+        {
+            DetailSessions = new ObservableCollection<WeighSessionDModel>((IEnumerable<WeighSessionDModel>)await weighSessionDRepository.GetBySessionCode(weighSession.SessionCode))
+                ?? new ObservableCollection<WeighSessionDModel>();
+            CurrentDetailWeight = DetailSessions.LastOrDefault();
+            RaisePropertyChanged(nameof(BarCodeImage));
+            RaisePropertyChanged(nameof(CurrentDetailWeight));
+        }
+
+        private ObservableCollection<WeighSessionDModel> detailSessions = new ObservableCollection<WeighSessionDModel>();
+        public ObservableCollection<WeighSessionDModel> DetailSessions
+        {
+            get => detailSessions;
+            set
+            {
+                _ = SetProperty(ref detailSessions, value);
             }
         }
         private bool isSessionWorking;
@@ -115,7 +140,6 @@ namespace ADM_Scada.Module.Report.ViewModels
             this.ea = ea;
             _ = this.ea.GetEvent<CurrentSessionChangeEvent>().Subscribe(UpdateCurrentSession);
             _ = this.ea.GetEvent<ShiftInfoChangeEvent>().Subscribe(UpdateCurrentShiftInfo);
-            _ = this.ea.GetEvent<NewBagEvent>().Subscribe(UpdateCurrentBag);
             #endregion
             EndSessionCommand = new DelegateCommand(EndSession);
         }
@@ -129,50 +153,10 @@ namespace ADM_Scada.Module.Report.ViewModels
         {
             ea.GetEvent<EndSessionCommandEvent>().Publish();
         }
-        private async void UpdateCurrentBag()
-        {
-            if (IsSessionEnded) return;
-            WeighSessionDModel newDetail = new WeighSessionDModel();
-            try
-            {
-                // Create a new instance of WeighSessionModel with initial value
-                newDetail.Barcode = "123456";
-                newDetail.CurrentWeigh = (decimal?)10.0;
-                newDetail.ProdCode = CurrentShiftInfo.ProdCode;
-                newDetail.ProdD365Code = ProductionInfoViewModel.currentProduct.HashCode;
-                newDetail.ProdFullName = CurrentShiftInfo.ProdCode;
-                newDetail.ProductionDate = DateTime.Now;
-                newDetail.StartTime = CurrentSession.StartTime;
-                newDetail.EndTime = DateTime.Now;
-
-                newDetail.SessionCode = CurrentSession.SessionCode;
-                newDetail.ShiftDataId = CurrentShiftInfo.Id;
-
-                newDetail.QtyCounted = CurrentDetailWeight.QtyCounted + 1;
-                newDetail.QtyWeighed = CurrentDetailWeight.QtyWeighed + newDetail.CurrentWeigh;
-
-                newDetail.UpdatedDate = DateTime.Now; // Set the created date to the current time
-                newDetail.UpdatedBy = UserLoginViewModel.currentUser.UserName; // Set the created by to the current user
-                newDetail.CreatedDate = DateTime.Now; // Set the created date to the current time
-                newDetail.CreatedBy = UserLoginViewModel.currentUser.UserName;
-                int b = await weighSessionDRepository.Create(newDetail);
-               
-                if (b != -1)
-                {
-                    CurrentDetailWeight = newDetail;
-                    CurrentDetailWeight.Id = b;
-                }
-                ea.GetEvent<UpdateSessionDetailChangeEvent>().Publish();
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "An error occurred while record a new detail weigh");
-            }
-        }
-
         private void UpdateCurrentSession(WeighSessionModel obj)
         {
             CurrentSession = obj;
+
         }
     }
 }
